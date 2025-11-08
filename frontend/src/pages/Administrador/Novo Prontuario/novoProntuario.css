@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
@@ -7,211 +6,211 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
-    
 
 
-    body {
-        background-color: #F6963E;
-        height: 100%;
+
+body {
+    background-color: #F6963E;
+    height: 100%;
+}
+
+.titulo {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    display: flex;
+
+    justify-content: center;
+    background-color: #63A1F0;
+    width: 80%;
+    margin: 1em 0em 0em 0em;
+    border-radius: 10px;
+    color: white;
+}
+
+.forms-prontuario {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 3em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 100%;
+    width: 80vh;
+    padding: 0.5em;
+    background-color: #FFEED9;
+    border-radius: 20px;
+}
+
+.garfield {
+    width: 130px;
+    height: 128px
+}
+
+.input-Garfield {
+    display: flex;
+    flex-direction: row;
+
+
+    margin: 1em 1em 0em 1em;
+
+
+
+}
+
+.inputs-1 {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        font-size: 12px;
+        margin: 0.5em 1em 0em;
     }
 
-    .titulo {
-        display: flex;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-    }
+    input {
+        margin: 0.5em;
+        height: 25px;
+        width: 260px;
 
-    h1 {
-        display: flex;
-  
-        justify-content: center;
-        background-color: #63A1F0;
-        width: 80%;
-        margin: 1em 0em 0em 0em;
-        border-radius: 10px;
-        color: white;
-    }
-
-    .forms-prontuario {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        gap: 3em;
-        margin-top: 2em;
-        margin-bottom: 2em;
-    }
-
-
-
-    form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        height: 100%;
-        width: 80vh;
-        padding: 0.5em;
-        background-color: #FFEED9;
+        border: none;
         border-radius: 20px;
+        padding: 5px 10px;
     }
 
-    .garfield {
-        width: 130px;
-        height: 128px
+
+
+}
+
+.container-textarea {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        font-size: 12px;
+        margin: 1em 0.8em 0.5em;
     }
 
-    .input-Garfield {
-        display: flex;
-        flex-direction: row;
-
-
-        margin: 1em 1em 0em 1em;
-
-
-
+    textarea {
+        margin: 0.5em;
+        padding: 10px;
+        border: none;
+        border-radius: 20px;
+        width: 420px;
+        height: 150px;
+        resize: none;
     }
+}
 
-    .inputs-1 {
-        display: flex;
-        flex-direction: column;
+.card-input1 {
+    display: flex;
+    margin-top: -2em;
 
-        label {
-            font-size: 12px;
-            margin: 0.5em 1em 0em;
-        }
-
-        input {
-            margin: 0.5em;
-            height: 25px;
-            width: 260px;
-
-            border: none;
-            border-radius: 20px;
-            padding: 5px 10px;
-        }
-
-
-
-    }
-
-    .container-textarea {
+    .inputs-2 {
         display: flex;
         flex-direction: column;
+
+        margin: 1em;
 
         label {
             font-size: 12px;
             margin: 1em 0.8em 0.5em;
         }
 
-        textarea {
-            margin: 0.5em;
-            padding: 10px;
+
+
+        input {
+
+            height: 25px;
+            width: 200px;
+
             border: none;
             border-radius: 20px;
-            width: 420px;
-            height: 150px;
-            resize: none;
+            padding: 5px 10px;
         }
     }
 
-    .card-input1 {
-        display: flex;
-        margin-top: -2em;
+}
 
-        .inputs-2 {
-            display: flex;
-            flex-direction: column;
+.tutor-garfield {
 
-            margin: 1em;
+    width: 80px;
+    height: 130px
+}
 
-            label {
-                font-size: 12px;
-                margin: 1em 0.8em 0.5em;
-            }
+.textarrea-1 {
+    display: flex;
+    flex-direction: column;
 
-
-
-            input {
-
-                height: 25px;
-                width: 200px;
-
-                border: none;
-                border-radius: 20px;
-                padding: 5px 10px;
-            }
-        }
-
+    label {
+        margin-left: 1em;
+        font-size: 12px;
     }
 
-    .tutor-garfield {
-
-        width: 80px;
-        height: 130px
+    textarea {
+        margin: 0.5em;
+        padding: 10px;
+        border: none;
+        border-radius: 20px;
+        width: 350px;
+        height: 150px;
+        resize: none;
     }
 
-    .textarrea-1 {
+
+}
+
+.textarea-2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputs-3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+
+
+
+    .formato {
         display: flex;
         flex-direction: column;
 
         label {
-            margin-left: 1em;
+
             font-size: 12px;
+            margin: 0.8em;
         }
 
-        textarea {
-            margin: 0.5em;
-            padding: 10px;
+        input {
+
+            height: 25px;
+            width: 150px;
+            margin-left: 0.5em;
+            margin-bottom: 1em;
+
             border: none;
             border-radius: 20px;
-            width: 350px;
-            height: 150px;
-            resize: none;
-        }
-
-
-    }
-
-    .textarea-2 {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .inputs-3 {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 90%;
-
-
-
-        .formato {
-            display: flex;
-            flex-direction: column;
-
-            label {
-
-                font-size: 12px;
-                margin: 0.8em;
-            }
-
-            input {
-
-                height: 25px;
-                width: 150px;
-                margin-left: 0.5em;
-                margin-bottom: 1em;
-
-                border: none;
-                border-radius: 20px;
-                padding: 5px 10px;
-            }
+            padding: 5px 10px;
         }
     }
+}
 
 
 .btn-salvar {
