@@ -1,0 +1,151 @@
+/* Layout da Página Inteira */
+.prontuarios-pagina {
+  display: flex;
+  min-height: 100vh;
+  background-color: #F9FAFB; /* Fundo do conteúdo principal */
+}
+
+/* --- Barra Lateral --- */
+.sidebar-prontuarios {
+  flex: 0 0 240px; 
+  background-color: #E6F0F9; 
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-prontuarios .logo{
+  width: 140px;
+  height: auto;
+  margin-bottom: 40px;
+  margin-left: 55px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebar-nav a {
+  text-decoration: none;
+  color: #555;
+  font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.sidebar-nav a:hover {
+  background-color: #DDE8F3;
+}
+
+/* Estilo do link ativo */
+.sidebar-nav a.active {
+  font-weight: bold;
+  color: #333;
+  /* Cor do "Prontuários" selecionado (branco) */
+  /* Se preferir o estilo da imagem (branco), use:
+     background-color: #FFF; 
+     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  */
+}
+
+
+/* --- Conteúdo Principal --- */
+.main-content-prontuarios {
+  flex: 1; /* Ocupa o resto do espaço */
+  padding: 40px 60px;
+}
+
+.titulo-prontuarios {
+  color: #F89B31; /* Laranja */
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+/* --- Tabela --- */
+.prontuario-tabela {
+  width: 100%;
+  border-collapse: collapse; /* Para tabelas, mas aqui vamos simular */
+}
+
+/* Cabeçalho da Tabela (Azul) */
+.prontuario-header {
+  display: grid;
+  /* Ajuste as colunas como preferir */
+  grid-template-columns: 1.5fr 2fr 1fr 1fr 1fr;
+  align-items: center;
+  gap: 15px;
+  
+  background-color: #4A90E2; /* Azul */
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Linhas de Dados da Tabela */
+.prontuario-linha {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 1fr 1fr 1fr; /* Mesmas colunas do header */
+  align-items: center;
+  gap: 15px;
+
+  background-color: #FFFFFF;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.prontuario-linha span {
+  color: #333;
+}
+
+.ver-mais-link {
+  color: #F89B31;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+.ver-mais-link:hover {
+  color: #d8801c;
+}
+
+/* --- Paginação --- */
+.paginacao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.page-link {
+  text-decoration: none;
+  color: #555;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.page-link:hover {
+  background-color: #EEE;
+}
+
+/* Página ativa (laranja) */
+.page-link.active {
+  background-color: #F89B31;
+  color: white;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
