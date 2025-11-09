@@ -1,0 +1,5 @@
+[
+  { "label": "Início", "path": "/" },
+  { "label": "Sobre Nós", "path": "/AboutUs" },
+  { "label": "Cadastre seu pet", "path": "/cadastro" }
+]

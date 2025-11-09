@@ -1,14 +1,11 @@
-import './cadastroTutor.css';
+import "./cadastroTutor.css";
+import "../../../styles/Home.css";
 
 export default function CadastroTutor() {
   return (
     <section>
       <div className="imagens">
-        <img
-          className="cao"
-          src="/images/cao-cadastro.jpg"
-          alt="cao"
-        />
+        <img className="cao" src="/images/cao-cadastro.jpg" alt="cao" />
         <div className="form-cadastro">
           <img
             className="fundo-cadastro"
