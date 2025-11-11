@@ -1,0 +1,89 @@
+.footer {
+  background-color: var(--azul-escuro);
+  color: var(--fundo);
+  padding-top: 3rem;
+  margin-top: 0;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 1rem;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-logo {
+  color: var(--azul);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.footer-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--fundo);
+}
+
+.footer-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: var(--fundo);
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.footer-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.footer-list li svg {
+  color: var(--azul);
+}
+
+.footer-list a {
+  text-decoration: none;
+  color: var(--fundo);
+  transition: color 0.2s ease;
+}
+
+.footer-list a:hover {
+  color: var(--azul);
+}
+
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--fundo);
+  opacity: 0.1;
+  margin-top: 1rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--fundo);
+  padding: 1rem 0 2rem;
+}
+
+.footer-bottom .highlight {
+  color: var(--azul);
+  font-weight: 600;
+}
