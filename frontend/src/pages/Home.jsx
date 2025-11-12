@@ -129,7 +129,7 @@ const Home = () => {
           <div className="card card-norte">
             <img className="img-norte" src={gato} alt="Zona Norte" />
             <p>
-              Rua Atílio Píffer, 687 – Casa Verde, Zona Norte
+              Rua Atílio Píffer, 687 – Casa Verde
               <br />
               <span>de segunda a sexta-feira, das 7h às 17h</span>
             </p>
