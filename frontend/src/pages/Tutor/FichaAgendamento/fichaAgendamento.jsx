@@ -122,7 +122,7 @@ function FichaAgendamento(props) {
 
           <footer className="ficha-footer">
             <button type="submit" className="btn btn-salvar">Salvar</button>
-            <button type="button" className="btn btn-voltar">Voltar</button>
+            <button type="button" className="btn-ficha btn-voltar-ficha">Voltar</button>
           </footer>
 
         </form>

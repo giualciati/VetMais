@@ -1,4 +1,4 @@
-import './infosProntuario.css';
+import './infosProntuarios.css';
 
 
 export default function InfosProntuario() {

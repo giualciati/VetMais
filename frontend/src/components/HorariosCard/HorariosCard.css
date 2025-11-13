@@ -1,0 +1,76 @@
+/* Estilo do card de horário */
+
+.horario-card {
+  background-color: #e3efff; /* azul clarinho */
+  border-radius: 16px;
+  padding: 18px 20px 14px 20px;
+  min-width: 180px;
+  max-width: 220px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.horario-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.horario-info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.horario-icon {
+  font-size: 18px;
+}
+
+.horario-icon.blue {
+  color: #4a90e2;
+}
+
+.horario-icon.pink {
+  color: #f89b31;
+}
+
+.horario-info {
+  font-size: 15px;
+  color: #222;
+}
+
+.horario-vagas {
+  margin-top: 6px;
+  font-size: 15px;
+  color: #1a3d7c;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vagas-label {
+  color: #888;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.vagas-num {
+  color: #1a3d7c;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.horario-label {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+  font-weight: 500;
+}
+
+.horario-label span {
+  font-weight: 600;
+  color: #1a3d7c; 
+}

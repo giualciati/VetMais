@@ -179,7 +179,7 @@ input[type="text"], textarea, select {
   margin-top: 30px;
 }
 
-.btn {
+.btn-ficha {
   border: none;
   border-radius: 20px;
   padding: 10px 30px;
@@ -189,7 +189,7 @@ input[type="text"], textarea, select {
   transition: all 0.2s;
 }
 
-.btn:hover {
+.btn-ficha:hover {
   opacity: 0.9;
 }
 
@@ -198,7 +198,7 @@ input[type="text"], textarea, select {
   color: white;
 }
 
-.btn-voltar {
+.btn-voltar-ficha {
   background-color: #F89B31; /* Laranja */
   color: white;
 }

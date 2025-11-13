@@ -1,0 +1,161 @@
+/* Layout da Página Inteira */
+.prontuarios-pagina {
+    display: flex;
+    min-height: 100vh;
+    background-color: #F9FAFB;
+}
+
+/* --- Barra Lateral --- */
+.sidebar-prontuarios {
+    flex: 0 0 240px;
+    background-color: #E6F0F9;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-prontuarios .logo {
+    width: 140px;
+    height: auto;
+    margin-bottom: 40px;
+    margin-left: 55px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebar-nav a {
+    text-decoration: none;
+    color: #555;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.sidebar-nav a:hover {
+    background-color: #DDE8F3;
+}
+
+.sidebar-nav a.active {
+    font-weight: bold;
+    color: #333;
+}
+
+/* --- Conteúdo Principal --- */
+.main-content-prontuarios {
+    flex: 1;
+    padding: 40px 60px;
+}
+
+.titulo-prontuarios {
+    color: #F89B31;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+/* --- Horários --- */
+.horarios-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.btn-novo {
+    border: none;
+    background-color: #F89B31;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 10px 24px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-novo:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(248, 155, 49, 0.25);
+}
+
+.horarios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.horario-card {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.horario-tutor {
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.horario-especialidade {
+    color: #666;
+    margin: 0 0 8px;
+}
+
+.horario-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #4A5568;
+    font-size: 14px;
+}
+
+.horario-icon {
+    font-size: 16px;
+}
+
+.lista-vazia {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #999;
+    padding: 40px 0;
+    font-size: 16px;
+}
+
+.paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.page-link {
+    min-width: 36px;
+    min-height: 36px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 999px;
+    background-color: transparent;
+    color: #555;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.page-link:hover {
+    background-color: #EEE;
+}
+
+.page-link.active {
+    background-color: #F89B31;
+    color: #fff;
+}
