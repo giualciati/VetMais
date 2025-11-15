@@ -1,5 +1,6 @@
 import React from 'react';
 import './Prontuarios.css';
+import { NavLink } from 'react-router-dom';
 
 // O componente recebe 'prontuarios' (array) e 'onVerMaisClick' (função) das props
 function Prontuarios(props) {
@@ -12,12 +13,14 @@ function Prontuarios(props) {
       <aside className="sidebar-prontuarios">
         <img src="/images/logo.png" alt="Vet+ Logo" className="logo" />
         
-        <nav className="sidebar-nav">
-          <a href="#">Perfil</a>
-          <a href="#" className="active">Prontuários</a>
-          <a href="#">Agenda</a>
-          <a href="#">Sair</a>
-        </nav>
+    
+
+<nav className="sidebar-nav">
+  <NavLink to="/infoPessoal">Perfil</NavLink>
+  <NavLink to="/prontuarios">Prontuários</NavLink>
+  <NavLink to="/agenda">Agenda</NavLink>
+  <NavLink to="/" > Sair </NavLink>
+</nav>
       </aside>
 
       {/* --- CONTEÚDO PRINCIPAL --- */}

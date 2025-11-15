@@ -2,7 +2,7 @@
 .prontuarios-pagina {
   display: flex;
   min-height: 100vh;
-  background-color: #F9FAFB; /* Fundo do conteúdo principal */
+  background-color: #F9FAFB;
 }
 
 /* --- Barra Lateral --- */
@@ -44,22 +44,18 @@
 .sidebar-nav a.active {
   font-weight: bold;
   color: #333;
-  /* Cor do "Prontuários" selecionado (branco) */
-  /* Se preferir o estilo da imagem (branco), use:
-     background-color: #FFF; 
-     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-  */
+
 }
 
 
 /* --- Conteúdo Principal --- */
 .main-content-prontuarios {
-  flex: 1; /* Ocupa o resto do espaço */
+  flex: 1; 
   padding: 40px 60px;
 }
 
 .titulo-prontuarios {
-  color: #F89B31; /* Laranja */
+  color: #F89B31;
   font-size: 32px;
   margin-bottom: 30px;
 }
@@ -67,18 +63,15 @@
 /* --- Tabela --- */
 .prontuario-tabela {
   width: 100%;
-  border-collapse: collapse; /* Para tabelas, mas aqui vamos simular */
+  border-collapse: collapse; 
 }
 
-/* Cabeçalho da Tabela (Azul) */
 .prontuario-header {
   display: grid;
-  /* Ajuste as colunas como preferir */
   grid-template-columns: 1.5fr 2fr 1fr 1fr 1fr;
   align-items: center;
   gap: 15px;
-  
-  background-color: #4A90E2; /* Azul */
+  background-color: #4A90E2;
   color: white;
   padding: 12px 20px;
   border-radius: 8px;
@@ -86,10 +79,10 @@
   font-size: 14px;
 }
 
-/* Linhas de Dados da Tabela */
+
 .prontuario-linha {
   display: grid;
-  grid-template-columns: 1.5fr 2fr 1fr 1fr 1fr; /* Mesmas colunas do header */
+  grid-template-columns: 1.5fr 2fr 1fr 1fr 1fr; 
   align-items: center;
   gap: 15px;
 
@@ -107,7 +100,7 @@
 
 .ver-mais-link {
   color: #F89B31;
-  text-decoration: underline;
+  text-decoration: none;
   font-weight: bold;
   cursor: pointer;
   font-size: 14px;
@@ -138,7 +131,6 @@
   background-color: #EEE;
 }
 
-/* Página ativa (laranja) */
 .page-link.active {
   background-color: #F89B31;
   color: white;
