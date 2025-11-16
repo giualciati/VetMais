@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "tb_situacao_agendament0")
+@Table(name = "tb_situacao_agendamento")
 @Data
 @Entity
 @AllArgsConstructor

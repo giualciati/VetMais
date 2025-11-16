@@ -33,7 +33,7 @@ public class Pessoa {
     @Column(length = 14)
     private String cpf_pessoa;
 
-    private int tel_pessoa;
+    private String tel_pessoa;
 
     @Column(length = 200)
     private String email_pessoa;
