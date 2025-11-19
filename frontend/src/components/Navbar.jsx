@@ -13,9 +13,9 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${isHome ? "navbar-home" : "navbar-default"}`}>
       <div className="navbar-content">
-        <Link to="/" className="logo">
-          <img src={logo} alt="Logo Vet+" />
-        </Link>
+        
+          <img src={logo} alt="Logo Vet+" width="100px"/>
+       
         <ul className="nav-links">
           <li>
             <Link to="/" className={isHome ? "active" : ""}>

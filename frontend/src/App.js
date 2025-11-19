@@ -14,6 +14,9 @@ import Agenda from "./pages/Tutor/Agenda/agenda";
 import Horarios from "./pages/Tutor/Horarios/horarios";
 import FichaAgendamento from "./pages/Tutor/FichaAgendamento/fichaAgendamento";
 import ControlDispo from "./pages/Tutor/ControlDispo/controlDispo";
+import InformacoesPessoais from "./pages/Administrador/InformacoesPessoais/InformacoesPessoais";
+import EditarInformacoesPessoais from "./pages/Administrador/EditarInformacoesPessoais/EditarInformacoesPessoais";
+import CadastroColaborador from "./pages/Administrador/CadastroColaborador/CadastroColaborador";
 
 function AppContent() {
   const location = useLocation();
@@ -34,6 +37,9 @@ function AppContent() {
         <Route path="/horarios" element={<Horarios/>} />
         <Route path="/controlDispo" element={<ControlDispo />} />
         <Route path="/fichaagendamento" element={<FichaAgendamento />} />
+        <Route path="/informacoesPessoais" element={<InformacoesPessoais />} />
+        <Route path="/editarInformacoesPessoais" element={<EditarInformacoesPessoais />} />
+        <Route path="/cadastroColaborador" element={<CadastroColaborador />} />
 
       </Routes>
       {showNavAndFooter && <Footer />}{" "}

@@ -5,7 +5,7 @@ export default function Prontuarios() {
     <section>
       <div className="menu">
         <img
-          src="/images/logo.png"
+          src="/logo.png"
           alt="logo vetmais"
         />
         <ul>
