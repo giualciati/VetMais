@@ -14,14 +14,22 @@ body {
     height: 100%;
 }
 
-.titulo {
+.prontuarioNovo{
     display: flex;
-    text-align: center;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
-h1 {
+.titulo-prontuario {
+    display: flex;
+    justify-content: center;
+   
+   width: 100%;
+}
+
+.h1-prontuario {
     display: flex;
 
     justify-content: center;
@@ -30,6 +38,7 @@ h1 {
     margin: 1em 0em 0em 0em;
     border-radius: 10px;
     color: white;
+    
 }
 
 .forms-prontuario {
@@ -82,7 +91,7 @@ form {
         margin: 0.5em 1em 0em;
     }
 
-    input {
+    .input-prontuario {
         margin: 0.5em;
         height: 25px;
         width: 260px;
@@ -133,7 +142,7 @@ form {
 
 
 
-        input {
+        .inputs-prontuario {
 
             height: 25px;
             width: 200px;
@@ -141,6 +150,7 @@ form {
             border: none;
             border-radius: 20px;
             padding: 5px 10px;
+            background-color: #ffffff;
         }
     }
 

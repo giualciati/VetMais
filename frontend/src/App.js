@@ -17,6 +17,9 @@ import ControlDispo from "./pages/Tutor/ControlDispo/controlDispo";
 import InformacoesPessoais from "./pages/Administrador/InformacoesPessoais/InformacoesPessoais";
 import EditarInformacoesPessoais from "./pages/Administrador/EditarInformacoesPessoais/EditarInformacoesPessoais";
 import CadastroColaborador from "./pages/Administrador/CadastroColaborador/CadastroColaborador";
+import Prontuarios from "./pages/Administrador/Prontuarios/Prontuarios";
+import NovoProntuario from "./pages/Administrador/NovoProntuario/NovoProntuario";
+import EditarProntuario from "./pages/Administrador/EditarProntuario/EditarProntuario";
 
 function AppContent() {
   const location = useLocation();
@@ -40,6 +43,9 @@ function AppContent() {
         <Route path="/informacoesPessoais" element={<InformacoesPessoais />} />
         <Route path="/editarInformacoesPessoais" element={<EditarInformacoesPessoais />} />
         <Route path="/cadastroColaborador" element={<CadastroColaborador />} />
+        <Route path="/prontuarios/vet" element={<Prontuarios />} />
+        <Route path="/novoProntuario" element={<NovoProntuario />} />
+        <Route path="/editarProntuario" element={<EditarProntuario />} />
 
       </Routes>
       {showNavAndFooter && <Footer />}{" "}

@@ -2,9 +2,9 @@ import './novoProntuario.css';
 
 export default function NovoProntuario() {
   return (
-    <section>
-      <div className="titulo">
-        <h1>Prontuário</h1>
+    <section className='prontuarioNovo'>
+      <div className="titulo-prontuario">
+        <h1 className='h1-prontuario'>Prontuário</h1>
       </div>
 
       <section className="forms-prontuario">
@@ -20,9 +20,9 @@ export default function NovoProntuario() {
 
             <div className="inputs-1">
               <label htmlFor="nomeAnimal">Nome do Animal:</label>
-              <input type="text" id="nomeAnimal" required />
+              <input className='input-prontuario' type="text" id="nomeAnimal" required />
               <label htmlFor="nomeTutor">Nome do Tutor:</label>
-              <input type="text" id="nomeTutor" required />
+              <input className='input-prontuario' type="text" id="nomeTutor" required />
             </div>
           </div>
 

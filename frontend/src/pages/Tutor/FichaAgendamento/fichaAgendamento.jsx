@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './fichaAgendamento.css';
+import './fichaAgendamento.scss';
 
 
 function FichaAgendamento(props) {

@@ -1,5 +1,5 @@
-import "./cadastroTutor.css";
-import "../../../styles/Home.css";
+import './cadastroTutor.scss';
+
 
 export default function CadastroTutor() {
   return (
@@ -14,10 +14,12 @@ export default function CadastroTutor() {
           />
           <form>
             <h1>Faça seu cadastro</h1>
-            <input type="text" placeholder="Nome Completo" required />
-
             <div className="inputs-form">
-              <input type="date" placeholder="Nascimento" required />
+                <input className='input1' type="text" placeholder="Nome Completo" required />
+            </div>
+           
+            <div className="inputs-form">
+              <input className='input1' type="date" placeholder="Nascimento" required />
               <input
                 className="input-margin"
                 type="tel"
@@ -27,7 +29,7 @@ export default function CadastroTutor() {
             </div>
 
             <div className="inputs-form">
-              <input type="text" placeholder="RG" required />
+              <input className='input1' type="text" placeholder="RG" required />
               <input
                 className="input-margin"
                 type="text"
@@ -36,8 +38,8 @@ export default function CadastroTutor() {
               />
             </div>
 
-            <input type="email" placeholder="Email" required />
-            <input type="password" placeholder="Senha" required />
+            <input className='input1' type="email" placeholder="Email" required />
+            <input className='input1' type="password" placeholder="Senha" required />
 
             <div className="botao-link">
               <button type="submit">Cadastrar</button>
