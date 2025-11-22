@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../../styles/MyPets.css";
 import {
-  FaPaw, // 🐾
-  FaBook, // 📘
-  FaRegCalendarAlt, // 📅
-  FaEdit, // ✏️
-  FaTrashAlt, // 🗑️
-  FaVenus, // ♀ Fêmea
+  FaPaw,
+  FaBook,
+  FaRegCalendarAlt,
+  FaEdit,
+  FaTrashAlt,
+  FaVenus,
 } from "react-icons/fa";
+
 import Sidebar from "../../../components/SideBar.jsx";
+import { listarPets, deletarPet } from "../../../services/petService";
 
 export default function MyPets() {
+  const [pets, setPets] = useState([]);
+
+  useEffect(() => {
+    listarPets().then((res) => setPets(res.data));
+  }, []);
+
+  function handleDelete(id) {
+    deletarPet(id).then(() => {
+      setPets((prev) => prev.filter((p) => p.id !== id));
+    });
+  }
+
   return (
     <div className="layout mypets-layout">
       <Sidebar />
@@ -27,61 +41,39 @@ export default function MyPets() {
         </div>
 
         <div className="pets-grid">
-          {/* CARD 1 */}
-          <div className="pet-card">
-            <p className="pet-name">Lessie Rosa Silva</p>
-            <div className="pet-info">
-              <p>
-                <FaPaw /> Canina
-              </p>
-              <p>
-                <FaVenus /> Fêmea
-              </p>
-              <p>
-                <FaBook /> Golden
-              </p>
-              <p>
-                <FaRegCalendarAlt /> 09/01/2018
-              </p>
-            </div>
+          {pets.map((pet) => (
+            <div className="pet-card" key={pet.id}>
+              <p className="pet-name">{pet.nome}</p>
 
-            <div className="pet-actions">
-              <Link to="/MyPets/Editar/1" className="edit-icon">
-                <FaEdit />
-              </Link>
-              <button className="delete-icon">
-                <FaTrashAlt />
-              </button>
-            </div>
-          </div>
+              <div className="pet-info">
+                <p>
+                  <FaPaw /> {pet.especie}
+                </p>
+                <p>
+                  <FaVenus /> {pet.genero}
+                </p>
+                <p>
+                  <FaBook /> {pet.raca}
+                </p>
+                <p>
+                  <FaRegCalendarAlt /> {pet.dataNascimento}
+                </p>
+              </div>
 
-          {/* CARD 2 */}
-          <div className="pet-card">
-            <p className="pet-name">Lilica Rosa Silva</p>
-            <div className="pet-info">
-              <p>
-                <FaPaw /> Felina
-              </p>
-              <p>
-                <FaVenus /> Fêmea
-              </p>
-              <p>
-                <FaBook /> SDR
-              </p>
-              <p>
-                <FaRegCalendarAlt /> 09/06/2025
-              </p>
-            </div>
+              <div className="pet-actions">
+                <Link to={`/MyPets/Editar/${pet.id}`} className="edit-icon">
+                  <FaEdit />
+                </Link>
 
-            <div className="pet-actions">
-              <Link to="/MyPets/Editar/2" className="edit-icon">
-                <FaEdit />
-              </Link>
-              <button className="delete-icon">
-                <FaTrashAlt />
-              </button>
+                <button
+                  className="delete-icon"
+                  onClick={() => handleDelete(pet.id)}
+                >
+                  <FaTrashAlt />
+                </button>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
 
         {/* Paginação */}

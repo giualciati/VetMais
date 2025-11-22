@@ -50,12 +50,14 @@
 
 /* Formulário */
 .edit-form-grid {
+  background: var(--fundo) !important;
+  background-image: none !important;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 50px;
-  row-gap: 15px;
   width: 100%;
   max-width: 650px;
+  max-height: fit-content;
   margin: 0 auto;
 }
 
