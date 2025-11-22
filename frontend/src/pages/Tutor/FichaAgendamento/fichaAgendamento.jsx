@@ -151,7 +151,7 @@ function FichaAgendamento(props) {
                 onChange={(e) => setStatus(e.target.value)}
                 className={`status-select ${status}`}
               >
-                <option value="Agendado">Agendado</option>
+                <option value="Atendido">Atendido</option>
                 <option value="Concluído">Concluído</option>
                 <option value="Cancelado">Cancelado</option>
               </select>
