@@ -1,29 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Prontuarios.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
-// O componente recebe 'prontuarios' (array) e 'onVerMaisClick' (função) das props
-function Prontuarios(props) {
-  const { prontuarios = [], onVerMaisClick } = props;
+function Prontuarios() {
+  const navigate = useNavigate();
+  
+  const [listaProntuarios, setListaProntuarios] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+
+  const idSalvo = localStorage.getItem("idTutor");
+  const ID_TUTOR_LOGADO = idSalvo ? JSON.parse(idSalvo) : 1; 
+
+
+  useEffect(() => {
+    const carregarProntuarios = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/prontuarios/tutor/${ID_TUTOR_LOGADO}`);
+        
+        if (response.status === 204) {
+            setListaProntuarios([]); 
+        } else if (response.ok) {
+            const data = await response.json();
+            setListaProntuarios(data);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar prontuários:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (ID_TUTOR_LOGADO) {
+        carregarProntuarios();
+    }
+  }, [ID_TUTOR_LOGADO]);
+
+
+  const formatarProtocolo = (id) => String(id).padStart(2, '0');
 
   return (
     <div className="prontuarios-pagina">
       
-      {/* --- BARRA LATERAL (Sidebar) --- */}
       <aside className="sidebar-prontuarios">
         <img src="/images/logo.png" alt="Vet+ Logo" className="logo" />
         
-    
-
-<nav className="sidebar-nav">
-  <NavLink to="/infoPessoal">Perfil</NavLink>
-  <NavLink to="/prontuarios">Prontuários</NavLink>
-  <NavLink to="/agenda">Agenda</NavLink>
-  <NavLink to="/" > Sair </NavLink>
-</nav>
+        <nav className="sidebar-nav">
+          <NavLink to="/infoPessoal">Perfil</NavLink>
+          <NavLink to="/prontuarioAnimal">Prontuários</NavLink>
+          <NavLink to="/agenda">Agenda</NavLink>
+          <NavLink to="/">Sair</NavLink>
+        </nav>
       </aside>
 
-      {/* --- CONTEÚDO PRINCIPAL --- */}
       <main className="main-content-prontuarios">
         <h1 className="titulo-prontuarios">Prontuários</h1>
         
@@ -34,34 +63,29 @@ function Prontuarios(props) {
             <span>Nome</span>
             <span>Espécie</span>
             <span>Sexo</span>
-            <span></span> {/* Coluna vazia para o link */}
+            <span></span>
           </div>
 
-          {/* (Mapeando os dados das props) */}
-          {prontuarios.map(prontuario => (
-            <div className="prontuario-linha" key={prontuario.id}>
-              <span><strong>{prontuario.protocolo}</strong></span>
-              <span>{prontuario.nome}</span>
-              <span>{prontuario.especie}</span>
-              <span>{prontuario.sexo}</span>
-              <span>
-                <a 
-                  href="#" 
-                  className="ver-mais-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (onVerMaisClick) {
-                      onVerMaisClick(prontuario.id);
-                    }
-                  }}
-                >
-                  Ver mais
-                </a>
+          {loading && <p style={{padding: '20px', textAlign: 'center'}}>Carregando...</p>}
+
+          {!loading && listaProntuarios.map(item => (
+            <div className="prontuario-linha" key={item.id_prontuario}>
+              <span><strong>{formatarProtocolo(item.id_prontuario)}</strong></span>
+              <span>{item.nm_animal}</span>
+              <span>{item.especie_animal}</span>
+              <span>{item.sexo_animal}</span>
+              
+              <span 
+                className="ver-mais-btn"
+                onClick={() => navigate(`/prontuarios/detalhes/${item.id_prontuario}`)} 
+                style={{ cursor: 'pointer' }} 
+              >
+                Ver mais
               </span>
             </div>
           ))}
 
-          {prontuarios.length === 0 && (
+          {!loading && listaProntuarios.length === 0 && (
             <p className="lista-vazia">Nenhum prontuário encontrado.</p>
           )}
         </div>

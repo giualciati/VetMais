@@ -24,4 +24,6 @@ public interface AgendaRepository extends JpaRepository<Agenda, Long> {
            "AND a.data_hora >= CURRENT_TIMESTAMP " +
            "AND (:termo IS NULL OR s.nm_servico = :termo OR v.especialidade_vet = :termo)")
     List<AgendaDisponivelDTO> buscarAgendasDisponiveis(@Param("termo") String termo);
+
+    Agenda buscarPorIdAgendamento(Long idAgendamento);
 }
