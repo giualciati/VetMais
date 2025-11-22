@@ -7,7 +7,7 @@
   min-height: 100vh;
   min-width: 100vw;
   font-family: Arial, sans-serif;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 .ficha-agendamento {
@@ -19,39 +19,87 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Cabeçalho --- */
+/* AJUSTE NO CABEÇALHO */
 .ficha-header {
   display: flex;
-  align-items: flex-start;
-  margin-bottom: 20px;
+  align-items: auto;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  height: 120px;
+  /* ajuste aqui – antes ela ficava sem limite */
 }
 
 .titulo-protocolo {
   display: flex;
+  /* Mude para 'space-between' para empurrar o protocolo para a direita */
   justify-content: space-between;
   width: 100%;
-  text-align: center;
-  justify-content: center;
+  /* REMOVA ou comente as linhas abaixo */
+  /* text-align: center; */
+  /* justify-content: center; */
   padding-bottom: 20px;
 }
 
 .titulo-principal {
   color: #F89B31;
   font-size: 28px;
+  /* REMOVA ou comente */
   align-items: center;
-  justify-content: center;
-  margin-right: 120px;
+  /* justify-content: center; */
+  /* REMOVA ou ajuste, pois 'space-between' fará o alinhamento */
+  margin-right: 0;
+}
+
+/* Centralize o Título Principal no meio da ficha, entre o logo e o protocolo */
+/* Adicione esta regra: */
+.ficha-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 5px;
+  width: 100%;
+  justify-content: space-between;
+  /* Novo: Garante espaçamento uniforme */
+}
+
+/* Novo estilo para a imagem e protocolo */
+
+
+.titulo-protocolo {
+  display: flex;
+  flex-grow: 1;
+  /* Permite que o container de título e protocolo cresça */
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.titulo-principal {
+  color: #F89B31;
+  font-size: 28px;
+  /* Alinhe o título no centro visualmente */
+  /* Pode ser ajustado após ver o tamanho do logo */
+  margin-left: auto;
+  margin-right: auto;
+  flex: 1;
+  /* margin: 0;
+  padding-right: 100px;  */
 }
 
 .protocolo {
+  flex-shrink: 0;
+  /* Não deixa o protocolo diminuir */
   text-align: right;
   color: #63A1F0;
+}
+
+.logo {
+  width: 12px;
+  height: 240px;
 }
 
 .protocolo-numero {
   font-size: 20px;
   font-weight: bold;
-  color: rgb(86, 81, 81);
+  color: #adadad;
   display: block;
 }
 
@@ -70,7 +118,7 @@
 .form-grupo-coluna {
   display: flex;
   flex-direction: column;
-  flex: 1; 
+  flex: 1;
   min-width: 200px;
 }
 
@@ -81,6 +129,8 @@
   margin-top: 10px;
 }
 
+
+
 label {
   font-size: 14px;
   color: #63A1F0;
@@ -88,16 +138,34 @@ label {
   margin-bottom: 5px;
 }
 
-input[type="text"], textarea {
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
   border: 1px solid #DDD;
   background-color: #F7F7F7;
   border-radius: 8px;
   padding: 10px;
   font-size: 14px;
-  margin-bottom: 15px; 
-  width: 100%; 
-  box-sizing: border-box; 
+  margin-bottom: 15px;
+  width: 100%;
+  box-sizing: border-box;
 }
+
+.form-grupo-coluna {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 200px;
+}
+
+
+.dados-consulta select {
+  height: auto;
+}
+
 
 textarea {
   resize: vertical;
@@ -120,29 +188,49 @@ textarea {
   gap: 20px;
 }
 
-.dados-consulta span {
+.dados-consulta .form-grupo-coluna span {
+  display: block;
+  /* Garante que o span ocupe a largura total */
   font-size: 14px;
-  font-weight: normal;
+  font-weight: bold;
+  /* O texto preenchido no print é bold */
   color: #333;
+  padding: 10px;
+  /* Igual ao input */
+  /* background-color: #F7F7F7; */
+  border: 1px solid #DDD;
+  border-radius: 8px;
+  margin-top: 5px;
+  /* Para separá-lo um pouco da label */
   margin-bottom: 15px;
+  /* Espaço para o próximo grupo */
+  box-sizing: border-box;
+  min-height: 38px;
+  /* Para garantir altura mínima, assim como o input */
+  line-height: 1.2;
+  /* Ajusta a altura da linha se o conteúdo for maior */
 }
 
-/* Estilo do campo "Status C" */
+
 .status-container {
   position: relative;
   width: 100%;
 }
+
 .status-input {
   padding-left: 35px !important;
   font-weight: bold;
   color: #007BFF;
 }
 
-input[type="text"], textarea {
-  box-sizing: border-box; 
+input[type="text"],
+textarea {
+  box-sizing: border-box;
 }
 
-input[type="text"], textarea, select {
+input[type="text"],
+textarea,
+select {
   border: 1px solid #DDD;
   background-color: #F7F7F7;
   border-radius: 8px;
@@ -155,7 +243,7 @@ input[type="text"], textarea, select {
 
 .status-input::before {
   position: absolute;
-  left: 8px; 
+  left: 8px;
   top: 50%;
   transform: translateY(-50%);
   background-color: #007BFF;
@@ -194,11 +282,13 @@ input[type="text"], textarea, select {
 }
 
 .btn-salvar {
-  background-color: #4A90E2; /* Azul */
+  background-color: #4A90E2;
+  /* Azul */
   color: white;
 }
 
 .btn-voltar-ficha {
-  background-color: #F89B31; /* Laranja */
+  background-color: #F89B31;
+  /* Laranja */
   color: white;
 }

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import './horarios.css';
 
-// O componente recebe 'prontuarios' (array) e 'onVerMaisClick' (função) das props
 function Horarios(props) {
+  const navigate = useNavigate();
+
+  // Dados temporários caso nenhum venha por props
   const dadosExemplo = Array.from({ length: 24 }, (_, index) => ({
     id: index + 1,
     tutor: 'Camile Vitória',
@@ -11,7 +15,7 @@ function Horarios(props) {
     hora: '09h00'
   }));
 
-  const { horarios = dadosExemplo, onNovoClick } = props;
+  const { horarios = dadosExemplo } = props;
   const [paginaAtual, setPaginaAtual] = useState(1);
   const itensPorPagina = 8;
 
@@ -20,10 +24,9 @@ function Horarios(props) {
   const horariosPaginados = horarios.slice(indiceInicio, indiceFim);
   const totalPaginas = Math.ceil(horarios.length / itensPorPagina);
 
+  // 👉 Agora este botão navega direto para /controlDispo
   const handleNovoClick = () => {
-    if (typeof onNovoClick === 'function') {
-      onNovoClick();
-    }
+    navigate("/controlDispo");
   };
 
   const mudarPagina = (numeroPagina) => {
@@ -38,33 +41,40 @@ function Horarios(props) {
         <img src="/images/logo.png" alt="Vet+ Logo" className="logo" />
 
         <nav className="sidebar-nav">
-          <a href="#">Perfil</a>
-          <a href="#" >Prontuários</a>
-          <a href="#" >Agenda</a>
-          <a href="#" className="active">Meus Horarios</a>
-          <a href="#">Sair</a>
+          <Link to="/perfil">Perfil</Link>
+          <Link to="/prontuario">Prontuários</Link>
+          <Link to="/agenda">Agenda</Link>
+          <Link to="/horarios" className="active">Meus Horários</Link>
+          <Link to="/">Sair</Link>
         </nav>
+
       </aside>
 
       {/* --- CONTEÚDO PRINCIPAL --- */}
       <main className="main-content-prontuarios">
+
+        {/* Título e botão "Novo" */}
         <div className="horarios-header">
           <h1 className="titulo-prontuarios">Horários Disponíveis</h1>
+
           <button type="button" className="btn-novo" onClick={handleNovoClick}>
             Novo
           </button>
         </div>
 
+        {/* Lista de horários */}
         <section className="horarios-grid">
           {horariosPaginados.length > 0 ? (
             horariosPaginados.map((horario) => (
               <article key={horario.id} className="horario-card">
                 <p className="horario-tutor">{horario.tutor}</p>
                 <p className="horario-especialidade">{horario.especialidade}</p>
+
                 <div className="horario-info">
                   <span className="horario-icon" aria-hidden="true">📅</span>
                   <span>{horario.data}</span>
                 </div>
+
                 <div className="horario-info">
                   <span className="horario-icon" aria-hidden="true">⏰</span>
                   <span>{horario.hora}</span>
@@ -76,6 +86,7 @@ function Horarios(props) {
           )}
         </section>
 
+        {/* Paginação */}
         {totalPaginas > 1 && (
           <nav className="paginacao" aria-label="Paginação de horários">
             {Array.from({ length: totalPaginas }, (_, index) => {
@@ -96,7 +107,6 @@ function Horarios(props) {
       </main>
     </div>
   );
-
 }
 
 export default Horarios;

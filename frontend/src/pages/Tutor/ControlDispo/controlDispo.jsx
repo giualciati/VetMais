@@ -49,12 +49,15 @@ export default function ControlDispo() {
                     {/* Linha 2 */}
                     <div className="row">
                         <div className="field-group full">
-                            <label htmlFor="proc">Selecione o procedimento/especialidade:</label>
-                            <select id="proc">
-                                <option>Selecionar</option>
-                            </select>
+                            <label htmlFor="proc">Procedimento / Especialidade:</label>
+                            <input
+                                type="text"
+                                id="proc"
+                                placeholder="Digite o procedimento ou especialidade"
+                            />
                         </div>
                     </div>
+
 
                     {/* Linha 3 */}
                     <div className="row">

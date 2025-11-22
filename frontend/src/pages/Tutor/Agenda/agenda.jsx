@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './agenda.css';
+import { Link } from "react-router-dom";
 
 // O componente recebe 'prontuarios' (array) e 'onVerMaisClick' (função) das props
 function Agenda(props) {
@@ -231,18 +232,13 @@ function Agenda(props) {
                                     <td>{prontuario.hora}</td>
                                     <td style={{ color: getStatusStyle(prontuario.status) }}>{prontuario.status}</td>
                                     <td>
-                                        <a
-                                            href="#"
+                                        <Link
+                                            to="/fichaagendamento"
                                             className="ver-mais-link"
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                if (onVerMaisClick) {
-                                                    onVerMaisClick(prontuario.id);
-                                                }
-                                            }}
                                         >
                                             Ver mais
-                                        </a>
+                                        </Link>
+
                                     </td>
                                 </tr>
                             ))}
