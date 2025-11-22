@@ -8,8 +8,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class AgendamentoService {
+
+        @Transactional
+        public void alterarStatus(Long idAgendamento, String novoStatus) {
+                @SuppressWarnings("null")
+                Agendamento agendamento = agendamentoRepository.findById(idAgendamento)
+                                .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
+
+                // Buscar a situação pelo nome
+                Situacao_agendamento situacao = situacaoRepository.findAll().stream()
+                                .filter(s -> s.getNm_situacao().equalsIgnoreCase(novoStatus))
+                                .findFirst()
+                                .orElseThrow(() -> new RuntimeException("Situação '" + novoStatus + "' não encontrada"));
+
+                agendamento.setSituacao_agendamento(situacao);
+                agendamentoRepository.save(agendamento);
+        }
 
     @Autowired private AgendamentoRepository agendamentoRepository;
     @Autowired private AgendaRepository agendaRepository;
@@ -17,15 +36,18 @@ public class AgendamentoService {
     @Autowired private TutorRepository tutorRepository;
     @Autowired private SituacaoAgendamentoRepository situacaoRepository; 
 
-    @Transactional // Garante que ou salva tudo ou não salva nada
-    public Agendamento criarAgendamento(AgendamentoRequestDTO dados) {
+        @Transactional // Garante que ou salva tudo ou não salva nada
+        public Agendamento criarAgendamento(AgendamentoRequestDTO dados) {
         
+        @SuppressWarnings("null")
         Agenda agenda = agendaRepository.findById(dados.getIdAgenda())
                 .orElseThrow(() -> new RuntimeException("Horário não encontrado!"));
         
+        @SuppressWarnings("null")
         Animal animal = animalRepository.findById(dados.getIdAnimal())
                 .orElseThrow(() -> new RuntimeException("Animal não encontrado!"));
 
+        @SuppressWarnings("null")
         Tutor tutor = tutorRepository.findById(dados.getIdTutor())
                 .orElseThrow(() -> new RuntimeException("Tutor não encontrado!"));
 
@@ -41,6 +63,7 @@ public class AgendamentoService {
                 .orElseThrow(() -> new RuntimeException("Situação 'Agendado' não encontrada no banco (ID 1)"));
 
         Agendamento novoAgendamento = new Agendamento();
+        novoAgendamento.setAgenda(agenda);
         novoAgendamento.setAnimal(animal);
         novoAgendamento.setTutor(tutor);
         novoAgendamento.setSituacao_agendamento(situacao);
@@ -58,8 +81,16 @@ public class AgendamentoService {
         return novoAgendamento;
     }
 
+        // Novo método para listar todos os agendamentos com detalhes completos
+        public List<AgendamentoDetalhesDTO> listarTodosDetalhes() {
+                return agendamentoRepository.findAll().stream()
+                                .map(agendamento -> buscarDetalhes(agendamento.getId_agendamento()))
+                                .collect(Collectors.toList());
+        }
+
     // Método para buscar os detalhes completos
-    public AgendamentoDetalhesDTO buscarDetalhes(Long id) {
+        public AgendamentoDetalhesDTO buscarDetalhes(Long id) {
+        @SuppressWarnings("null")
         Agendamento agendamento = agendamentoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
 
@@ -80,25 +111,19 @@ public class AgendamentoService {
         dto.setDescricaoAnimal(agendamento.getAnimal().getDesc_animal());
         dto.setNomeTutor(agendamento.getTutor().getPessoa().getNm_pessoa());
 
-        // Achar a Agenda vinculada (Precisamos buscar na tb_agenda onde o agendamento está na lista ou fazer query inversa)
-        // Supondo que você consiga recuperar a Agenda a partir do Agendamento 
-        // (Se não tiver mapeado bidirecional, precisará de uma query no Repository)
-        // Vou assumir aqui uma Query simples no Repository: findAgendaByAgendamentoId
-        Agenda agenda = agendaRepository.buscarPorIdAgendamento(id); 
-        
-        if(agenda != null) {
-            dto.setNomeVeterinario(agenda.getVeterinario().getPessoa().getNm_pessoa());
-            dto.setNomeHospital(agenda.getHospital().getNm_hospital());
-            dto.setEspecialidade(agenda.getServico().getNm_servico());
-            dto.setDataHora(agenda.getData_hora());
-        }
+                Agenda agenda = agendamento.getAgenda();
+                dto.setNomeVeterinario(agenda.getVeterinario().getPessoa().getNm_pessoa());
+                dto.setNomeHospital(agenda.getHospital().getNm_hospital());
+                dto.setEspecialidade(agenda.getServico().getNm_servico());
+                dto.setDataHora(agenda.getData_hora());
 
         return dto;
     }
 
     // Método para Cancelar
-    @Transactional
-    public void cancelarAgendamento(Long idAgendamento) {
+        @Transactional
+        public void cancelarAgendamento(Long idAgendamento) {
+        @SuppressWarnings("null")
         Agendamento agendamento = agendamentoRepository.findById(idAgendamento)
                 .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
 
@@ -108,13 +133,11 @@ public class AgendamentoService {
         agendamento.setSituacao_agendamento(cancelado);
         agendamentoRepository.save(agendamento);
 
-        // 2. Libera a Agenda (Volta status para DISPONIVEL - ID 1)
-        Agenda agenda = agendaRepository.buscarPorIdAgendamento(idAgendamento);
-        if (agenda != null) {
-             StatusAgenda disponivel = new StatusAgenda();
-             disponivel.setId_status_agenda(1L); // ID 1 = Disponível
-             agenda.setStatusAgenda(disponivel);
-             agendaRepository.save(agenda);
-        }
+           // 2. Libera a Agenda (Volta status para DISPONIVEL - ID 1)
+           Agenda agenda = agendamento.getAgenda();
+           StatusAgenda disponivel = new StatusAgenda();
+           disponivel.setId_status_agenda(1L); // ID 1 = Disponível
+           agenda.setStatusAgenda(disponivel);
+           agendaRepository.save(agenda);
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.vetmais.dto.VeterinarioNovoDTO;
 import br.com.vetmais.model.Veterinario;
 import br.com.vetmais.service.VeterinarioService;
 
@@ -28,7 +29,7 @@ public class VeterinarioController {
     }
 
     @PostMapping
-    public Veterinario create(@RequestBody Veterinario veterinario){
+    public Veterinario create(@RequestBody VeterinarioNovoDTO veterinario){
         return veterinarioService.createVeterinario(veterinario);
     }
 

@@ -1,4 +1,6 @@
+
 package br.com.vetmais.controller;
+import br.com.vetmais.dto.AgendamentoStatusUpdateDTO;
 
 import br.com.vetmais.dto.AgendamentoDetalhesDTO;
 import br.com.vetmais.dto.AgendamentoRequestDTO;
@@ -7,13 +9,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/agendamentos")
 @CrossOrigin(origins = "*")
 public class AgendamentoController {
 
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Void> alterarStatus(@PathVariable Long id, @RequestBody AgendamentoStatusUpdateDTO dto) {
+        agendamentoService.alterarStatus(id, dto.getStatusAgendamento());
+        return ResponseEntity.noContent().build();
+    }
+
     @Autowired
     private AgendamentoService agendamentoService;
+
+    // Novo endpoint para listar todos os agendamentos com detalhes completos
+    @GetMapping
+    public ResponseEntity<List<AgendamentoDetalhesDTO>> listarTodos() {
+        return ResponseEntity.ok(agendamentoService.listarTodosDetalhes());
+    }
 
     @PostMapping("/novo")
     public ResponseEntity<?> criar(@RequestBody AgendamentoRequestDTO dados) {

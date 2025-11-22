@@ -1,6 +1,7 @@
-.container-geral {
+.ficha-container-geral {
   background-color: #BBD6F8;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 40px;
@@ -10,7 +11,7 @@
   box-sizing: border-box;
 }
 
-.ficha-agendamento {
+.ficha-agendamento-box {
   background-color: #FFFFFF;
   border-radius: 20px;
   padding: 30px 40px;
@@ -19,28 +20,24 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* AJUSTE NO CABEÇALHO */
 .ficha-header {
   display: flex;
   align-items: auto;
   justify-content: space-between;
   margin-bottom: 10px;
   height: 120px;
-  /* ajuste aqui – antes ela ficava sem limite */
+  border-radius: 10px;
 }
 
-.titulo-protocolo {
+.ficha-titulo-protocolo {
   display: flex;
-  /* Mude para 'space-between' para empurrar o protocolo para a direita */
   justify-content: space-between;
   width: 100%;
-  /* REMOVA ou comente as linhas abaixo */
-  /* text-align: center; */
-  /* justify-content: center; */
   padding-bottom: 20px;
 }
 
-.titulo-principal {
+.ficha-titulo-principal {
+  margin-bottom: 40px;
   color: #F89B31;
   font-size: 28px;
   /* REMOVA ou comente */
@@ -84,19 +81,16 @@
   padding-right: 100px;  */
 }
 
-.protocolo {
+.ficha-protocolo {
   flex-shrink: 0;
   /* Não deixa o protocolo diminuir */
   text-align: right;
   color: #63A1F0;
 }
 
-.logo {
-  width: 12px;
-  height: 240px;
-}
 
-.protocolo-numero {
+
+.ficha-protocolo-numero {
   font-size: 20px;
   font-weight: bold;
   color: #adadad;
@@ -109,20 +103,20 @@
   flex-direction: column;
 }
 
-.dados-animal {
+.ficha-dados-animal {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 
-.form-grupo-coluna {
+.ficha-form-grupo-coluna {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-width: 200px;
 }
 
-.form-grupo-descricao {
+.ficha-form-grupo-descricao {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -131,7 +125,7 @@
 
 
 
-label {
+.ficha-label {
   font-size: 14px;
   color: #63A1F0;
   font-weight: bold;
@@ -139,11 +133,11 @@ label {
 }
 
 
-input[type="text"],
-input[type="date"],
-input[type="time"],
-textarea,
-select {
+.ficha-input[type="text"],
+.ficha-input[type="date"],
+.ficha-input[type="time"],
+.ficha-textarea,
+.ficha-select {
   border: 1px solid #DDD;
   background-color: #F7F7F7;
   border-radius: 8px;
@@ -154,7 +148,7 @@ select {
   box-sizing: border-box;
 }
 
-.form-grupo-coluna {
+.ficha-form-grupo-coluna {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -162,18 +156,18 @@ select {
 }
 
 
-.dados-consulta select {
+.ficha-dados-consulta .ficha-select {
   height: auto;
 }
 
 
-textarea {
+.ficha-textarea {
   resize: vertical;
   min-height: 80px;
 }
 
 /* --- Dados da Consulta --- */
-.titulo-secao {
+.ficha-titulo-secao {
   color: #F89B31;
   font-size: 20px;
   border-bottom: 1px solid #EEE;
@@ -182,7 +176,7 @@ textarea {
   margin-bottom: 20px;
 }
 
-.dados-consulta {
+.ficha-dados-consulta {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -212,25 +206,25 @@ textarea {
 }
 
 
-.status-container {
+.ficha-status-container {
   position: relative;
   width: 100%;
 }
 
-.status-input {
+.ficha-status-input {
   padding-left: 35px !important;
   font-weight: bold;
   color: #007BFF;
 }
 
-input[type="text"],
-textarea {
+.ficha-input[type="text"],
+.ficha-textarea {
   box-sizing: border-box;
 }
 
-input[type="text"],
-textarea,
-select {
+.ficha-input[type="text"],
+.ficha-textarea,
+.ficha-select {
   border: 1px solid #DDD;
   background-color: #F7F7F7;
   border-radius: 8px;
@@ -241,7 +235,7 @@ select {
   box-sizing: border-box;
 }
 
-.status-input::before {
+.ficha-status-input::before {
   position: absolute;
   left: 8px;
   top: 50%;
@@ -267,7 +261,7 @@ select {
   margin-top: 30px;
 }
 
-.btn-ficha {
+.ficha-btn-ficha {
   border: none;
   border-radius: 20px;
   padding: 10px 30px;
@@ -277,17 +271,17 @@ select {
   transition: all 0.2s;
 }
 
-.btn-ficha:hover {
+.ficha-btn-ficha:hover {
   opacity: 0.9;
 }
 
-.btn-salvar {
+.ficha-btn-salvar {
   background-color: #4A90E2;
   /* Azul */
   color: white;
 }
 
-.btn-voltar-ficha {
+.ficha-btn-voltar {
   background-color: #F89B31;
   /* Laranja */
   color: white;

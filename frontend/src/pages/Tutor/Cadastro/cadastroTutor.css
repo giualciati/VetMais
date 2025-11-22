@@ -33,7 +33,7 @@
 }
 
 .form-cadastro form {
- 
+
 
   text-align: center;
 
@@ -54,7 +54,7 @@
   font-size: 1rem;
   border: #007bff solid 1px;
   color: #838383;
-   background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .form-cadastro button {
@@ -76,7 +76,7 @@
   display: flex;
 
   .input-margin {
-   
+
     margin: 8px;
     width: 100%;
     height: 50px;

@@ -19,4 +19,8 @@ public class PessoaService {
     public Pessoa createPessoa(Pessoa pessoa){
         return pessoaRepository.save(pessoa);
     }
+
+    public java.util.Optional<Pessoa> getPessoaById(Long id) {
+        return pessoaRepository.findById(id);
+    }
 }
