@@ -34,7 +34,7 @@ public class Hospital {
     @Column(length = 20)
     private String tel_hospital;
 
-    @Column(length = 20)
+    @Column(length = 80)
     private String email_hospital;
 
 
