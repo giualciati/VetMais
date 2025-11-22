@@ -1,10 +1,50 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { FaTimes } from "react-icons/fa";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../../../styles/CadastroPets.css";
 import Sidebar from "../../../components/SideBar.jsx";
+import { salvarPet } from "../../../services/petService";
 
 export default function CadastrarPet() {
+  const navigate = useNavigate();
+
+  const [pet, setPet] = useState({
+    nome: "",
+    dataNascimento: "",
+    rga: "",
+    raca: "",
+    especie: "",
+    genero: "",
+  });
+
+  const [erro, setErro] = useState("");
+
+  function handleChange(e) {
+    setPet({ ...pet, [e.target.name]: e.target.value });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const camposObrigatorios = [
+      "nome",
+      "dataNascimento",
+      "rga",
+      "raca",
+      "especie",
+      "genero",
+    ];
+
+    for (let campo of camposObrigatorios) {
+      if (!pet[campo] || pet[campo].trim() === "") {
+        setErro(`O campo "${campo}" é obrigatório.`);
+        return;
+      }
+    }
+
+    setErro("");
+    salvarPet(pet).then(() => navigate("/MyPets"));
+  }
+
   return (
     <div className="cad-layout">
       <Sidebar />
@@ -14,54 +54,68 @@ export default function CadastrarPet() {
 
         <div className="cad-header">
           <h2 className="cad-subtitle">Cadastrar Pet</h2>
-
           <Link to="/MyPets" className="cad-close">
-            <FaTimes />
+            ✖
           </Link>
         </div>
 
-        <form className="cad-form-grid">
+        <form className="cad-form-grid" onSubmit={handleSubmit}>
           <div>
             <label>Nome</label>
-            <input className="cad-input" placeholder="Nome" />
+            <input name="nome" className="cad-input" onChange={handleChange} />
           </div>
 
           <div>
             <label>Data de nascimento</label>
-            <input className="cad-input" placeholder="Data de nascimento" />
+            <input
+              type="date"
+              name="dataNascimento"
+              className="cad-input"
+              onChange={handleChange}
+            />
           </div>
 
           <div>
             <label>RGA</label>
-            <input className="cad-input" placeholder="RGA" />
+            <input name="rga" className="cad-input" onChange={handleChange} />
           </div>
 
           <div>
             <label>Raça</label>
-            <input className="cad-input" placeholder="Raça" />
+            <input name="raca" className="cad-input" onChange={handleChange} />
           </div>
 
           <div>
             <label>Espécie</label>
-            <select className="cad-input">
-              <option>Selecione</option>
+            <select
+              name="especie"
+              className="cad-input"
+              onChange={handleChange}
+            >
+              <option value="">Selecione</option>
+              <option value="Cão">Cão</option>
+              <option value="Gato">Gato</option>
+              <option value="Ave">Ave</option>
+              <option value="Outro">Outro</option>
             </select>
           </div>
 
           <div>
             <label>Gênero</label>
-            <select className="cad-input">
-              <option>Selecione</option>
+            <select name="genero" className="cad-input" onChange={handleChange}>
+              <option value="">Selecione</option>
+              <option value="Macho">Macho</option>
+              <option value="Fêmea">Fêmea</option>
             </select>
           </div>
+          <div className="cad-buttons">
+            <Link to="/MyPets" className="cad-btn cad-cancel">
+              Cancelar
+            </Link>
+            <button className="cad-btn cad-save">Salvar</button>
+            {erro && <span className="cad-error">{erro}</span>}
+          </div>
         </form>
-
-        <div className="cad-buttons">
-          <Link to="/MyPets" className="cad-btn cad-cancel">
-            Cancelar
-          </Link>
-          <button className="cad-btn cad-save">Salvar</button>
-        </div>
       </div>
     </div>
   );

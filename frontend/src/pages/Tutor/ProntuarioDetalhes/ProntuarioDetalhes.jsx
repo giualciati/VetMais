@@ -1,15 +1,47 @@
-import React, { useRef } from 'react'; 
+import React, { useRef, useState, useEffect } from 'react'; 
+import { useParams, useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';            
 import html2canvas from 'html2canvas'; 
 import './ProntuarioDetalhes.css';
 
-
-function ProntuarioDetalhes(props) {
-  const { prontuario } = props;
-
+function ProntuarioDetalhes() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const cardRef = useRef(null);
 
-  // Função de download
+  const [prontuario, setProntuario] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const carregarProntuario = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/prontuarios/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setProntuario(data);
+        } else {
+          console.error("Prontuário não encontrado");
+        }
+      } catch (error) {
+        console.error("Erro de conexão:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) carregarProntuario();
+  }, [id]);
+
+  const formatarData = (dataISO) => {
+    if (!dataISO) return '-';
+    return new Date(dataISO).toLocaleDateString('pt-BR');
+  };
+
+  const formatarHora = (dataISO) => {
+    if (!dataISO) return '-';
+    return new Date(dataISO).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  };
+
   const handleDownloadPDF = (event) => {
     event.preventDefault();
 
@@ -24,33 +56,41 @@ function ProntuarioDetalhes(props) {
     }).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       
-      // Cria um novo PDF no tamanho A4 
       const pdf = new jsPDF('p', 'mm', 'a4');
-      
-
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
       
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`prontuario_${prontuario.protocolo || 'detalhes'}.pdf`);
+      pdf.save(`prontuario_${prontuario?.protocolo || 'detalhes'}.pdf`);
     });
   };
+
+  if (loading) {
+    return <div className="detalhe-pagina"><p>Carregando dados...</p></div>;
+  }
 
   if (!prontuario) {
     return (
       <div className="detalhe-pagina">
         <p>Erro: Prontuário não encontrado.</p>
+        <button onClick={() => navigate(-1)}>Voltar</button>
       </div>
     );
   }
 
   return (
     <div className="detalhe-pagina">
+      <button className='btnVoltar'
+        onClick={() => navigate("/prontuarioAnimal")} 
+      >
+        &larr; Voltar
+      </button>
+
       <div className="detalhe-card" ref={cardRef}>
         
         <div className="detalhe-card-conteudo">
 
-          {/* --- CABEÇALHO --- */}
+
           <header className="detalhe-header">
             <img src="/images/logo.png" alt="Vet+ Logo" className="logo" />
             <div className="detalhe-titulo-protocolo">
@@ -58,35 +98,41 @@ function ProntuarioDetalhes(props) {
               <div className="detalhe-protocolo">
                 <span>Protocolo</span>
                 <span className="detalhe-protocolo-numero">
-                  {prontuario.protocolo}
+                  {String(prontuario.protocolo).padStart(2, '0')}
                 </span>
               </div>
             </div>
           </header>
 
-          {/* --- DADOS DO ANIMAL --- */}
           <section className="detalhe-secao-flex">
             <div className="detalhe-grupo-coluna">
               <label>Nome do Animal</label>
-              <span>{prontuario.nome}</span>
+              <span>{prontuario.nomeAnimal}</span>
+              
               <label>Espécie</label>
               <span>{prontuario.especie}</span>
+              
               <label>Nome Tutor</label>
-              <span>{prontuario.tutor}</span>
+              <span>{prontuario.nomeTutor}</span>
+              
               <label>Descrição do Animal</label>
-              <span>{prontuario.descricao}</span>
+              <span>{prontuario.descricaoAnimal}</span>
             </div>
+            
             <div className="detalhe-grupo-coluna">
               <label>Sexo</label>
               <span>{prontuario.sexo}</span>
+              
               <label>Raça</label>
               <span>{prontuario.raca}</span>
+              
               <label>RA</label>
-              <span>{prontuario.ra}</span>
+              <span>{prontuario.rga || '---'}</span>
             </div>
+            
             <div className="detalhe-grupo-coluna">
               <label>Data de Nascimento</label>
-              <span>{prontuario.nascimento}</span>
+              <span>{formatarData(prontuario.dataNascimento)}</span>
             </div>
           </section>
 
@@ -97,19 +143,20 @@ function ProntuarioDetalhes(props) {
           <section className="detalhe-secao-flex">
             <div className="detalhe-grupo-coluna">
               <label>Veterinário(a)</label>
-              <span>{prontuario.veterinario}</span>
+              <span>{prontuario.nomeVeterinario}</span>
             </div>
             <div className="detalhe-grupo-coluna">
               <label>Data</label>
-              <span>{prontuario.data}</span>
+  
+              <span>{formatarData(prontuario.dataAtendimento)}</span>
             </div>
             <div className="detalhe-grupo-coluna">
               <label>Hora</label>
-              <span>{prontuario.hora}</span>
+              <span>{formatarHora(prontuario.dataAtendimento)}</span>
             </div>
             <div className="detalhe-grupo-coluna">
               <label>Hospital</label>
-              <span>{prontuario.hospital}</span>
+              <span>{prontuario.nomeHospital}</span>
             </div>
           </section>
 
@@ -132,10 +179,8 @@ function ProntuarioDetalhes(props) {
             </div>
           </section>
 
-          {/* --- RODAPÉ COM ÍCONE --- */}
           <footer className="detalhe-footer">
-            {/* 6. Mude de href="#" para onClick={handleDownloadPDF} */}
-            <a href="#" className="download-icon" onClick={handleDownloadPDF}>
+            <a href="#" className="download-icon" onClick={handleDownloadPDF} title="Baixar PDF">
               &#x21E3; 
             </a>
           </footer>

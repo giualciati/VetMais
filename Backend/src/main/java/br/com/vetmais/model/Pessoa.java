@@ -40,4 +40,6 @@ public class Pessoa {
 
     @Column(length = 40)
     private String senha_pessoa;
+
+    
 }

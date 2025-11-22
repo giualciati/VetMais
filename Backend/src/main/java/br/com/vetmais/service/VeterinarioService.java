@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.vetmais.dto.VeterinarioNovoDTO;
+import br.com.vetmais.model.Hospital;
+import br.com.vetmais.model.Pessoa;
 import br.com.vetmais.model.Veterinario;
 import br.com.vetmais.repository.VeterinarioRepository;
 
@@ -13,12 +16,30 @@ public class VeterinarioService {
     @Autowired
     private VeterinarioRepository veterinarioRepository;
 
+    @Autowired
+    private PessoaService pessoaService;
+
+    @Autowired
+    private HospitalService hospitalService;
+
     public List <Veterinario> getAllVeterinarios(){
         return veterinarioRepository.findAll();
     }
 
-    public Veterinario createVeterinario(Veterinario veterinario){
-        return  veterinarioRepository.save(veterinario);
+    public Veterinario createVeterinario(VeterinarioNovoDTO veterinario){
+            Veterinario vet = new Veterinario();
+            vet.setCrm_veterinario(veterinario.getCrmv_veterinario());
+            vet.setEspecialidade_vet(veterinario.getEspecialidade_vet());
+
+            Hospital hospital = hospitalService.getHospitalById(veterinario.getId_hospvet())
+                .orElseThrow(() -> new RuntimeException("Hospital não encontrado com id: " + veterinario.getId_hospvet()));
+            vet.setHospital(hospital);
+
+            Pessoa pessoa = pessoaService.getPessoaById(veterinario.getId_pessoa())
+                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada com id: " + veterinario.getId_pessoa()));
+            vet.setPessoa(pessoa);
+            
+        return  veterinarioRepository.save(vet);
     }
 
     public Veterinario updateVeterinario(Long id, Veterinario novo){
