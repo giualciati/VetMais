@@ -10,20 +10,21 @@ import java.util.List;
 public interface AgendaRepository extends JpaRepository<Agenda, Long> {
 
     @Query("SELECT new br.com.vetmais.dto.AgendaDisponivelDTO(" +
-           " a.id, " +
-           " v.pessoa.nm_pessoa, " +
-           " s.nm_servico, " +
-           " a.data_hora, " +
-           " h.end_hospital) " +
-           "FROM Agenda a " +
-           "JOIN a.veterinario v " +
-           "JOIN a.servico s " +
-           "JOIN a.statusAgenda sa " +
-           "JOIN a.hospital h " + 
-           "WHERE sa.nm_status = 'DISPONIVEL' " +
-           "AND a.data_hora >= CURRENT_TIMESTAMP " +
-           "AND (:termo IS NULL OR s.nm_servico = :termo OR v.especialidade_vet = :termo)")
+            " a.id, " +
+            " v.pessoa.nm_pessoa, " +
+            " s.nm_servico, " +
+            " a.data_hora, " +
+            " h.cidade_hospital) " + 
+            "FROM Agenda a " +
+            "JOIN a.veterinario v " +
+            "JOIN a.servico s " +
+            "JOIN a.statusAgenda sa " +
+            "JOIN a.hospital h " +
+            "WHERE sa.nm_status = 'DISPONIVEL' " +
+            "AND a.data_hora >= CURRENT_TIMESTAMP " +
+            "AND (:termo IS NULL OR s.nm_servico = :termo OR v.especialidade_vet = :termo)")
     List<AgendaDisponivelDTO> buscarAgendasDisponiveis(@Param("termo") String termo);
 
-    Agenda buscarPorIdAgendamento(Long idAgendamento);
+    @Query("SELECT a FROM Agenda a JOIN a.agendamento ag WHERE ag.id_agendamento = :idAgendamento")
+    Agenda buscarPorIdAgendamento(@Param("idAgendamento") Long idAgendamento);
 }
