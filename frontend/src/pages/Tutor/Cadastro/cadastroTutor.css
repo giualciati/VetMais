@@ -6,56 +6,44 @@
 
 .cao {
   height: 100vh;
-  width: 70vh;
+  width: 40vw;
 }
 
 .fundo-cadastro {
   position: absolute;
-  width: 140vh;
-  height: 100%;
+  width: 100%;
+  height: 100;
   z-index: -1;
   margin-left: 2.2em;
 }
 
+.teste {
+  width: 100%;
+}
+
 .imagens {
   display: flex;
+  align-items: center;
+  background-image: url("../../../assets/fundo.png");
+  width: 100%;
 }
 
 .form-cadastro {
-  position: relative;
-  width: 100%;
-  height: 100vh;
+  width: 70vw;
+  height: 100%;
 }
 
 .form-cadastro form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  max-width: 400px;
+ 
+
   text-align: center;
 
   background: #fff;
   padding: 40px;
   border-radius: 10px;
-  z-index: 0;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
-.form-cadastro form::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 4px;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #f6963e, #63a1f0);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: -1;
-  pointer-events: none;
-}
 
 .form-cadastro input {
   width: 100%;
