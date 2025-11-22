@@ -49,9 +49,4 @@ public class Animal {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_tutor", nullable = false)
     private Tutor tutor;
-
-
-
-
-
 }

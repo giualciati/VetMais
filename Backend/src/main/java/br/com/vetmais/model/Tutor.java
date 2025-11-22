@@ -29,6 +29,4 @@ public class Tutor {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_pessoa", nullable = false)
     private Pessoa pessoa;
-
-
 }
