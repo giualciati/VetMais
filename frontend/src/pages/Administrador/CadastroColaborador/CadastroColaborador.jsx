@@ -4,7 +4,7 @@ import './cadastroColaborador.css';
 
 export default function CadastroColaborador() {
   return (
-    <div>
+    <div className='body'>
       <Navbar />
       <div>
         <h1>Seja nosso colaborador</h1>

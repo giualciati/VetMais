@@ -7,7 +7,7 @@
   align-items: center;
   padding: 40px;
   min-height: 100vh;
-  min-width: 100vw;
+  min-width: 95vw;
   font-family: Arial, sans-serif;
   box-sizing: border-box; 
 }
@@ -28,6 +28,12 @@
   display: flex;
   align-items: flex-start;
   margin-bottom: 20px;
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+  margin: 20px 0 30px 0;
+  height: 130px;
+  width: 100%;
 }
 
 .agendar-header .logo {
@@ -38,8 +44,8 @@
 
 .titulo-container {
   display: flex;
-  justify-content: space-between;
   width: 100%;
+  margin-top: 40px;
   text-align: center;
   justify-content: center;
   padding-bottom: 20px;
@@ -53,7 +59,6 @@
   margin-right: 120px;
 }
 
-/* Linha de Inputs Superiores */
 .form-row-inputs {
   display: flex;
   gap: 30px;
@@ -63,7 +68,7 @@
 .form-grupo {
   display: flex;
   flex-direction: column;
-  flex: 1; /* Faz os dois campos ocuparem o mesmo espaço */
+  flex: 1; 
 }
 
 .form-grupo label {
@@ -87,14 +92,14 @@
   font-size: 18px;
   color: #333;
   margin-bottom: 15px;
+  font-weight: 400;
 }
 
-/* Lista de Pets */
 .pet-list {
   display: flex;
   gap: 20px;
   margin-bottom: 30px;
-  overflow-x: auto; /* Permite rolar se tiver muitos pets */
+  overflow-x: auto; 
 }
 
 .pet-card {
@@ -102,9 +107,9 @@
   border-radius: 12px;
   padding: 15px 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  border: 2px solid transparent; /* Borda transparente para não "pular" */
+  border: 2px solid transparent;
   cursor: pointer;
-  min-width: 220px; /* Largura mínima do card */
+  min-width: 220px;
 }
 
 .pet-card h3 {
@@ -118,14 +123,11 @@
   margin: 5px 0;
 }
 
-/* Estilo do card de pet SELECIONADO */
 .pet-card.selected {
-  border-color: #F89B31; /* Borda laranja ao selecionar */
+  border-color: #F89B31;
   box-shadow: 0 4px 12px rgba(248, 155, 49, 0.3);
 }
 
-
-/* Lista de Horários */
 .horario-list-container {
   position: relative;
 }
@@ -133,8 +135,8 @@
 .horario-list {
   display: flex;
   gap: 20px;
-  overflow-x: auto; /* Permite rolagem horizontal */
-  padding-bottom: 15px; /* Espaço para a barra de rolagem não cobrir */
+  overflow-x: auto;
+  padding-bottom: 15px;
 }
 
 .horario-card {
@@ -144,7 +146,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border: 2px solid transparent;
   cursor: pointer;
-  min-width: 220px; /* Largura mínima */
+  min-width: 220px;
 }
 .horario-card h3 {
   font-size: 15px;
@@ -154,9 +156,8 @@
   margin: 5px 0;
 }
 
-/* Estilo do card de horário SELECIONADO */
 .horario-card.selected {
-  border-color: #4A90E2; /* Borda azul ao selecionar */
+  border-color: #4A90E2;
   box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 }
 
@@ -179,15 +180,41 @@
 }
 
 .btn-cancelar-ag {
-  background-color: #C9E0F8; /* Azul claro */
-  color: #007BFF;
+  background-color: #BBD6F8;
+  color: black;
+  font-weight: 500;
 }
 
 .btn-agendar-ag {
-  background-color: #F5C6CB; /* Rosa claro */
-  color: #D0021B;
+  background-color: #FFB6B8;
+  color: black;
+  font-weight: 500;
 }
 
 .btn:hover {
   opacity: 0.8;
+}
+
+/* Mensagem de erro destacada */
+.mensagem-sem-horarios {
+    text-align: center;
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.container-desativado {
+    opacity: 0.5;
+    pointer-events: none;
+    filter: grayscale(100%);
+}
+
+button:disabled {
+    background-color: #ccc !important;
+    cursor: not-allowed;
+    transform: none !important;
 }

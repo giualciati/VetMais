@@ -1,170 +1,241 @@
-import React, { useState } from 'react';
+
+
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import './fichaAgendamento.css';
 
+function FichaAgendamento() {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-function FichaAgendamento(props) {
+  const [dados, setDados] = useState(null);
+  const [statusSelecionado, setStatusSelecionado] = useState('');
 
-  const [nomeAnimal, setNomeAnimal] = useState(props.nomeAnimal || '');
-  const [especie, setEspecie] = useState(props.especie || '');
-  const [nomeTutor, setNomeTutor] = useState(props.nomeTutor || '');
-  const [descricao, setDescricao] = useState(props.descricao || '');
+  useEffect(() => {
+    const carregarFicha = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/agendamentos/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setDados(data);
+          setStatusSelecionado(data.statusAgendamento || 'Agendado');
+        } else {
+          alert('Erro ao carregar agendamento');
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+      }
+    };
 
-  const [status, setStatus] = useState(props.status || 'Agendado');
+    carregarFicha();
+  }, [id]);
+
+  const handleVoltar = () => {
+    navigate('/agenda');
+  };
+
+  const handleSalvar = async () => {
+    // Se não mudou o status, só volta
+    if (statusSelecionado === dados.statusAgendamento) {
+      navigate('/agenda');
+      return;
+    }
+
+    // Se mudou para Cancelado e ainda não estava cancelado
+    if (statusSelecionado === 'Cancelado' && dados.statusAgendamento !== 'Cancelado') {
+      const confirmar = window.confirm(
+        'Tem certeza que deseja cancelar este agendamento? O horário será liberado.'
+      );
+
+      if (confirmar) {
+        try {
+          const response = await fetch(
+            `http://localhost:8080/agendamentos/${id}/cancelar`,
+            {
+              method: 'PUT',
+            }
+          );
+
+          if (response.ok) {
+            alert('Agendamento cancelado com sucesso!');
+            navigate('/agenda');
+          } else {
+            alert('Erro ao cancelar.');
+          }
+        } catch (error) {
+          console.error('Erro:', error);
+        }
+      }
+    } else {
+      // Aqui você poderia chamar um endpoint para atualizar outros status, se existir
+      // Por enquanto apenas volta
+      navigate('/agenda');
+    }
+  };
+
+  if (!dados) return <div className="loading">Carregando ficha...</div>;
+
+  const dataNasc = dados.dataNascimento
+    ? new Date(dados.dataNascimento).toLocaleDateString('pt-BR')
+    : '';
+  const dataConsulta = dados.dataHora
+    ? new Date(dados.dataHora).toLocaleDateString('pt-BR')
+    : '';
+  const horaConsulta = dados.dataHora
+    ? new Date(dados.dataHora).toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    : '';
 
   return (
-    <div className="container-geral">
-      <div className="ficha-agendamento">
+    <div className="ficha-container">
+      <header>
+        <img src="/logo.png" alt="Logo" className="logo-ficha" />
+        <h1>Ficha de Agendamento</h1>
+        <div className="protocolo">
+          Protocolo <strong>{dados.protocolo}</strong>
+        </div>
+      </header>
 
-        <header className="ficha-header">
-          <div className='logo'><img src="/images/logo.png" alt="Vet+ Logo" className="logo" />
+      <div className="ficha-content">
+        {/* Bloco 1: Animal e Tutor */}
+        <div className="row">
+          <div className="campo">
+            <label>Nome do Animal</label>
+            <input
+              type="text"
+              value={dados.nomeAnimal}
+              readOnly
+              className="input-readonly"
+            />
           </div>
-
-          <div className="titulo-protocolo">
-            <h1 className="titulo-principal">Ficha de Agendamento</h1>
-            <div className="protocolo">
-              <span>Protocolo</span>
-              <span className="protocolo-numero">{props.protocolo || '01'}</span>
-            </div>
+          <div className="campo">
+            <label>Raça</label>
+            <input
+              type="text"
+              value={dados.raca}
+              readOnly
+              className="input-readonly"
+            />
           </div>
-        </header>
+          <div className="campo">
+            <label>Data de Nascimento</label>
+            <input
+              type="text"
+              value={dataNasc}
+              readOnly
+              className="input-readonly"
+            />
+          </div>
+        </div>
 
-        <form className="ficha-form">
+        <div className="row">
+          <div className="campo">
+            <label>Espécie</label>
+            <input
+              type="text"
+              value={dados.especie}
+              readOnly
+              className="input-readonly"
+            />
+          </div>
+          <div className="campo">
+            <label>Sexo</label>
+            <input
+              type="text"
+              value={dados.sexo || ''}
+              readOnly
+              className="input-readonly"
+            />
+          </div>
+          <div className="campo">
+            <label>RGA</label>
+            <input
+              type="text"
+              value={dados.rga || 'Não informado'}
+              readOnly
+              className="input-readonly"
+            />
+          </div>
+        </div>
 
-          <section className="dados-animal">
-            <div className="form-grupo-coluna">
-              <label htmlFor="nomeAnimal">Nome do Animal</label>
-              <input
-                type="text"
-                id="nomeAnimal"
-                value={nomeAnimal}
-                onChange={(e) => setNomeAnimal(e.target.value)}
-                placeholder="Não informado"
-              />
-              <div className="especie"></div>
-              <label htmlFor="especie">Espécie</label>
-              <input
-                type="text"
-                id="especie"
-                value={especie}
-                onChange={(e) => setEspecie(e.target.value)}
-                placeholder="Não informado"
-              />
+        <div className="row">
+          <div className="campo full-width">
+            <label>Nome Tutor</label>
+            <input
+              type="text"
+              value={dados.nomeTutor}
+              readOnly
+              className="input-readonly"
+            />
+          </div>
+        </div>
 
-              <label htmlFor="nomeTutor">Nome Tutor</label>
-              <input
-                type="text"
-                id="nomeTutor"
-                value={nomeTutor}
-                onChange={(e) => setNomeTutor(e.target.value)}
-                placeholder="Não informado"
-              />
-            </div>
-
-            <div className="form-grupo-coluna">
-              <label htmlFor="sexo">Sexo</label>
-              <input type="text" id="sexo" defaultValue={props.sexo || ''}
-                placeholder="Não informado"
-              />
-
-
-              <div className="form-grupo-coluna data">
-                <label htmlFor="dataNascimento">Data de Nascimento</label>
-                <input type="date" id="dataNascimento" defaultValue={props.dataNascimento || ''} />
-              </div>
-
-              <label htmlFor="raca">Raça</label>
-              <input type="text" id="raca" defaultValue={props.raca || ''}
-                placeholder="Não informado" />
-
-
-              <label htmlFor="ra">RA</label>
-              <input type="text" id="ra" defaultValue={props.ra || ''}
-                placeholder="Não informado" />
-            </div>
-            {/* 
-            <div className="form-grupo-coluna">
-              <label htmlFor="dataNascimento">Data de Nascimento</label>
-              <input type="date" id="dataNascimento" defaultValue={props.dataNascimento || ''} />
-            </div> */}
-
-          </section>
-
-
-          <div className="form-grupo-descricao">
-            <label htmlFor="descricao">Descrição do Animal</label>
+        <div className="row">
+          <div className="campo full-width">
+            <label>Descrição do Animal</label>
             <textarea
-              id="descricao"
-              rows="3"
-              value={descricao}
-              onChange={(e) => setDescricao(e.target.value)}
-              placeholder="Não informado"
-            >
-            </textarea>
+              readOnly
+              value={dados.descricaoAnimal || ''}
+              className="input-readonly"
+            />
+          </div>
+        </div>
+
+        <h2 className="titulo-secao">Dados da Consulta</h2>
+
+        <div className="row">
+          <div className="campo">
+            <label>Veterinário(a)</label>
+            <div className="valor-texto">{dados.nomeVeterinario}</div>
+          </div>
+          <div className="campo">
+            <label>Hospital</label>
+            <div className="valor-texto">{dados.nomeHospital}</div>
+          </div>
+          <div className="campo">
+            <label>Especialidade</label>
+            <div className="valor-texto">{dados.especialidade}</div>
+          </div>
+        </div>
+
+        <div className="row last-row">
+          <div className="campo">
+            <label>Data</label>
+            <div className="valor-texto">{dataConsulta}</div>
+          </div>
+          <div className="campo">
+            <label>Hora</label>
+            <div className="valor-texto">{horaConsulta}</div>
           </div>
 
-          <h2 className="titulo-secao">Dados da Consulta</h2>
-          <section className="dados-consulta">
-            {/* Veterinário */}
-            <div className="vet">
-              <label htmlFor="veterinario">Veterinário(a)</label>
-              <input
-                type="text"
-                id="veterinario"
-                defaultValue={props.veterinario || ''}
-                placeholder="Não informado"
-              />
-            </div>
+          <div className="campo">
+            <label>Status</label>
+            <select
+              value={statusSelecionado}
+              onChange={(e) => setStatusSelecionado(e.target.value)}
+              className={`select-status ${statusSelecionado}`}
+              disabled={
+                dados.statusAgendamento === 'Concluído' ||
+                dados.statusAgendamento === 'Cancelado'
+              }
+            >
+              <option value="Atendido">Atendido</option>
+              <option value="Concluído">Concluído</option>
+              <option value="Cancelado">Cancelado</option>
+            </select>
+          </div>
+        </div>
 
-            {/* Hospital e Hora */}
-            <div className="form-grupo-coluna">
-              <label htmlFor="hospital">Hospital</label>
-              <input
-                type="text"
-                id="hospital"
-                defaultValue={props.hospital || ''}
-                placeholder="Não informado"
-              />
-              <div className="form-grupo-hora"></div>
-              <label htmlFor="hora">Hora</label>
-              <input
-                type="time"
-                id="hora"
-                defaultValue={props.hora || ''}
-                placeholder="Não informada"
-              />
-            </div>
-
-
-            <div className="form-grupo-coluna">
-              <label htmlFor="especialidade">Especialidade</label>
-              <input
-                type="text"
-                id="especialidade"
-                defaultValue={props.especialidade || ''}
-                placeholder="Não informada"
-              />
-
-              <label htmlFor="status">Status</label>
-              <select
-                id="status"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-                className={`status-select ${status}`}
-              >
-                <option value="Agendado">Agendado</option>
-                <option value="Concluído">Concluído</option>
-                <option value="Cancelado">Cancelado</option>
-              </select>
-            </div>
-          </section>
-
-
-          <footer className="ficha-footer">
-            <button type="submit" className="btn btn-salvar">Salvar</button>
-            <button type="button" className="btn-ficha btn-voltar-ficha">Voltar</button>
-          </footer>
-
-        </form>
+        <div className="ficha-actions">
+          <button className="btn-salvar" onClick={handleSalvar}>
+            Salvar
+          </button>
+          <button className="btn-voltar" onClick={handleVoltar}>
+            Voltar
+          </button>
+        </div>
       </div>
     </div>
   );
