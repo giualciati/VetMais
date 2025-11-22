@@ -20,6 +20,11 @@ import ControlDispo from "./pages/Tutor/ControlDispo/controlDispo";
 import InformacoesPessoais from "./pages/Administrador/InformacoesPessoais/InformacoesPessoais";
 import EditarInformacoesPessoais from "./pages/Administrador/EditarInformacoesPessoais/EditarInformacoesPessoais";
 import CadastroColaborador from "./pages/Administrador/CadastroColaborador/CadastroColaborador";
+import Prontuarios from "./pages/Administrador/Prontuarios/Prontuarios";
+import NovoProntuario from "./pages/Administrador/NovoProntuario/NovoProntuario";
+import EditarProntuario from "./pages/Administrador/EditarProntuario/EditarProntuario";
+import AgendarServico from "./pages/Tutor/AgendarServico/agendarServico";
+import ProntuarioDetalhes from "./pages/Tutor/ProntuarioDetalhes/ProntuarioDetalhes";
 
 function AppContent() {
   const location = useLocation();
@@ -31,28 +36,41 @@ function AppContent() {
   return (
     <>
       {showNavAndFooter && <Navbar />}
+
       <Routes>
-        {/* Páginas públicas */}
+        {/* Rotas públicas */}
         <Route path="/" element={<Home />} />
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/cadastro" element={<CadastroTutor />} />
-        {/* Páginas internas (sem Navbar/Footer) */}
+
+        {/* Tutor */}
         <Route path="/MyPets" element={<MyPets />} />
         <Route path="/MyPets/Cadastro" element={<CadastroPets />} />
         <Route path="/MyPets/Editar/:id" element={<EditPets />} />
-        <Route path="/prontuario" element={<Prontuario />} />
+        <Route path="/prontuarioAnimal" element={<Prontuario />} />
         <Route path="/agenda" element={<Agenda />} />
+        <Route path="/agendarServico" element={<AgendarServico />} />
         <Route path="/horarios" element={<Horarios />} />
         <Route path="/controlDispo" element={<ControlDispo />} />
-        <Route path="/fichaagendamento" element={<FichaAgendamento />} />
+        <Route path="/fichaagendamento/:id" element={<FichaAgendamento />} />
+        <Route
+          path="/prontuarioDetalhes/:id"
+          element={<ProntuarioDetalhes />}
+        />
+
+        {/* Administrador */}
         <Route path="/informacoesPessoais" element={<InformacoesPessoais />} />
         <Route
           path="/editarInformacoesPessoais"
           element={<EditarInformacoesPessoais />}
         />
         <Route path="/cadastroColaborador" element={<CadastroColaborador />} />
+        <Route path="/prontuarios/vet" element={<Prontuarios />} />
+        <Route path="/novoProntuario" element={<NovoProntuario />} />
+        <Route path="/editarProntuario" element={<EditarProntuario />} />
       </Routes>
-      {showNavAndFooter && <Footer />}{" "}
+
+      {showNavAndFooter && <Footer />}
     </>
   );
 }
