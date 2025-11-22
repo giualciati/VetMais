@@ -1,35 +1,42 @@
-import "./cadastroTutor.css";
-import "../../../styles/Home.css";
-
-export default function CadastroTutor() {
-  return (
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./cadastroTutor.css" />
+    <title>Document</title>
+  </head>
+  <body>
     <section>
-      <div className="imagens">
-        <img className="cao" src="/images/cao-cadastro.jpg" alt="cao" />
-        <div className="form-cadastro">
+      <div class="imagens">
+        <img
+          class="cao"
+          src="../../../../public/images/cao-cadastro.jpg"
+          alt="cao"
+        />
+        <div class="form-cadastro">
           <img
-            className="fundo-cadastro"
-            src="/images/Group 82.png"
+            class="fundo-cadastro"
+            src="../../../../public/images/Group 82.png"
             alt="fundo"
           />
           <form>
             <h1>Faça seu cadastro</h1>
             <input type="text" placeholder="Nome Completo" required />
-
-            <div className="inputs-form">
+            <div class="inputs-form">
               <input type="date" placeholder="Nascimento" required />
               <input
-                className="input-margin"
+                class="input-margin"
                 type="tel"
                 placeholder="Telefone"
                 required
               />
             </div>
 
-            <div className="inputs-form">
+            <div class="inputs-form">
               <input type="text" placeholder="RG" required />
               <input
-                className="input-margin"
+                class="input-margin"
                 type="text"
                 placeholder="CPF"
                 required
@@ -38,14 +45,13 @@ export default function CadastroTutor() {
 
             <input type="email" placeholder="Email" required />
             <input type="password" placeholder="Senha" required />
-
-            <div className="botao-link">
+            <div class="botao-link">
               <button type="submit">Cadastrar</button>
-              <a href="#">Seja nosso colaborador</a>
+              <a>Seja nosso colaborador</a>
             </div>
           </form>
         </div>
       </div>
     </section>
-  );
-}
+  </body>
+</html>

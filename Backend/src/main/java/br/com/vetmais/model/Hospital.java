@@ -25,9 +25,6 @@ public class Hospital {
     @Column(length = 100)
     private String nm_hospital;
 
-    @Column(length = 50)
-    private String cidade_hospital;
-
     @Column(length = 100)
     private String end_hospital;
 

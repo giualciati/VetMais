@@ -14,22 +14,14 @@ body {
     height: 100%;
 }
 
-.prontuarioNovo{
+.titulo {
     display: flex;
-    flex-direction: column;
+    text-align: center;
     justify-content: center;
     align-items: center;
-    
 }
 
-.titulo-prontuario {
-    display: flex;
-    justify-content: center;
-   
-   width: 100%;
-}
-
-.h1-prontuario {
+h1 {
     display: flex;
 
     justify-content: center;
@@ -38,7 +30,6 @@ body {
     margin: 1em 0em 0em 0em;
     border-radius: 10px;
     color: white;
-    
 }
 
 .forms-prontuario {
@@ -59,7 +50,7 @@ form {
     flex-direction: column;
     align-items: center;
 
-    height: 119vh;
+    height: 100%;
     width: 80vh;
     padding: 0.5em;
     background-color: #FFEED9;
@@ -91,7 +82,7 @@ form {
         margin: 0.5em 1em 0em;
     }
 
-    .input-prontuario1 {
+    input {
         margin: 0.5em;
         height: 25px;
         width: 260px;
@@ -99,8 +90,9 @@ form {
         border: none;
         border-radius: 20px;
         padding: 5px 10px;
-        background-color: #ffffff;
     }
+
+
 
 }
 
@@ -113,7 +105,7 @@ form {
         margin: 1em 0.8em 0.5em;
     }
 
-    .textarea-pront {
+    textarea {
         margin: 0.5em;
         padding: 10px;
         border: none;
@@ -121,7 +113,6 @@ form {
         width: 420px;
         height: 150px;
         resize: none;
-        background-color: #ffffff;
     }
 }
 
@@ -134,7 +125,6 @@ form {
         flex-direction: column;
 
         margin: 1em;
-        margin-top: 2em;
 
         label {
             font-size: 12px;
@@ -143,7 +133,7 @@ form {
 
 
 
-        .input-prontuario2 {
+        input {
 
             height: 25px;
             width: 200px;
@@ -151,7 +141,6 @@ form {
             border: none;
             border-radius: 20px;
             padding: 5px 10px;
-            background-color: #ffffff;
         }
     }
 
@@ -172,7 +161,7 @@ form {
         font-size: 12px;
     }
 
-    .textarea-pront {
+    textarea {
         margin: 0.5em;
         padding: 10px;
         border: none;
@@ -180,7 +169,6 @@ form {
         width: 350px;
         height: 150px;
         resize: none;
-        background-color: #ffffff;
     }
 
 
@@ -210,7 +198,7 @@ form {
             margin: 0.8em;
         }
 
-        .input-prontuario3 {
+        input {
 
             height: 25px;
             width: 150px;
@@ -220,7 +208,6 @@ form {
             border: none;
             border-radius: 20px;
             padding: 5px 10px;
-            background-color: #ffffff;
         }
     }
 }

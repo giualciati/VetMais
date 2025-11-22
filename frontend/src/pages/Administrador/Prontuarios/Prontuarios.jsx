@@ -1,4 +1,4 @@
-import './prontuarios.scss';
+import './prontuarios.css';
 
 export default function Prontuarios() {
   return (
@@ -19,8 +19,8 @@ export default function Prontuarios() {
 
       <div className="infos">
         <h1>Prontuários</h1>
-        <div className="botao1">
-          <button className="button-novo" type="button">
+        <div className="botao">
+          <button className="btnNovo" type="button">
             Novo
           </button>
         </div>

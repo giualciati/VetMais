@@ -27,7 +27,7 @@ section {
     font-size: 13px;
 }
 
-.button-novo {
+button {
     background-color: #F6963E;
     color: #ffffff;
     border: none;
@@ -80,7 +80,7 @@ ul {
     padding: 4em;
 }
 
-.botao1 {
+.botao {
     width: 80%;
     display: flex;
     justify-content: flex-end;

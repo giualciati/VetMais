@@ -8,7 +8,7 @@
 /* --- Barra Lateral --- */
 .sidebar-prontuarios {
   flex: 0 0 240px; 
-  background-color: #BBD6F8; 
+  background-color: #E6F0F9; 
   padding: 30px 20px;
   display: flex;
   flex-direction: column;
