@@ -17,6 +17,8 @@ import ControlDispo from "./pages/Tutor/ControlDispo/controlDispo";
 import InformacoesPessoais from "./pages/Administrador/InformacoesPessoais/InformacoesPessoais";
 import EditarInformacoesPessoais from "./pages/Administrador/EditarInformacoesPessoais/EditarInformacoesPessoais";
 import CadastroColaborador from "./pages/Administrador/CadastroColaborador/CadastroColaborador";
+import AgendarServico from "./pages/Tutor/AgendarServico/agendarServico";
+import ProntuarioDetalhes from "./pages/Tutor/ProntuarioDetalhes/ProntuarioDetalhes";
 
 function AppContent() {
   const location = useLocation();
@@ -32,14 +34,16 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/cadastro" element={<CadastroTutor />} />
-        <Route path="/prontuario" element={<Prontuario/>} />
+        <Route path="/prontuarioAnimal" element={<Prontuario/>} />
         <Route path="/agenda" element={<Agenda/>} />
+        <Route path="/agendarServico" element={<AgendarServico />} />
         <Route path="/horarios" element={<Horarios/>} />
         <Route path="/controlDispo" element={<ControlDispo />} />
-        <Route path="/fichaagendamento" element={<FichaAgendamento />} />
+        <Route path="/fichaagendamento/:id" element={<FichaAgendamento />} />
         <Route path="/informacoesPessoais" element={<InformacoesPessoais />} />
         <Route path="/editarInformacoesPessoais" element={<EditarInformacoesPessoais />} />
         <Route path="/cadastroColaborador" element={<CadastroColaborador />} />
+        <Route path="/prontuarioDetalhes/:id" element={<ProntuarioDetalhes />} />
 
       </Routes>
       {showNavAndFooter && <Footer />}{" "}
