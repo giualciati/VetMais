@@ -29,7 +29,7 @@ import ProntuarioDetalhes from "./pages/Tutor/ProntuarioDetalhes/ProntuarioDetal
 function AppContent() {
   const location = useLocation();
 
-  const showNavAndFooter = ["/", "/AboutUs", "/cadastro"].includes(
+  const showNavAndFooter = ["/", "/AboutUs"].includes(
     location.pathname
   );
 

@@ -1,139 +1,156 @@
-.form-cadastro div {
-  margin: 0;
-  padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
-.cao {
-  height: 100vh;
-  width: 40vw;
-}
+/* ============================ */
+/*      SECTION PRINCIPAL       */
+/* ============================ */
 
-.fundo-cadastro {
-  position: absolute;
-  width: 100%;
-  height: 100;
-  z-index: -1;
-  margin-left: 2.2em;
-}
-
-.teste {
-  width: 100%;
-}
-
-.imagens {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  border: 1px solid black;
-}
-
-.main-cad{
-  display: flex;
-  border: 1px solid black;
-}
-
-.cachorro-tutor {
- border: 1px solid black;
- height: 100vh;
-  width: 40vw;
-
-}
-
-.form-cadastro {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 70%;
-  height: 100vh;
-  background-image: url("../../../assets/fundo.png");
-  border: #0056b3 solid 3px;
-
-}
-
-.form-cadastro .form-cad-tutor {
-  text-align: center;
-  height: auto;
-  width: 400px;
-
-  background: #fff;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-}
-
-.form-cadastro .input1 {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  height: 50px;
-
-  border-radius: 20px;
-  font-size: 1rem;
-  border: #007bff solid 1px;
-  color: #838383;
-  background-color: #ffffff;
-}
-
-.form-cadastro button {
-  background-color: #007bff;
-  padding: 10px 30px;
-  width: 150px;
-  color: white;
-  cursor: pointer;
-  border-radius: 20px;
-  border: none;
-  transition: 0.3s;
-}
-
-.form-cadastro button:hover {
-  background-color: #0056b3;
-}
-
-.inputs-form {
-  display: flex;
-
-  .input-margin {
-    margin: 8px;
+.cadastro-section {
     width: 100%;
-    height: 50px;
+    height: 100vh;
+}
+
+.cadastro-main-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* ============================ */
+/*          IMAGEM DO CÃO       */
+/* ============================ */
+
+.cadastro-img-container {
+    width: 50%;
+    height: 100%;
+}
+
+.cadastro-img-cao {
+    
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ============================ */
+/*        ÁREA DO FORMULÁRIO    */
+/* ============================ */
+
+.cadastro-form-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url("../../../assets/fundo.png");
+}
+
+/* FUNDO GRADIENTE AO FORMULÁRIO */
+.cadastro-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    max-width: 400px;
+    text-align: center;
+    
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.cadastro-form::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 4px;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #F6963E, #63A1F0);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ============================ */
+/*          TÍTULO              */
+/* ============================ */
+
+.cadastro-title {
+    margin: 25px 0;
+    color: #F6963E;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+/* ============================ */
+/*         INPUTS GERAIS        */
+/* ============================ */
+
+.cadastro-input {
+    width: 100%;
     padding: 12px;
-
+    margin: 10px 0;
     border-radius: 20px;
+    border: 1px solid #007bff;
     font-size: 1rem;
-    border: #007bff solid 1px;
     color: #838383;
-    background-color: #ffffff;
-  }
 }
 
-.form-cadastro h1 {
-  margin: 25px 0px;
-  color: #f6963e;
+.cadastro-input::placeholder {
+    color: #a1a1a1;
 }
 
-.botao-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* LINHA COM 2 INPUTS */
+.cadastro-inputs-row {
+    display: flex;
+    width: 100%;
+    gap: 10px;
 }
 
-.botao-link a {
-  text-decoration: underline;
-  color: #63a1f0;
-  margin-top: 15px;
-  font-size: 12px;
+/* ÍCONE DO DATE */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(47%) sepia(90%) saturate(1000%) hue-rotate(180deg);
+    cursor: pointer;
 }
 
-.input-cad-tutor{
-  width: 300px;
-  height: 30px;
-  border-radius: 25px;
-  padding: 5px;
-  border: #0056b3 1px solid;
-  margin: 10px;
+/* ============================ */
+/*       BOTÕES E LINKS         */
+/* ============================ */
+
+.cadastro-button-link-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.input-cad-tutor[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(47%) sepia(90%) saturate(1000%) hue-rotate(180deg);
-  cursor: pointer;
+.cadastro-button {
+    background-color: #007bff;
+    padding: 10px 30px;
+    width: 150px;
+    color: white;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    transition: 0.3s;
+}
+
+.cadastro-button:hover {
+    background-color: #0056b3;
+}
+
+.cadastro-link {
+    text-decoration: underline;
+    color: #63A1F0;
+    margin-top: 15px;
+    font-size: 12px;
+    cursor: pointer;
 }
