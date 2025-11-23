@@ -1,0 +1,108 @@
+.form-cadastro div {
+  margin: 0;
+  padding: 0;
+}
+
+.cao {
+  height: 100vh;
+  width: 40vw;
+}
+
+.fundo-cadastro {
+  position: absolute;
+  width: 100%;
+  height: 100;
+  z-index: -1;
+  margin-left: 2.2em;
+}
+
+.teste {
+  width: 100%;
+}
+
+.imagens {
+  display: flex;
+  align-items: center;
+  background-image: url("../../../assets/fundo.png");
+  width: 100%;
+}
+
+.form-cadastro {
+  width: 70vw;
+  height: 100%;
+}
+
+.form-cadastro form {
+  text-align: center;
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.form-cadastro .input1 {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  height: 50px;
+
+  border-radius: 20px;
+  font-size: 1rem;
+  border: #007bff solid 1px;
+  color: #838383;
+  background-color: #ffffff;
+}
+
+.form-cadastro button {
+  background-color: #007bff;
+  padding: 10px 30px;
+  width: 150px;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+  border: none;
+  transition: 0.3s;
+}
+
+.form-cadastro button:hover {
+  background-color: #0056b3;
+}
+
+.inputs-form {
+  display: flex;
+
+  .input-margin {
+    width: 100%;
+    height: 50px;
+    padding: 12px;
+
+    border-radius: 20px;
+    font-size: 1rem;
+    border: #007bff solid 1px;
+    color: #838383;
+    background-color: #ffffff;
+  }
+}
+
+.form-cadastro h1 {
+  margin: 25px 0px;
+  color: #f6963e;
+}
+
+.botao-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.botao-link a {
+  text-decoration: underline;
+  color: #63a1f0;
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(47%) sepia(90%) saturate(1000%) hue-rotate(180deg);
+  cursor: pointer;
+}
