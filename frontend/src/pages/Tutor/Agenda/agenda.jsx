@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './agenda.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Agenda(props) {
 
@@ -8,11 +8,12 @@ function Agenda(props) {
     const [paginaAtual, setPaginaAtual] = useState(1);
     const itensPorPagina = 5;
 
-    // Função do botão NOVO
+    // hook de navegação do React Router
+    const navigate = useNavigate();
+
+    // Função do botão NOVO -> vai para /agendarServico
     const handleNovoClick = () => {
-        console.log("Clicou no botão NOVO");
-        // coloque aqui o redirecionamento ou ação
-        // ex: navigate("/novo-agendamento");
+        navigate("/agendarServico");
     };
 
     useEffect(() => {
@@ -107,7 +108,7 @@ function Agenda(props) {
                                 <th>Espécie</th>
                                 <th>Sexo</th>
                                 <th>Especialidade</th>
-                                <th>Data</   th>
+                                <th>Data</th>
                                 <th>Hora</th>
                                 <th>Status</th>
                                 <th></th>
