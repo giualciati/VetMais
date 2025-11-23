@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
-import "../styles/Global.css";
 import logo from "../assets/Logo.png";
 
 const Navbar = () => {
@@ -11,11 +10,13 @@ const Navbar = () => {
   const isSignIn = location.pathname === "/cadastro";
 
   return (
-    <nav className={`navbar ${isHome ? "navbar-home" : "navbar-default"}`}>
+    <nav
+      className={`navbar-component navbar ${
+        isHome ? "navbar-home" : "navbar-default"
+      }`}
+    >
       <div className="navbar-content">
-        
-          <img src={logo} alt="Logo Vet+" width="100px"/>
-       
+        <img src={logo} alt="Logo Vet+" width="100px" />
         <ul className="nav-links">
           <li>
             <Link to="/" className={isHome ? "active" : ""}>

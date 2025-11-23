@@ -1,242 +1,187 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+.novo-prontuario-page * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-
-
-body {
-    background-color: #F6963E;
-    height: 100%;
+.novo-prontuario-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.prontuarioNovo{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
+.novo-prontuario-page body {
+  background-color: #f6963e;
+  height: 100%;
 }
 
-.titulo-prontuario {
-    display: flex;
-    justify-content: center;
-   
-   width: 100%;
+.novo-prontuario-page .titulo-prontuario {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-.h1-prontuario {
-    display: flex;
-
-    justify-content: center;
-    background-color: #63A1F0;
-    width: 80%;
-    margin: 1em 0em 0em 0em;
-    border-radius: 10px;
-    color: white;
-    
+.novo-prontuario-page .h1-prontuario {
+  display: flex;
+  justify-content: center;
+  background-color: #63a1f0;
+  width: 80%;
+  margin: 1em 0 0 0;
+  border-radius: 10px;
+  color: white;
 }
 
-.forms-prontuario {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    gap: 3em;
-    margin-top: 2em;
-    margin-bottom: 2em;
+.novo-prontuario-page .forms-prontuario {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 3em;
+  margin: 2em 0;
 }
 
-
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    height: 119vh;
-    width: 80vh;
-    padding: 0.5em;
-    background-color: #FFEED9;
-    border-radius: 20px;
+.novo-prontuario-page form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 119vh;
+  width: 80vh;
+  padding: 0.5em;
+  background-color: #ffeed9;
+  border-radius: 20px;
 }
 
-.garfield {
-    width: 130px;
-    height: 128px
+.novo-prontuario-page .garfield {
+  width: 130px;
+  height: 128px;
 }
 
-.input-Garfield {
-    display: flex;
-    flex-direction: row;
-
-
-    margin: 1em 1em 0em 1em;
-
-
-
+.novo-prontuario-page .input-Garfield {
+  display: flex;
+  flex-direction: row;
+  margin: 1em;
 }
 
-.inputs-1 {
-    display: flex;
-    flex-direction: column;
-
-    label {
-        font-size: 12px;
-        margin: 0.5em 1em 0em;
-    }
-
-    .input-prontuario1 {
-        margin: 0.5em;
-        height: 25px;
-        width: 260px;
-
-        border: none;
-        border-radius: 20px;
-        padding: 5px 10px;
-        background-color: #ffffff;
-    }
-
+.novo-prontuario-page .inputs-1 label {
+  font-size: 12px;
+  margin: 0.5em 1em 0 0;
 }
 
-.container-textarea {
-    display: flex;
-    flex-direction: column;
-
-    label {
-        font-size: 12px;
-        margin: 1em 0.8em 0.5em;
-    }
-
-    .textarea-pront {
-        margin: 0.5em;
-        padding: 10px;
-        border: none;
-        border-radius: 20px;
-        width: 420px;
-        height: 150px;
-        resize: none;
-        background-color: #ffffff;
-    }
+.novo-prontuario-page .inputs-1 .input-prontuario1 {
+  margin: 0.5em;
+  height: 25px;
+  width: 260px;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 10px;
+  background-color: #ffffff;
 }
 
-.card-input1 {
-    display: flex;
-    margin-top: -2em;
-
-    .inputs-2 {
-        display: flex;
-        flex-direction: column;
-
-        margin: 1em;
-        margin-top: 2em;
-
-        label {
-            font-size: 12px;
-            margin: 1em 0.8em 0.5em;
-        }
-
-
-
-        .input-prontuario2 {
-
-            height: 25px;
-            width: 200px;
-
-            border: none;
-            border-radius: 20px;
-            padding: 5px 10px;
-            background-color: #ffffff;
-        }
-    }
-
+.novo-prontuario-page .container-textarea label {
+  font-size: 12px;
+  margin: 1em 0.8em 0.5em;
 }
 
-.tutor-garfield {
-
-    width: 80px;
-    height: 130px
+.novo-prontuario-page .container-textarea .textarea-pront {
+  margin: 0.5em;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  width: 420px;
+  height: 150px;
+  resize: none;
+  background-color: #ffffff;
 }
 
-.textarrea-1 {
-    display: flex;
-    flex-direction: column;
-
-    label {
-        margin-left: 1em;
-        font-size: 12px;
-    }
-
-    .textarea-pront {
-        margin: 0.5em;
-        padding: 10px;
-        border: none;
-        border-radius: 20px;
-        width: 350px;
-        height: 150px;
-        resize: none;
-        background-color: #ffffff;
-    }
-
-
+.novo-prontuario-page .card-input1 {
+  display: flex;
+  margin-top: -2em;
 }
 
-.textarea-2 {
-    display: flex;
-    flex-direction: column;
+.novo-prontuario-page .inputs-2 {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0;
 }
 
-.inputs-3 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-
-
-
-    .formato {
-        display: flex;
-        flex-direction: column;
-
-        label {
-
-            font-size: 12px;
-            margin: 0.8em;
-        }
-
-        .input-prontuario3 {
-
-            height: 25px;
-            width: 150px;
-            margin-left: 0.5em;
-            margin-bottom: 1em;
-
-            border: none;
-            border-radius: 20px;
-            padding: 5px 10px;
-            background-color: #ffffff;
-        }
-    }
+.novo-prontuario-page .inputs-2 label {
+  font-size: 12px;
+  margin: 1em 0.8em 0.5em;
 }
 
+.novo-prontuario-page .inputs-2 .input-prontuario2 {
+  height: 25px;
+  width: 200px;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 10px;
+  background-color: #ffffff;
+}
 
-.btn-salvar {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    background-color: #63A1F0;
-    color: #ffffff;
-    border: none;
-    border-radius: 25px;
-    width: 100px;
-    padding: 8px 35px;
-    cursor: pointer;
-    font-size: 13px;
-    margin-top: 1em;
+.novo-prontuario-page .tutor-garfield {
+  width: 80px;
+  height: 130px;
+}
+
+.novo-prontuario-page .textarrea-1 label {
+  margin-left: 1em;
+  font-size: 12px;
+}
+
+.novo-prontuario-page .textarrea-1 .textarea-pront {
+  margin: 0.5em;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  width: 350px;
+  height: 150px;
+  resize: none;
+  background-color: #ffffff;
+}
+
+.novo-prontuario-page .inputs-3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+.novo-prontuario-page .inputs-3 .formato {
+  display: flex;
+  flex-direction: column;
+}
+
+.novo-prontuario-page .inputs-3 .formato label {
+  font-size: 12px;
+  margin: 0.8em;
+}
+
+.novo-prontuario-page .inputs-3 .formato .input-prontuario3 {
+  height: 25px;
+  width: 150px;
+  margin-left: 0.5em;
+  margin-bottom: 1em;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 10px;
+  background-color: #ffffff;
+}
+
+.novo-prontuario-page .btn-salvar {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: #63a1f0;
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  width: 100px;
+  padding: 8px 35px;
+  cursor: pointer;
+  font-size: 13px;
+  margin-top: 1em;
 }

@@ -1,7 +1,6 @@
 import "./cadastroTutor.scss";
 import { useState } from "react";
 import axios from "axios";
-import "./cadastroTutor.css";
 
 export default function CadastroTutor() {
   const [formData, setFormData] = useState({
