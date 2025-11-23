@@ -1,187 +1,198 @@
-.novo-prontuario-page * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
-.novo-prontuario-page {
+/* ---------------------- TÍTULO ---------------------- */
+.novo-prontuario-page{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+ 
+  background-color: #F6963E; /* Laranja */
+  min-height: 100vh;         /* Ocupa a tela inteira */
+  padding-bottom: 2rem;
+  padding-top: 1rem;
+
+}
+.titulo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.novo-prontuario-page body {
-  background-color: #f6963e;
-  height: 100%;
+.titulo-prontuario {
+    background-color: #63A1F0;
+    width: 80%;
+    margin-top: 1em;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    padding: 0.4em 0;
 }
 
-.novo-prontuario-page .titulo-prontuario {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+/* ---------------------- CONTÊINER GERAL ---------------------- */
+
+.prontuario-forms-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3em;
+    margin: 2em 0;
 }
 
-.novo-prontuario-page .h1-prontuario {
-  display: flex;
-  justify-content: center;
-  background-color: #63a1f0;
-  width: 80%;
-  margin: 1em 0 0 0;
-  border-radius: 10px;
-  color: white;
+/* ---------------------- FORMULÁRIOS ---------------------- */
+
+.form-esquerdo,
+.form-direito {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vh;
+    height: 120vh;
+    background-color: #FFEED9;
+    border-radius: 20px;
+    padding: 1em;
 }
 
-.novo-prontuario-page .forms-prontuario {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  gap: 3em;
-  margin: 2em 0;
+/* ---------------------- GARFIELD E INPUTS ---------------------- */
+
+.input-garfield-container {
+    display: flex;
+    flex-direction: row;
+    margin: 1em;
 }
 
-.novo-prontuario-page form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 119vh;
-  width: 80vh;
-  padding: 0.5em;
-  background-color: #ffeed9;
-  border-radius: 20px;
+.imagem-garfield-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.novo-prontuario-page .garfield {
-  width: 130px;
-  height: 128px;
+.garfield-imagem {
+    width: 130px;
+    height: 128px;
 }
 
-.novo-prontuario-page .input-Garfield {
-  display: flex;
-  flex-direction: row;
-  margin: 1em;
+.tutor-garfield-imagem {
+    width: 80px;
+    height: 130px;
 }
 
-.novo-prontuario-page .inputs-1 label {
-  font-size: 12px;
-  margin: 0.5em 1em 0 0;
+/* ---------------------- INPUT BLOCO 1 ---------------------- */
+
+.inputs-bloco-1 {
+    display: flex;
+    flex-direction: column;
 }
 
-.novo-prontuario-page .inputs-1 .input-prontuario1 {
-  margin: 0.5em;
-  height: 25px;
-  width: 260px;
-  border: none;
-  border-radius: 20px;
-  padding: 5px 10px;
-  background-color: #ffffff;
+.label-prontuario {
+    font-size: 12px;
+    margin: 0.6em 1em 0.2em;
 }
 
-.novo-prontuario-page .container-textarea label {
-  font-size: 12px;
-  margin: 1em 0.8em 0.5em;
+.input-prontuario {
+    margin: 0.5em;
+    height: 25px;
+    width: 260px;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    background: white;
 }
 
-.novo-prontuario-page .container-textarea .textarea-pront {
-  margin: 0.5em;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  width: 420px;
-  height: 150px;
-  resize: none;
-  background-color: #ffffff;
+/* ---------------------- CARD INPUT BLOCO 2 ---------------------- */
+
+.card-inputs-container {
+    display: flex;
+    margin-top: 1em;
 }
 
-.novo-prontuario-page .card-input1 {
-  display: flex;
-  margin-top: -2em;
+.inputs-bloco-2 {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
 }
 
-.novo-prontuario-page .inputs-2 {
-  display: flex;
-  flex-direction: column;
-  margin: 1em 0;
+.inputs-bloco-2 .label-prontuario {
+    margin: 1em 0.8em 0.5em;
 }
 
-.novo-prontuario-page .inputs-2 label {
-  font-size: 12px;
-  margin: 1em 0.8em 0.5em;
+.inputs-bloco-2 .input-prontuario {
+    width: 200px;
 }
 
-.novo-prontuario-page .inputs-2 .input-prontuario2 {
-  height: 25px;
-  width: 200px;
-  border: none;
-  border-radius: 20px;
-  padding: 5px 10px;
-  background-color: #ffffff;
+/* ---------------------- TEXTAREAS GERAIS ---------------------- */
+
+.textarea-container,
+.textarea-container-2 {
+    display: flex;
+    flex-direction: column;
 }
 
-.novo-prontuario-page .tutor-garfield {
-  width: 80px;
-  height: 130px;
+.textarea-prontuario {
+    margin: 0.5em;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    width: 420px;
+    height: 150px;
+    resize: none;
 }
 
-.novo-prontuario-page .textarrea-1 label {
-  margin-left: 1em;
-  font-size: 12px;
+/* ---------------------- TEXTAREA BLOCO 1 ---------------------- */
+
+.textarea-bloco-1 {
+    display: flex;
+    flex-direction: column;
 }
 
-.novo-prontuario-page .textarrea-1 .textarea-pront {
-  margin: 0.5em;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  width: 350px;
-  height: 150px;
-  resize: none;
-  background-color: #ffffff;
+.textarea-bloco-1 .textarea-prontuario {
+    width: 350px;
 }
 
-.novo-prontuario-page .inputs-3 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 90%;
+/* ---------------------- BLOCO INPUTS FINAIS ---------------------- */
+
+.inputs-final-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin-top: 1em;
 }
 
-.novo-prontuario-page .inputs-3 .formato {
-  display: flex;
-  flex-direction: column;
+.formato-bloco {
+    display: flex;
+    flex-direction: column;
 }
 
-.novo-prontuario-page .inputs-3 .formato label {
-  font-size: 12px;
-  margin: 0.8em;
+.formato-bloco .label-prontuario {
+    margin: 0.8em 0.5em;
 }
 
-.novo-prontuario-page .inputs-3 .formato .input-prontuario3 {
-  height: 25px;
-  width: 150px;
-  margin-left: 0.5em;
-  margin-bottom: 1em;
-  border: none;
-  border-radius: 20px;
-  padding: 5px 10px;
-  background-color: #ffffff;
+.formato-bloco .input-prontuario {
+    width: 150px;
+    margin-left: 0.5em;
 }
 
-.novo-prontuario-page .btn-salvar {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  background-color: #63a1f0;
-  color: #ffffff;
-  border: none;
-  border-radius: 25px;
-  width: 100px;
-  padding: 8px 35px;
-  cursor: pointer;
-  font-size: 13px;
-  margin-top: 1em;
+/* ---------------------- BOTÕES ---------------------- */
+
+.botoes-container {
+    display: flex;
+    gap: 1em;
+}
+
+.btn-salvar {
+    background-color: #63A1F0;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    width: 100px;
+    padding: 8px 35px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-top: 1em;
 }

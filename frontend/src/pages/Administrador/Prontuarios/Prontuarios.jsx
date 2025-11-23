@@ -1,4 +1,4 @@
-import "./prontuarios.css";
+import "./prontuarios.scss";
 
 export default function Prontuarios() {
   return (

@@ -47,14 +47,17 @@ export default function CadastroTutor() {
 
   return (
     <section className="teste">
-      <div className="imagens">
-        <img className="cao" src="/images/cao-cadastro.jpg" alt="cao" />
+      <div className="main-cad">
+        <div className="cachorro-tutor">
+          <img className="cao" src="/images/cao-cadastro.jpg" alt="cao" />
+        </div>
 
         <div className="form-cadastro">
-          <form onSubmit={handleSubmit}>
+          <form className="form-cad-tutor" onSubmit={handleSubmit}>
             <h1>Faça seu cadastro</h1>
 
             <input
+            className="input-cad-tutor"
               type="text"
               placeholder="Nome Completo"
               name="nm_pessoa"
@@ -64,7 +67,7 @@ export default function CadastroTutor() {
 
             <div className="inputs-form">
               <input
-                className="input-form"
+                className="input-cad-tutor"
                 type="date"
                 name="dt_nasc_pessoa"
                 onChange={handleChange}
@@ -72,7 +75,7 @@ export default function CadastroTutor() {
               />
 
               <input
-                className="input-form"
+                className="input-cad-tutor"
                 type="tel"
                 placeholder="Telefone"
                 name="tel_pessoa"
@@ -83,6 +86,7 @@ export default function CadastroTutor() {
 
             <div className="inputs-form">
               <input
+              className="input-cad-tutor"
                 type="text"
                 placeholder="RG"
                 name="rg_pessoa"
@@ -91,7 +95,7 @@ export default function CadastroTutor() {
               />
 
               <input
-                className="input-form"
+               className="input-cad-tutor"
                 type="text"
                 placeholder="CPF"
                 name="cpf_pessoa"
@@ -101,6 +105,7 @@ export default function CadastroTutor() {
             </div>
 
             <input
+            className="input-cad-tutor"
               type="email"
               placeholder="Email"
               name="email_pessoa"
@@ -109,6 +114,7 @@ export default function CadastroTutor() {
             />
 
             <input
+            className="input-cad-tutor"
               type="password"
               placeholder="Senha"
               name="senha_pessoa"
