@@ -2,27 +2,37 @@ import React, { useState, useEffect } from 'react';
 import './agenda.css';
 import { Link } from "react-router-dom";
 
-// O componente recebe 'prontuarios' (array) e 'onVerMaisClick' (função) das props
 function Agenda(props) {
-
 
     const [agendas, setAgendas] = useState([]);
     const [paginaAtual, setPaginaAtual] = useState(1);
     const itensPorPagina = 5;
 
+    // Função do botão NOVO
+    const handleNovoClick = () => {
+        console.log("Clicou no botão NOVO");
+        // coloque aqui o redirecionamento ou ação
+        // ex: navigate("/novo-agendamento");
+    };
+
     useEffect(() => {
         fetch('http://localhost:8080/agendamentos')
             .then(res => res.json())
             .then(data => {
-                // Adaptar os dados para o formato da tabela usando o DTO do backend
+
                 const adaptados = data.map(agendamento => {
                     let dataFormatada = '';
                     let horaFormatada = '';
+
                     if (agendamento.dataHora) {
                         const dataObj = new Date(agendamento.dataHora);
                         dataFormatada = dataObj.toLocaleDateString('pt-BR');
-                        horaFormatada = dataObj.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                        horaFormatada = dataObj.toLocaleTimeString('pt-BR', {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
                     }
+
                     return {
                         id: agendamento.idAgendamento,
                         nome: agendamento.nomeAnimal,
@@ -34,6 +44,7 @@ function Agenda(props) {
                         status: agendamento.statusAgendamento,
                     };
                 });
+
                 setAgendas(adaptados);
             })
             .catch(() => setAgendas([]));
@@ -60,7 +71,7 @@ function Agenda(props) {
     return (
         <div className="prontuarios-pagina">
 
-            {/* --- BARRA LATERAL (Sidebar) --- */}
+            {/* --- BARRA LATERAL --- */}
             <aside className="sidebar-prontuarios">
                 <img src="/images/logo.png" alt="Vet+ Logo" className="logo" />
 
@@ -75,7 +86,18 @@ function Agenda(props) {
 
             {/* --- CONTEÚDO PRINCIPAL --- */}
             <main className="main-content-prontuarios">
-                <h1 className="titulo-prontuarios">Agendamentos</h1>
+
+                <div className="horarios-header">
+                    <h1 className="titulo-prontuarios">Agendamentos</h1>
+
+                    <button
+                        type="button"
+                        className="btn-novo"
+                        onClick={handleNovoClick}
+                    >
+                        Novo
+                    </button>
+                </div>
 
                 <div className="prontuario-tabela">
                     <table className="prontuario-table">
@@ -85,10 +107,10 @@ function Agenda(props) {
                                 <th>Espécie</th>
                                 <th>Sexo</th>
                                 <th>Especialidade</th>
-                                <th>Data</th>
+                                <th>Data</   th>
                                 <th>Hora</th>
                                 <th>Status</th>
-                                <th></th> {/* Coluna vazia para o link */}
+                                <th></th>
                             </tr>
                         </thead>
 
@@ -101,7 +123,9 @@ function Agenda(props) {
                                     <td>{agenda.especialidade}</td>
                                     <td>{agenda.data}</td>
                                     <td>{agenda.hora}</td>
-                                    <td style={{ color: getStatusStyle(agenda.status) }}>{agenda.status}</td>
+                                    <td style={{ color: getStatusStyle(agenda.status) }}>
+                                        {agenda.status}
+                                    </td>
                                     <td>
                                         <Link
                                             to={`/fichaagendamento/${agenda.id}`}
@@ -112,7 +136,6 @@ function Agenda(props) {
                                     </td>
                                 </tr>
                             ))}
-
                         </tbody>
                     </table>
 
@@ -121,7 +144,7 @@ function Agenda(props) {
                     )}
                 </div>
 
-                {/* Paginação dinâmica */}
+                {/* Paginação */}
                 <div className="paginacao">
                     {Array.from({ length: totalPaginas }, (_, index) => (
                         <button
@@ -134,10 +157,10 @@ function Agenda(props) {
                         </button>
                     ))}
                 </div>
+
             </main>
         </div>
     );
-
 }
 
 export default Agenda;

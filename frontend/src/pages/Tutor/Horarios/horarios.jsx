@@ -43,7 +43,7 @@ function Horarios(props) {
   const horariosPaginados = horarios.slice(indiceInicio, indiceFim);
   const totalPaginas = Math.ceil(horarios.length / itensPorPagina);
 
-  // 👉 Agora este botão navega direto para /controlDispo
+ 
   const handleNovoClick = () => {
     navigate("/controlDispo");
   };
@@ -72,7 +72,7 @@ function Horarios(props) {
       {/* --- CONTEÚDO PRINCIPAL --- */}
       <main className="main-content-prontuarios">
 
-        {/* Título e botão "Novo" */}
+        
         <div className="horarios-header">
           <h1 className="titulo-prontuarios">Horários Disponíveis</h1>
 
