@@ -1,13 +1,10 @@
-import './prontuarios.scss';
+import "./prontuarios.scss";
 
 export default function Prontuarios() {
   return (
-    <section>
+    <section className="prontuarios-page">
       <div className="menu">
-        <img
-          src="/logo.png"
-          alt="logo vetmais"
-        />
+        <img src="/logo.png" alt="logo vetmais" />
         <ul>
           <li>Perfil</li>
           <li>Prontuários</li>

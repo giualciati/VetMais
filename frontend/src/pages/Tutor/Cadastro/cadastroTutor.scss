@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ============================ */
+/*      SECTION PRINCIPAL       */
+/* ============================ */
+
+.cadastro-section {
+    width: 100%;
+    height: 100vh;
+}
+
+.cadastro-main-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* ============================ */
+/*          IMAGEM DO CÃO       */
+/* ============================ */
+
+.cadastro-img-container {
+    width: 50%;
+    height: 100%;
+}
+
+.cadastro-img-cao {
+    
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ============================ */
+/*        ÁREA DO FORMULÁRIO    */
+/* ============================ */
+
+.cadastro-form-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url("../../../assets/fundo.png");
+}
+
+/* FUNDO GRADIENTE AO FORMULÁRIO */
+.cadastro-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    max-width: 400px;
+    text-align: center;
+    
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.cadastro-form::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 4px;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #F6963E, #63A1F0);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ============================ */
+/*          TÍTULO              */
+/* ============================ */
+
+.cadastro-title {
+    margin: 25px 0;
+    color: #F6963E;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+/* ============================ */
+/*         INPUTS GERAIS        */
+/* ============================ */
+
+.cadastro-input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 20px;
+    border: 1px solid #007bff;
+    font-size: 1rem;
+    color: #838383;
+}
+
+.cadastro-input::placeholder {
+    color: #a1a1a1;
+}
+
+/* LINHA COM 2 INPUTS */
+.cadastro-inputs-row {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+/* ÍCONE DO DATE */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(47%) sepia(90%) saturate(1000%) hue-rotate(180deg);
+    cursor: pointer;
+}
+
+/* ============================ */
+/*       BOTÕES E LINKS         */
+/* ============================ */
+
+.cadastro-button-link-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cadastro-button {
+    background-color: #007bff;
+    padding: 10px 30px;
+    width: 150px;
+    color: white;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    transition: 0.3s;
+}
+
+.cadastro-button:hover {
+    background-color: #0056b3;
+}
+
+.cadastro-link {
+    text-decoration: underline;
+    color: #63A1F0;
+    margin-top: 15px;
+    font-size: 12px;
+    cursor: pointer;
+}

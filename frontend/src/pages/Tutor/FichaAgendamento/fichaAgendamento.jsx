@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './fichaAgendamento.css';
@@ -41,32 +39,35 @@ function FichaAgendamento() {
       return;
     }
 
-    // Confirmação extra se for cancelar
+    // Se mudou para Cancelado e ainda não estava cancelado
     if (statusSelecionado === 'Cancelado' && dados.statusAgendamento !== 'Cancelado') {
       const confirmar = window.confirm(
         'Tem certeza que deseja cancelar este agendamento? O horário será liberado.'
       );
-      if (!confirmar) return;
-    }
 
-    try {
-      const response = await fetch(
-        `http://localhost:8080/agendamentos/${id}/status`,
-        {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ statusAgendamento: statusSelecionado })
+      if (confirmar) {
+        try {
+          const response = await fetch(
+            `http://localhost:8080/agendamentos/${id}/cancelar`,
+            {
+              method: 'PUT',
+            }
+          );
+
+          if (response.ok) {
+            alert('Agendamento cancelado com sucesso!');
+            navigate('/agenda');
+          } else {
+            alert('Erro ao cancelar.');
+          }
+        } catch (error) {
+          console.error('Erro:', error);
         }
-      );
-      if (response.ok) {
-        alert('Status atualizado com sucesso!');
-        navigate('/agenda');
-      } else {
-        alert('Erro ao atualizar status.');
       }
-    } catch (error) {
-      console.error('Erro:', error);
-      alert('Erro ao atualizar status.');
+    } else {
+      // Aqui você poderia chamar um endpoint para atualizar outros status, se existir
+      // Por enquanto apenas volta
+      navigate('/agenda');
     }
   };
 
@@ -80,152 +81,139 @@ function FichaAgendamento() {
     : '';
   const horaConsulta = dados.dataHora
     ? new Date(dados.dataHora).toLocaleTimeString('pt-BR', {
-      hour: '2-digit',
-      minute: '2-digit',
-    })
+        hour: '2-digit',
+        minute: '2-digit',
+      })
     : '';
 
   return (
-    <div className="ficha-container-geral">
-      <header className="ficha-header">
-        <img src="/images/logo.png" alt="Logo" className="ficha-logo" />
-        <h1 className="ficha-titulo-principal">Ficha de Agendamento</h1>
-        <div className="ficha-protocolo">
-          <strong>{dados.dataHora ? new Date(dados.dataHora).toLocaleDateString('pt-BR', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          }) + ' - ' + horaConsulta : ''}</strong>
+    <div className="ficha-container">
+      <header>
+        <img src="/logo.png" alt="Logo" className="logo-ficha" />
+        <h1>Ficha de Agendamento</h1>
+        <div className="protocolo">
+          Protocolo <strong>{dados.protocolo}</strong>
         </div>
       </header>
 
-      <div className="ficha-agendamento-box">
+      <div className="ficha-content">
         {/* Bloco 1: Animal e Tutor */}
-        <div className="ficha-protocolo">
-          Protocolo <strong>{dados.protocolo}</strong>
-        </div>
         <div className="row">
           <div className="campo">
-            <label className="ficha-label">Nome do Animal</label>
+            <label>Nome do Animal</label>
             <input
               type="text"
               value={dados.nomeAnimal}
               readOnly
-              className="ficha-input input-readonly"
+              className="input-readonly"
             />
           </div>
           <div className="campo">
-            <label className="ficha-label">Raça</label>
+            <label>Raça</label>
             <input
               type="text"
               value={dados.raca}
               readOnly
-              className="ficha-input input-readonly"
+              className="input-readonly"
             />
           </div>
           <div className="campo">
-            <label className="ficha-label">Data de Nascimento</label>
+            <label>Data de Nascimento</label>
             <input
               type="text"
               value={dataNasc}
               readOnly
-              className="ficha-input input-readonly"
+              className="input-readonly"
             />
           </div>
         </div>
 
         <div className="row">
           <div className="campo">
-            <label className="ficha-label">Espécie</label>
+            <label>Espécie</label>
             <input
               type="text"
               value={dados.especie}
               readOnly
-              className="ficha-input input-readonly"
+              className="input-readonly"
             />
           </div>
           <div className="campo">
-            <label className="ficha-label">Sexo</label>
+            <label>Sexo</label>
             <input
               type="text"
               value={dados.sexo || ''}
               readOnly
-              className="ficha-input input-readonly"
+              className="input-readonly"
             />
           </div>
           <div className="campo">
-            <label className="ficha-label">RGA</label>
+            <label>RGA</label>
             <input
               type="text"
               value={dados.rga || 'Não informado'}
               readOnly
-              className="ficha-input input-readonly"
+              className="input-readonly"
             />
           </div>
         </div>
 
         <div className="row">
           <div className="campo full-width">
-            <label className="ficha-label">Nome Tutor</label>
+            <label>Nome Tutor</label>
             <input
               type="text"
               value={dados.nomeTutor}
               readOnly
-              className="ficha-input input-readonly"
+              className="input-readonly"
             />
           </div>
         </div>
 
         <div className="row">
           <div className="campo full-width">
-            <label className="ficha-label">Descrição do Animal</label>
+            <label>Descrição do Animal</label>
             <textarea
               readOnly
               value={dados.descricaoAnimal || ''}
-              className="ficha-textarea input-readonly"
+              className="input-readonly"
             />
           </div>
         </div>
 
-        <h2 className="ficha-titulo-secao">Dados da Consulta</h2>
+        <h2 className="titulo-secao">Dados da Consulta</h2>
 
         <div className="row">
           <div className="campo">
-            <label className="ficha-label">Veterinário(a)</label>
+            <label>Veterinário(a)</label>
             <div className="valor-texto">{dados.nomeVeterinario}</div>
           </div>
           <div className="campo">
-            <label className="ficha-label">Hospital</label>
+            <label>Hospital</label>
             <div className="valor-texto">{dados.nomeHospital}</div>
           </div>
           <div className="campo">
-            <label className="ficha-label">Especialidade</label>
+            <label>Especialidade</label>
             <div className="valor-texto">{dados.especialidade}</div>
           </div>
         </div>
 
         <div className="row last-row">
           <div className="campo">
-            <label className="ficha-label">Data</label>
-            <div className="valor-texto">{dados.dataHora ? new Date(dados.dataHora).toLocaleDateString('pt-BR', {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            }) : ''}</div>
+            <label>Data</label>
+            <div className="valor-texto">{dataConsulta}</div>
           </div>
           <div className="campo">
-            <label className="ficha-label">Hora</label>
+            <label>Hora</label>
             <div className="valor-texto">{horaConsulta}</div>
           </div>
 
           <div className="campo">
-            <label className="ficha-label">Status</label>
+            <label>Status</label>
             <select
               value={statusSelecionado}
               onChange={(e) => setStatusSelecionado(e.target.value)}
-              className={`ficha-select select-status ${statusSelecionado}`}
+              className={`select-status ${statusSelecionado}`}
               disabled={
                 dados.statusAgendamento === 'Concluído' ||
                 dados.statusAgendamento === 'Cancelado'
@@ -238,11 +226,11 @@ function FichaAgendamento() {
           </div>
         </div>
 
-        <div className="ficha-footer">
-          <button className="ficha-btn-salvar" onClick={handleSalvar}>
+        <div className="ficha-actions">
+          <button className="btn-salvar" onClick={handleSalvar}>
             Salvar
           </button>
-          <button className="ficha-btn-voltar" onClick={handleVoltar}>
+          <button className="btn-voltar" onClick={handleVoltar}>
             Voltar
           </button>
         </div>

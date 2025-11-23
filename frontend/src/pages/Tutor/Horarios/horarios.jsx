@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import './horarios.css';
@@ -6,44 +6,25 @@ import './horarios.css';
 function Horarios(props) {
   const navigate = useNavigate();
 
+  // Dados temporários caso nenhum venha por props
+  const dadosExemplo = Array.from({ length: 24 }, (_, index) => ({
+    id: index + 1,
+    tutor: 'Camile Vitória',
+    especialidade: 'Ortopedia',
+    data: '04/11/2025',
+    hora: '09h00'
+  }));
 
-  const [horarios, setHorarios] = useState([]);
+  const { horarios = dadosExemplo } = props;
   const [paginaAtual, setPaginaAtual] = useState(1);
-  const itensPorPagina = 12;
-
-  useEffect(() => {
-    // Altere a URL abaixo conforme o endereço do seu backend
-    fetch('http://localhost:8080/agendas')
-      .then((res) => res.json())
-      .then((data) => {
-        const horariosAdaptados = data.map((agenda) => {
-          let dataFormatada = '';
-          let horaFormatada = '';
-          if (agenda.data_hora) {
-            const dataObj = new Date(agenda.data_hora);
-            dataFormatada = dataObj.toLocaleDateString('pt-BR');
-            horaFormatada = dataObj.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-          }
-          return {
-            id: agenda.id,
-            tutor: agenda.veterinario && agenda.veterinario.pessoa ? agenda.veterinario.pessoa.nm_pessoa : '---',
-            especialidade: agenda.veterinario ? agenda.veterinario.especialidade_vet : '---',
-            data: dataFormatada,
-            hora: horaFormatada
-          };
-        });
-        console.log(horariosAdaptados);
-        setHorarios(horariosAdaptados);
-      })
-      .catch(() => setHorarios([]));
-  }, []);
+  const itensPorPagina = 8;
 
   const indiceInicio = (paginaAtual - 1) * itensPorPagina;
   const indiceFim = indiceInicio + itensPorPagina;
   const horariosPaginados = horarios.slice(indiceInicio, indiceFim);
   const totalPaginas = Math.ceil(horarios.length / itensPorPagina);
 
- 
+  // 👉 Agora este botão navega direto para /controlDispo
   const handleNovoClick = () => {
     navigate("/controlDispo");
   };
@@ -72,7 +53,7 @@ function Horarios(props) {
       {/* --- CONTEÚDO PRINCIPAL --- */}
       <main className="main-content-prontuarios">
 
-        
+        {/* Título e botão "Novo" */}
         <div className="horarios-header">
           <h1 className="titulo-prontuarios">Horários Disponíveis</h1>
 
@@ -85,12 +66,7 @@ function Horarios(props) {
         <section className="horarios-grid">
           {horariosPaginados.length > 0 ? (
             horariosPaginados.map((horario) => (
-              <article
-                key={horario.id}
-                className="horario-card"
-                style={{ cursor: 'pointer' }}
-                onClick={() => navigate(`/controlDispo/${horario.id}`)}
-              >
+              <article key={horario.id} className="horario-card">
                 <p className="horario-tutor">{horario.tutor}</p>
                 <p className="horario-especialidade">{horario.especialidade}</p>
 

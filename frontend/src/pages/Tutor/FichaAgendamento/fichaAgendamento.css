@@ -1,7 +1,6 @@
-.ficha-container-geral {
+.container-geral {
   background-color: #BBD6F8;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 40px;
@@ -11,7 +10,7 @@
   box-sizing: border-box;
 }
 
-.ficha-agendamento-box {
+.ficha-agendamento {
   background-color: #FFFFFF;
   border-radius: 20px;
   padding: 30px 40px;
@@ -20,24 +19,28 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* AJUSTE NO CABEÇALHO */
 .ficha-header {
   display: flex;
   align-items: auto;
   justify-content: space-between;
   margin-bottom: 10px;
   height: 120px;
-  border-radius: 10px;
+  /* ajuste aqui – antes ela ficava sem limite */
 }
 
-.ficha-titulo-protocolo {
+.titulo-protocolo {
   display: flex;
+  /* Mude para 'space-between' para empurrar o protocolo para a direita */
   justify-content: space-between;
   width: 100%;
+  /* REMOVA ou comente as linhas abaixo */
+  /* text-align: center; */
+  /* justify-content: center; */
   padding-bottom: 20px;
 }
 
-.ficha-titulo-principal {
-  margin-bottom: 40px;
+.titulo-principal {
   color: #F89B31;
   font-size: 28px;
   /* REMOVA ou comente */
@@ -81,16 +84,19 @@
   padding-right: 100px;  */
 }
 
-.ficha-protocolo {
+.protocolo {
   flex-shrink: 0;
   /* Não deixa o protocolo diminuir */
   text-align: right;
   color: #63A1F0;
 }
 
+.logo {
+  width: 12px;
+  height: 240px;
+}
 
-
-.ficha-protocolo-numero {
+.protocolo-numero {
   font-size: 20px;
   font-weight: bold;
   color: #adadad;
@@ -103,20 +109,20 @@
   flex-direction: column;
 }
 
-.ficha-dados-animal {
+.dados-animal {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 
-.ficha-form-grupo-coluna {
+.form-grupo-coluna {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-width: 200px;
 }
 
-.ficha-form-grupo-descricao {
+.form-grupo-descricao {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -125,19 +131,19 @@
 
 
 
-.ficha-label {
+label {
   font-size: 14px;
   color: #63A1F0;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-
-.ficha-input[type="text"],
-.ficha-input[type="date"],
-.ficha-input[type="time"],
-.ficha-textarea,
-.ficha-select {
+/*
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
   border: 1px solid #DDD;
   background-color: #F7F7F7;
   border-radius: 8px;
@@ -148,7 +154,7 @@
   box-sizing: border-box;
 }
 
-.ficha-form-grupo-coluna {
+.form-grupo-coluna {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -156,18 +162,18 @@
 }
 
 
-.ficha-dados-consulta .ficha-select {
+.dados-consulta select {
   height: auto;
 }
 
 
-.ficha-textarea {
+textarea {
   resize: vertical;
   min-height: 80px;
 }
 
 /* --- Dados da Consulta --- */
-.ficha-titulo-secao {
+.titulo-secao {
   color: #F89B31;
   font-size: 20px;
   border-bottom: 1px solid #EEE;
@@ -176,7 +182,7 @@
   margin-bottom: 20px;
 }
 
-.ficha-dados-consulta {
+.dados-consulta {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -206,25 +212,26 @@
 }
 
 
-.ficha-status-container {
+.status-container {
   position: relative;
   width: 100%;
 }
 
-.ficha-status-input {
+.status-input {
   padding-left: 35px !important;
   font-weight: bold;
   color: #007BFF;
 }
 
-.ficha-input[type="text"],
-.ficha-textarea {
+/*
+input[type="text"],
+textarea {
   box-sizing: border-box;
 }
 
-.ficha-input[type="text"],
-.ficha-textarea,
-.ficha-select {
+input[type="text"],
+textarea,
+select {
   border: 1px solid #DDD;
   background-color: #F7F7F7;
   border-radius: 8px;
@@ -235,7 +242,7 @@
   box-sizing: border-box;
 }
 
-.ficha-status-input::before {
+.status-input::before {
   position: absolute;
   left: 8px;
   top: 50%;
@@ -261,7 +268,7 @@
   margin-top: 30px;
 }
 
-.ficha-btn-ficha {
+.btn-ficha {
   border: none;
   border-radius: 20px;
   padding: 10px 30px;
@@ -271,17 +278,17 @@
   transition: all 0.2s;
 }
 
-.ficha-btn-ficha:hover {
+.btn-ficha:hover {
   opacity: 0.9;
 }
 
-.ficha-btn-salvar {
+.btn-salvar {
   background-color: #4A90E2;
   /* Azul */
   color: white;
 }
 
-.ficha-btn-voltar {
+.btn-voltar-ficha {
   background-color: #F89B31;
   /* Laranja */
   color: white;

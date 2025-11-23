@@ -1,6 +1,6 @@
+import "./cadastroTutor.scss";
 import { useState } from "react";
 import axios from "axios";
-import "./cadastroTutor.css";
 
 export default function CadastroTutor() {
   const [formData, setFormData] = useState({
@@ -33,10 +33,7 @@ export default function CadastroTutor() {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/tutores",
-        payload
-      );
+      const response = await axios.post("http://localhost:8080/tutores", payload);
       alert("Tutor cadastrado com sucesso!");
       console.log(response.data);
     } catch (error) {
@@ -46,15 +43,24 @@ export default function CadastroTutor() {
   }
 
   return (
-    <section className="teste">
-      <div className="imagens">
-        <img className="cao" src="/images/cao-cadastro.jpg" alt="cao" />
+    <section className="cadastro-section">
+      <div className="cadastro-main-container">
 
-        <div className="form-cadastro">
-          <form onSubmit={handleSubmit}>
-            <h1>Faça seu cadastro</h1>
+        <div className="cadastro-img-container">
+          <img
+            className="cadastro-img-cao"
+            src="/images/cao-cadastro.jpg"
+            alt="cao"
+          />
+        </div>
+
+        <div className="cadastro-form-wrapper">
+          <form className="cadastro-form" onSubmit={handleSubmit}>
+
+            <h1 className="cadastro-title">Faça seu cadastro</h1>
 
             <input
+              className="cadastro-input"
               type="text"
               placeholder="Nome Completo"
               name="nm_pessoa"
@@ -62,9 +68,9 @@ export default function CadastroTutor() {
               required
             />
 
-            <div className="inputs-form">
+            <div className="cadastro-inputs-row">
               <input
-                className="input-form"
+                className="cadastro-input"
                 type="date"
                 name="dt_nasc_pessoa"
                 onChange={handleChange}
@@ -72,7 +78,7 @@ export default function CadastroTutor() {
               />
 
               <input
-                className="input-form"
+                className="cadastro-input"
                 type="tel"
                 placeholder="Telefone"
                 name="tel_pessoa"
@@ -81,8 +87,9 @@ export default function CadastroTutor() {
               />
             </div>
 
-            <div className="inputs-form">
+            <div className="cadastro-inputs-row">
               <input
+                className="cadastro-input"
                 type="text"
                 placeholder="RG"
                 name="rg_pessoa"
@@ -91,7 +98,7 @@ export default function CadastroTutor() {
               />
 
               <input
-                className="input-form"
+                className="cadastro-input"
                 type="text"
                 placeholder="CPF"
                 name="cpf_pessoa"
@@ -101,6 +108,7 @@ export default function CadastroTutor() {
             </div>
 
             <input
+              className="cadastro-input"
               type="email"
               placeholder="Email"
               name="email_pessoa"
@@ -109,6 +117,7 @@ export default function CadastroTutor() {
             />
 
             <input
+              className="cadastro-input"
               type="password"
               placeholder="Senha"
               name="senha_pessoa"
@@ -116,12 +125,19 @@ export default function CadastroTutor() {
               required
             />
 
-            <div className="botao-link">
-              <button type="submit">Cadastrar</button>
-              <a href="#">Seja nosso colaborador</a>
+            <div className="cadastro-button-link-container">
+              <button className="cadastro-button" type="submit">
+                Cadastrar
+              </button>
+
+              <a className="cadastro-link" href="#">
+                Seja nosso colaborador
+              </a>
             </div>
+
           </form>
         </div>
+
       </div>
     </section>
   );

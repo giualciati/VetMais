@@ -1,237 +1,193 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
 
+/* ---------------------- TÍTULO ---------------------- */
+.novo-prontuario-page{
+  display: flex;
+  flex-direction: column;
+ 
+  background-color: #F6963E; /* Laranja */
+  min-height: 100vh;         /* Ocupa a tela inteira */
+  padding-bottom: 2rem;
+  padding-top: 1rem;
 
-
-body {
-    background-color: #F6963E;
-    height: 100%;
 }
-
-.prontuarioNovo{
+.titulo-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
 }
 
 .titulo-prontuario {
-    display: flex;
-    justify-content: center;
-   
-   width: 100%;
-}
-
-.h1-prontuario {
-    display: flex;
-
-    justify-content: center;
     background-color: #63A1F0;
     width: 80%;
-    margin: 1em 0em 0em 0em;
+    margin-top: 1em;
     border-radius: 10px;
     color: white;
-    
+    text-align: center;
+    padding: 0.4em 0;
 }
 
-.forms-prontuario {
+/* ---------------------- CONTÊINER GERAL ---------------------- */
+
+.prontuario-forms-container {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    height: 100%;
+    align-items: flex-start;
     gap: 3em;
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin: 2em 0;
 }
 
+/* ---------------------- FORMULÁRIOS ---------------------- */
 
-
-form {
+.form-esquerdo,
+.form-direito {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    height: 119vh;
     width: 80vh;
-    padding: 0.5em;
+    height: 120vh;
     background-color: #FFEED9;
     border-radius: 20px;
+    padding: 1em;
 }
 
-.garfield {
+/* ---------------------- GARFIELD E INPUTS ---------------------- */
+
+.input-garfield-container {
+    display: flex;
+    flex-direction: row;
+    margin: 1em;
+}
+
+.imagem-garfield-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.garfield-imagem {
     width: 130px;
-    height: 128px
+    height: 128px;
 }
 
-.input-Garfield {
-    display: flex;
-    flex-direction: row;
-
-
-    margin: 1em 1em 0em 1em;
-
-
-
-}
-
-.inputs-1 {
-    display: flex;
-    flex-direction: column;
-
-    label {
-        font-size: 12px;
-        margin: 0.5em 1em 0em;
-    }
-
-    .input-prontuario1 {
-        margin: 0.5em;
-        height: 25px;
-        width: 260px;
-
-        border: none;
-        border-radius: 20px;
-        padding: 5px 10px;
-        background-color: #ffffff;
-    }
-
-}
-
-.container-textarea {
-    display: flex;
-    flex-direction: column;
-
-    label {
-        font-size: 12px;
-        margin: 1em 0.8em 0.5em;
-    }
-
-    .textarea-pront {
-        margin: 0.5em;
-        padding: 10px;
-        border: none;
-        border-radius: 20px;
-        width: 420px;
-        height: 150px;
-        resize: none;
-        background-color: #ffffff;
-    }
-}
-
-.card-input1 {
-    display: flex;
-    margin-top: -2em;
-
-    .inputs-2 {
-        display: flex;
-        flex-direction: column;
-
-        margin: 1em;
-        margin-top: 2em;
-
-        label {
-            font-size: 12px;
-            margin: 1em 0.8em 0.5em;
-        }
-
-
-
-        .input-prontuario2 {
-
-            height: 25px;
-            width: 200px;
-
-            border: none;
-            border-radius: 20px;
-            padding: 5px 10px;
-            background-color: #ffffff;
-        }
-    }
-
-}
-
-.tutor-garfield {
-
+.tutor-garfield-imagem {
     width: 80px;
-    height: 130px
+    height: 130px;
 }
 
-.textarrea-1 {
-    display: flex;
-    flex-direction: column;
+/* ---------------------- INPUT BLOCO 1 ---------------------- */
 
-    label {
-        margin-left: 1em;
-        font-size: 12px;
-    }
-
-    .textarea-pront {
-        margin: 0.5em;
-        padding: 10px;
-        border: none;
-        border-radius: 20px;
-        width: 350px;
-        height: 150px;
-        resize: none;
-        background-color: #ffffff;
-    }
-
-
-}
-
-.textarea-2 {
+.inputs-bloco-1 {
     display: flex;
     flex-direction: column;
 }
 
-.inputs-3 {
+.label-prontuario {
+    font-size: 12px;
+    margin: 0.6em 1em 0.2em;
+}
+
+.input-prontuario {
+    margin: 0.5em;
+    height: 25px;
+    width: 260px;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    background: white;
+}
+
+/* ---------------------- CARD INPUT BLOCO 2 ---------------------- */
+
+.card-inputs-container {
     display: flex;
-    flex-direction: row;
+    margin-top: 1em;
+}
+
+.inputs-bloco-2 {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.inputs-bloco-2 .label-prontuario {
+    margin: 1em 0.8em 0.5em;
+}
+
+.inputs-bloco-2 .input-prontuario {
+    width: 200px;
+}
+
+/* ---------------------- TEXTAREAS GERAIS ---------------------- */
+
+.textarea-container,
+.textarea-container-2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.textarea-prontuario {
+    margin: 0.5em;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    width: 420px;
+    height: 150px;
+    resize: none;
+}
+
+/* ---------------------- TEXTAREA BLOCO 1 ---------------------- */
+
+.textarea-bloco-1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.textarea-bloco-1 .textarea-prontuario {
+    width: 350px;
+}
+
+/* ---------------------- BLOCO INPUTS FINAIS ---------------------- */
+
+.inputs-final-container {
+    display: flex;
     justify-content: space-between;
     align-items: center;
     width: 90%;
-
-
-
-    .formato {
-        display: flex;
-        flex-direction: column;
-
-        label {
-
-            font-size: 12px;
-            margin: 0.8em;
-        }
-
-        .input-prontuario3 {
-
-            height: 25px;
-            width: 150px;
-            margin-left: 0.5em;
-            margin-bottom: 1em;
-
-            border: none;
-            border-radius: 20px;
-            padding: 5px 10px;
-            background-color: #ffffff;
-        }
-    }
+    margin-top: 1em;
 }
 
+.formato-bloco {
+    display: flex;
+    flex-direction: column;
+}
+
+.formato-bloco .label-prontuario {
+    margin: 0.8em 0.5em;
+}
+
+.formato-bloco .input-prontuario {
+    width: 150px;
+    margin-left: 0.5em;
+}
+
+/* ---------------------- BOTÕES ---------------------- */
+
+.botoes-container {
+    display: flex;
+    gap: 1em;
+}
 
 .btn-salvar {
-    display: flex;
-    justify-content: center;
-    text-align: center;
     background-color: #63A1F0;
-    color: #ffffff;
+    color: #fff;
     border: none;
     border-radius: 25px;
     width: 100px;

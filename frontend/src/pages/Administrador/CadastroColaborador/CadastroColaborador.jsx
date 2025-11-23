@@ -1,16 +1,14 @@
-import Navbar from '../../../components/Navbar';
-import './cadastroColaborador.css'; 
-
+import Navbar from "../../../components/Navbar";
+import "./cadastroColaborador.scss";
 
 export default function CadastroColaborador() {
   return (
-    <div className='body'>
+    <div className="cadastro-colaborador-page">
       <Navbar />
       <div>
         <h1>Seja nosso colaborador</h1>
 
         <form className="formulario">
-
           <div className="linha">
             <input type="text" placeholder="Nome" required />
             <input type="tel" placeholder="Telefone" required />
@@ -36,8 +34,9 @@ export default function CadastroColaborador() {
             <input type="text" placeholder="Hospital" required />
           </div>
 
-          <button type="submit" className="botao">Cadastrar</button>
-
+          <button type="submit" className="botao">
+            Cadastrar
+          </button>
         </form>
       </div>
     </div>
