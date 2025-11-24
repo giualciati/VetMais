@@ -4,7 +4,7 @@ const EdtInfoPessoais = () => {
   return (
     <div className="dashboard-wrapper">
       <aside className="sidebar">
-        <img src={logo} alt="VET+ Logo" className="logo" />
+        <img src="/images/logo.png" alt="VET+ Logo" className="logo" />
         <nav>
           <a href="#" className="active">Perfil</a>
           <a href="#">Meus Pets</a>

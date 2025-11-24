@@ -1,16 +1,17 @@
+import { NavLink } from 'react-router-dom';
 import './InfoPessoais.css'; 
 
 const InfoPessoais = () => {
   return (
     <div className="dashboard-wrapper">
       <aside className="sidebar">
-        <img src={logo} alt="VET+ Logo" className="logo" />
+        <img src="/images/logo.png" alt="VET+ Logo" className="logo" />
         <nav>
-          <a href="#" className="active">Perfil</a>
-          <a href="#">Meus Pets</a>
-          <a href="#">Agenda</a>
-          <a href="#">Prontuários</a>
-          <a href="#">Sair</a>
+          <NavLink to="/infPessoaisTutor">Perfil</NavLink>
+          <NavLink to="/MyPets">Meus Pets</NavLink>
+          <NavLink to="/agenda">Agenda</NavLink>
+          <NavLink to="/prontuarioAnimal">Prontuários</NavLink>
+          <NavLink to="/">Sair</NavLink>
         </nav>
       </aside>
       
