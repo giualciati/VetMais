@@ -14,7 +14,6 @@ import br.com.vetmais.dto.ProntuarioResumoDTO;
 
 @RestController
 @RequestMapping("/prontuarios")
-@CrossOrigin(origins = "*") // <--- Importante para seu React conseguir acessar
 public class ProntuariosController {
 
     @Autowired

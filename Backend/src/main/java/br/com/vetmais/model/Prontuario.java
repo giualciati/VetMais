@@ -33,13 +33,13 @@ public class Prontuario {
 
     private String ds_tratamento;
 
-    private String ds_medicacao;
+    //private String ds_medicacao;
 
     private String ds_observacoes;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_veterinario", nullable = false)
-    private Veterinario Veterinario;
+    private Veterinario veterinario;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_hospvet", nullable = false)

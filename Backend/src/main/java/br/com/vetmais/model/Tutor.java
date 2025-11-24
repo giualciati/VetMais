@@ -27,8 +27,9 @@ public class Tutor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_tutor;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_pessoa", nullable = false)
     private Pessoa pessoa;
+
 
 }
