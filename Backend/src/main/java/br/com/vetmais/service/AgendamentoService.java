@@ -87,7 +87,7 @@ public class AgendamentoService {
         Agenda agenda = agendaRepository.buscarPorIdAgendamento(id); 
         
         if(agenda != null) {
-            dto.setNomeVeterinario(agenda.getVeterinario().getPessoa().getNm_pessoa());
+            dto.setNomeVeterinario(agenda.getVeterinario().getPessoa().get_pessoa());
             dto.setNomeHospital(agenda.getHospital().getNm_hospital());
             dto.setEspecialidade(agenda.getServico().getNm_servico());
             dto.setDataHora(agenda.getData_hora());
@@ -95,6 +95,8 @@ public class AgendamentoService {
 
         return dto;
     }
+
+    
 
     // Método para Cancelar
     @Transactional

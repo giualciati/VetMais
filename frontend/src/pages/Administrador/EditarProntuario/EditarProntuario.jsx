@@ -1,4 +1,4 @@
-import '../NovoProntuario/novoProntuario.css';
+import '../NovoProntuario/novoProntuario.scss';
 
 
 

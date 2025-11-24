@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './agenda.css';
 import { Link } from "react-router-dom";
+import Menu from '../../../components/Menu';
 
 function Agenda() {
     const [agendas, setAgendas] = useState([]);
@@ -56,16 +57,9 @@ function Agenda() {
 
     return (
         <div className="prontuarios-pagina">
-            <aside className="sidebar-prontuarios">
-                <img src="/images/logo.png" alt="Vet+ Logo" className="logo" />
-                <nav className="sidebar-nav">
-                    <Link to="/perfil">Perfil</Link>
-                    <Link to="/prontuario">Prontuários</Link>
-                    <Link to="/agenda" className="active">Agenda</Link>
-                    <Link to="/horarios">Meus Horarios</Link>
-                    <Link to="/">Sair</Link>
-                </nav>
-            </aside>
+           
+               <Menu></Menu>
+          
 
             <main className="main-content-prontuarios">
                 <div className="horarios-header">

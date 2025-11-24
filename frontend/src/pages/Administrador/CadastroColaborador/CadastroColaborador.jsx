@@ -1,5 +1,5 @@
 import Navbar from "../../../components/Navbar";
-import "./cadastroColaborador.scss";
+
 
 export default function CadastroColaborador() {
   return (

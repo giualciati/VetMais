@@ -39,6 +39,12 @@ section {
     }
 }
 
+.logo-menu {
+    width: 150px;
+  
+   
+}
+
 .button-novo {
     background-color: #F6963E;
     color: #ffffff;
@@ -54,12 +60,34 @@ h1 {
     color: #F6963E;
 }
 
+
+.menu-link {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+
+.menu-link:hover {
+  text-decoration: none;
+}
+
+
+.link-novo{
+    text-decoration: none;
+  color: #ffffff;
+}
+
+.link-novo:hover {
+    color: rgb(43, 51, 122);
+}
+
 .menu {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     text-align: center;
     align-items: center;
-    height: 100vh;
+    height: 115vh;
     width: 250px;
     background-color: #F6963E;
 }
@@ -73,11 +101,12 @@ li {
 
 ul {
     display: flex;
-
+    text-align: center;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     margin-top: 4em;
+  
 
 
 }

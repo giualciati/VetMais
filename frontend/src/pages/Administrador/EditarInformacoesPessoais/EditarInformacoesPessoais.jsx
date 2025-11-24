@@ -1,4 +1,4 @@
-import './EditarInformacoesPessoais.css';
+
 
 export default function EditarInformacoesPessoais() {
   return (

@@ -1,27 +1,20 @@
 import "./prontuarios.scss";
 import ListaProntuarios from "../../../components/ListaProntuarios.jsx";
+import Menu from "../../../components/Menu.jsx";
+import { Link } from "react-router-dom";
 
 export default function Prontuarios() {
   return (
     <section className="prontuarios-page">
       <div className="menu">
-        <img src="/logo.png" alt="logo vetmais" />
-        <ul>
-          <li>Perfil</li>
-          <li>Prontuários</li>
-          <li>Agenda</li>
-          <li>Meus Horários</li>
-          <li>Sair</li>
-        </ul>
-        <ul>
-        </ul>
+        <Menu/>
       </div>
 
       <div className="infos">
         <h1>Prontuários</h1>
         <div className="botao1">
           <button className="button-novo" type="button">
-            Novo
+            <Link to="/novoProntuario" className="link-novo">Novo</Link>
           </button>
         </div>
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./novoProntuario.css";
+import "./novoProntuario.scss";
 import axios from "axios";
 
 export default function NovoProntuario() {

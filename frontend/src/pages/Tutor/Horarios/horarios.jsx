@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import './horarios.css';
+import Menu from '../../../components/Menu';
 
 function Horarios(props) {
   const navigate = useNavigate();
@@ -37,18 +38,7 @@ function Horarios(props) {
     <div className="prontuarios-pagina">
 
       {/* --- BARRA LATERAL (Sidebar) --- */}
-      <aside className="sidebar-prontuarios">
-        <img src="/images/logo.png" alt="Vet+ Logo" className="logo" />
-
-        <nav className="sidebar-nav">
-          <Link to="/perfil">Perfil</Link>
-          <Link to="/prontuario">Prontuários</Link>
-          <Link to="/agenda">Agenda</Link>
-          <Link to="/horarios" className="active">Meus Horários</Link>
-          <Link to="/">Sair</Link>
-        </nav>
-
-      </aside>
+      <Menu></Menu>
 
       {/* --- CONTEÚDO PRINCIPAL --- */}
       <main className="main-content-prontuarios">
