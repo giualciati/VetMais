@@ -1,11 +1,9 @@
-/* Layout da Página Inteira */
 .prontuarios-pagina {
     display: flex;
     min-height: 100vh;
     background-color: #F9FAFB;
 }
 
-/* --- Barra Lateral --- */
 .sidebar-prontuarios {
     flex: 0 0 240px;
     background-color: #E6F0F9;

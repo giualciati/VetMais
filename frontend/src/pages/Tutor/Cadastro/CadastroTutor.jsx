@@ -36,6 +36,7 @@ export default function CadastroTutor() {
       const response = await axios.post("http://localhost:8080/tutores", payload);
       alert("Tutor cadastrado com sucesso!");
       console.log(response.data);
+      window.location.replace("/infPessoaisTutor");
     } catch (error) {
       console.error(error);
       alert("Erro ao cadastrar tutor!");

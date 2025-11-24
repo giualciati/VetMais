@@ -1,178 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './agenda.css';
 import { Link } from "react-router-dom";
 
-// O componente recebe 'prontuarios' (array) e 'onVerMaisClick' (função) das props
-function Agenda(props) {
-
-    let dadosExemplo = [
-        {
-            id: 1,
-            nome: "Rex",
-            especie: "Cachorro",
-            sexo: "Macho",
-            especialidade: "Cardiologia",
-            data: "30/08/2025",
-            hora: "14:00",
-            status: "Confirmado"
-        },
-        {
-            id: 2,
-            nome: "Ju",
-            especie: "Gato",
-            sexo: "Fêmea",
-            especialidade: "Dermatologia",
-            data: "08/11/2025",
-            hora: "10:30",
-            status: "Pendente"
-        },
-        {
-            id: 3,
-            nome: "Thor",
-            especie: "Cachorro",
-            sexo: "Fêmea",
-            especialidade: "Ortopedia",
-            data: "15/09/2025",
-            hora: "09:00",
-            status: "Pendente"
-        },
-        {
-            id: 4,
-            nome: "Frufru",
-            especie: "Gato",
-            sexo: "Fêmea",
-            especialidade: "Dermatologia",
-            data: "23/12/2025",
-            hora: "10:30",
-            status: "Cancelado"
-        },
-        {
-            id: 5,
-            nome: "Bolt",
-            especie: "Cachorro",
-            sexo: "Macho",
-            especialidade: "Cardiologia",
-            data: "18/09/2025",
-            hora: "15:00",
-            status: "Confirmado"
-        },
-        {
-            id: 6,
-            nome: "Mimi",
-            especie: "Gato",
-            sexo: "Fêmea",
-            especialidade: "Oftalmologia",
-            data: "27/09/2025",
-            hora: "11:00",
-            status: "Pendente"
-        },
-        {
-            id: 7,
-            nome: "Max",
-            especie: "Cachorro",
-            sexo: "Macho",
-            especialidade: "Neurologia",
-            data: "02/01/2025",
-            hora: "16:00",
-            status: "Confirmado"
-        },
-        {
-            id: 8,
-            nome: "Luna",
-            especie: "Gato",
-            sexo: "Fêmea",
-            especialidade: "Cardiologia",
-            data: "09/02/2026",
-            hora: "09:30",
-            status: "Pendente"
-        },
-        {
-            id: 9,
-            nome: "Rocky",
-            especie: "Cachorro",
-            sexo: "Macho",
-            especialidade: "Ortopedia",
-            data: "09/08/2026",
-            hora: "14:30",
-            status: "Cancelado"
-        },
-        {
-            id: 10,
-            nome: "Whiskers",
-            especie: "Gato",
-            sexo: "Macho",
-            especialidade: "Dermatologia",
-            data: "19/03/2026",
-            hora: "10:00",
-            status: "Confirmado"
-        },
-        {
-            id: 11,
-            nome: "Buddy",
-            especie: "Cachorro",
-            sexo: "Macho",
-            especialidade: "Cardiologia",
-            data: "18/07/2025",
-            hora: "13:00",
-            status: "Pendente"
-        },
-        {
-            id: 12,
-            nome: "Garfield",
-            especie: "Gato",
-            sexo: "Macho",
-            especialidade: "Oftalmologia",
-            data: "24/11/2025",
-            hora: "15:30",
-            status: "Confirmado"
-        },
-        {
-            id: 13,
-            nome: "Spike",
-            especie: "Cachorro",
-            sexo: "Macho",
-            especialidade: "Neurologia",
-            data: "03/12/2025",
-            hora: "08:00",
-            status: "Confirmado"
-        },
-        {
-            id: 14,
-            nome: "Felix",
-            especie: "Gato",
-            sexo: "Macho",
-            especialidade: "Cardiologia",
-            data: "19/11/2025",
-            hora: "12:00",
-            status: "Cancelado"
-        },
-        {
-            id: 15,
-            nome: "Lassie",
-            especie: "Cachorro",
-            sexo: "Fêmea",
-            especialidade: "Ortopedia",
-            data: "30/12/2025",
-            hora: "17:00",
-            status: "Confirmado"
-        }
-    ];
-
-    const { prontuarios = dadosExemplo, onVerMaisClick } = props;
-
-    // Estado para controlar a página atual e itens por página
+function Agenda() {
+    const [agendas, setAgendas] = useState([]);
+    const [erro, setErro] = useState(false);
     const [paginaAtual, setPaginaAtual] = useState(1);
     const itensPorPagina = 5;
 
-    // Calcular índices para fatiar os dados
+    useEffect(() => {
+        fetch('http://localhost:8080/agendamentos')
+            .then(res => {
+                if (!res.ok) throw new Error();
+                return res.json();
+            })
+            .then(data => {
+                const adaptados = data.map(agendamento => {
+                    const dataObj = agendamento.dataHora ? new Date(agendamento.dataHora) : null;
+                    return {
+                        id: agendamento.idAgendamento,
+                        nome: agendamento.nomeAnimal,
+                        especie: agendamento.especie,
+                        sexo: agendamento.sexo,
+                        especialidade: agendamento.especialidade,
+                        data: dataObj ? dataObj.toLocaleDateString('pt-BR') : "",
+                        hora: dataObj ? dataObj.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : "",
+                        status: agendamento.statusAgendamento
+                    };
+                });
+                setAgendas(adaptados);
+                setErro(false);
+            })
+            .catch(() => {
+                setErro(true);
+            });
+    }, []);
+
     const indiceInicio = (paginaAtual - 1) * itensPorPagina;
     const indiceFim = indiceInicio + itensPorPagina;
-    const dadosPaginados = prontuarios.slice(indiceInicio, indiceFim);
+    const dadosPaginados = agendas.slice(indiceInicio, indiceFim);
+    const totalPaginas = Math.ceil(agendas.length / itensPorPagina);
 
-    // Calcular número total de páginas
-    const totalPaginas = Math.ceil(prontuarios.length / itensPorPagina);
-
-    // Função para mudar de página
     const mudarPagina = (numeroPagina) => {
         setPaginaAtual(numeroPagina);
     };
@@ -188,69 +56,74 @@ function Agenda(props) {
 
     return (
         <div className="prontuarios-pagina">
-
-            {/* --- BARRA LATERAL (Sidebar) --- */}
             <aside className="sidebar-prontuarios">
                 <img src="/images/logo.png" alt="Vet+ Logo" className="logo" />
-
                 <nav className="sidebar-nav">
-                    <a href="#">Perfil</a>
-                    <a href="#" >Prontuários</a>
-                    <a href="#" className="active">Agenda</a>
-                    <a href="#" >Meus Horarios</a>
-                    <a href="#">Sair</a>
+                    <Link to="/perfil">Perfil</Link>
+                    <Link to="/prontuario">Prontuários</Link>
+                    <Link to="/agenda" className="active">Agenda</Link>
+                    <Link to="/horarios">Meus Horarios</Link>
+                    <Link to="/">Sair</Link>
                 </nav>
             </aside>
 
-            {/* --- CONTEÚDO PRINCIPAL --- */}
             <main className="main-content-prontuarios">
-                <h1 className="titulo-prontuarios">Agendamentos</h1>
-
-                <div className="prontuario-tabela">
-                    <table className="prontuario-table">
-                        <thead>
-                            <tr className="prontuario-header">
-                                <th>Nome do Animal</th>
-                                <th>Espécie</th>
-                                <th>Sexo</th>
-                                <th>Especialidade</th>
-                                <th>Data</th>
-                                <th>Hora</th>
-                                <th>Status</th>
-                                <th></th> {/* Coluna vazia para o link */}
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {dadosPaginados.map(prontuario => (
-                                <tr className="prontuario-linha" key={prontuario.id}>
-                                    <td>{prontuario.nome}</td>
-                                    <td>{prontuario.especie}</td>
-                                    <td>{prontuario.sexo}</td>
-                                    <td>{prontuario.especialidade}</td>
-                                    <td>{prontuario.data}</td>
-                                    <td>{prontuario.hora}</td>
-                                    <td style={{ color: getStatusStyle(prontuario.status) }}>{prontuario.status}</td>
-                                    <td>
-                                        <Link
-                                            to="/fichaagendamento"
-                                            className="ver-mais-link"
-                                        >
-                                            Ver mais
-                                        </Link>
-
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-
-                    {prontuarios.length === 0 && (
-                        <p className="lista-vazia">Nenhum prontuário encontrado.</p>
-                    )}
+                <div className="horarios-header">
+                    <h1 className="titulo-prontuarios">Agendamentos</h1>
+                    <Link to="/novo-agendamento" className="btn-novo">Novo</Link>
                 </div>
 
-                {/* Paginação dinâmica */}
+                {erro && (
+                    <p className="lista-vazia">Nenhum prontuário encontrado.</p>
+                )}
+
+                {!erro && agendas.length === 0 && (
+                    <p className="lista-vazia">Nenhum prontuário encontrado.</p>
+                )}
+
+                {!erro && agendas.length > 0 && (
+                    <div className="prontuario-tabela">
+                        <table className="prontuario-table">
+                            <thead>
+                                <tr className="prontuario-header">
+                                    <th>Nome do Animal</th>
+                                    <th>Espécie</th>
+                                    <th>Sexo</th>
+                                    <th>Especialidade</th>
+                                    <th>Data</th>
+                                    <th>Hora</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {dadosPaginados.map(prontuario => (
+                                    <tr className="prontuario-linha" key={prontuario.id}>
+                                        <td>{prontuario.nome}</td>
+                                        <td>{prontuario.especie}</td>
+                                        <td>{prontuario.sexo}</td>
+                                        <td>{prontuario.especialidade}</td>
+                                        <td>{prontuario.data}</td>
+                                        <td>{prontuario.hora}</td>
+                                        <td style={{ color: getStatusStyle(prontuario.status) }}>
+                                            {prontuario.status}
+                                        </td>
+                                        <td>
+                                            <Link
+                                                to="/fichaagendamento"
+                                                className="ver-mais-link"
+                                            >
+                                                Ver mais
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+
                 <div className="paginacao">
                     {Array.from({ length: totalPaginas }, (_, index) => (
                         <a
@@ -269,7 +142,6 @@ function Agenda(props) {
             </main>
         </div>
     );
-
 }
 
 export default Agenda;
