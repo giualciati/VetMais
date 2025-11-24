@@ -1,4 +1,5 @@
 import "./prontuarios.scss";
+import ListaProntuarios from "../../../components/ListaProntuarios.jsx";
 
 export default function Prontuarios() {
   return (
@@ -12,6 +13,8 @@ export default function Prontuarios() {
           <li>Meus Horários</li>
           <li>Sair</li>
         </ul>
+        <ul>
+        </ul>
       </div>
 
       <div className="infos">
@@ -24,10 +27,14 @@ export default function Prontuarios() {
 
         <div>
           <div className="cabecalho">
-            <p>Número de Protocolo</p>
-            <p>Nome</p>
-            <p>Espécie</p>
-            <p>Sexo</p>
+            <p className="p-prontuario">Número de Protocolo</p>
+            <p className="p-prontuario">Nome</p>
+            <p className="p-prontuario">Espécie</p>
+            <p className="p-prontuario">Sexo</p>
+            <p className="p-prontuario">Data Atendimento</p>
+          </div>
+          <div>
+                <ListaProntuarios/>
           </div>
         </div>
       </div>

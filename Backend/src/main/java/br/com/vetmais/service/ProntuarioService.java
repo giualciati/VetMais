@@ -1,6 +1,8 @@
 package br.com.vetmais.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,8 @@ import br.com.vetmais.repository.AnimalRepository;
 import br.com.vetmais.repository.HospitalRepository;
 import br.com.vetmais.repository.ProntuarioRepository;
 import br.com.vetmais.repository.VeterinarioRepository;
+
+
 
 @Service
 public class ProntuarioService {
@@ -44,4 +48,32 @@ public class ProntuarioService {
 
         return prontuarioRepository.save(prontuario);
     }
+
+    public List<Prontuario> getAllProntuarios() {
+    return prontuarioRepository.findAll();
+}
+
+public Prontuario updateProntuario(Long id, Prontuario p) {
+
+        Prontuario original = prontuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Prontuário não encontrado"));
+
+        // Atualiza apenas os campos editáveis
+        original.setDt_atendimento(p.getDt_atendimento());
+        original.setDs_sintomas(p.getDs_sintomas());
+        original.setDs_diagnostico(p.getDs_diagnostico());
+        original.setDs_tratamento(p.getDs_tratamento());
+        original.setDs_observacoes(p.getDs_observacoes());
+
+        return prontuarioRepository.save(original);
+    }
+
+
+    // -------------------------
+    // DELETAR PRONTUÁRIO
+    // -------------------------
+    public void deleteProntuario(Long id) {
+        prontuarioRepository.deleteById(id);
+    }
+
 }

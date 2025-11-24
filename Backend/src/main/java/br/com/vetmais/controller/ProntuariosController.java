@@ -12,6 +12,7 @@ import br.com.vetmais.repository.ProntuarioRepository; // <--- Faltava este impo
 import br.com.vetmais.dto.ProntuarioDetalhesDTO; // <--- Faltava este import
 import br.com.vetmais.dto.ProntuarioResumoDTO;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/prontuarios")
 public class ProntuariosController {
@@ -37,6 +38,7 @@ public class ProntuariosController {
         return prontuarioService.updateProntuario(id, prontuario);
     }
 
+ 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         prontuarioService.deleteProntuario(id);
