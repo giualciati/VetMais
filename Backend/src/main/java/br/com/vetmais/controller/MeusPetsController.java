@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pets")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class MeusPetsController {
 
     private final MeusPetsService service;

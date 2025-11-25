@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/agendamentos")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class AgendamentoController {
 
     @Autowired
