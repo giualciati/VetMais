@@ -27,21 +27,21 @@ public class SecurityConfigurations {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        // Libera o Login e o Registro (se houver)
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        // Bloqueia todas as outras rotas (ex: InfoPessoais)
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
+    // --- AQUI NÓS CRIAMOS O AUTHENTICATION MANAGER ---
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    // --- AQUI CRIAMOS O ENCRIPTADOR DE SENHAS ---
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();

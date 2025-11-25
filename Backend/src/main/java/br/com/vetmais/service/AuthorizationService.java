@@ -15,8 +15,6 @@ public class AuthorizationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // O Spring passa o email digitado no login para a variável 'username'
-        return repository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Tutor não encontrado com este e-mail"));
+        return repository.findByEmail(username);
     }
 }

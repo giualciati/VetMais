@@ -1,9 +1,12 @@
 package br.com.vetmais.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
 public class LoginDTO {
-    private String usuario; // O Front envia o e-mail neste campo "usuario"
+    @NotBlank
+    private String usuario; // E-mail
+    @NotBlank
     private String senha;
 }

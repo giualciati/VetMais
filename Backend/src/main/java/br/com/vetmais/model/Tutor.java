@@ -1,58 +1,54 @@
 package br.com.vetmais.model;
 
-// --- Seus Imports Originais (Mantidos) ---
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column; // <--- Adicionei este para configurar as colunas novas
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-// --- Imports de Segurança (Mantidos) ---
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
 import java.util.List;
 
 @Table(name = "tb_tutor")
-@Data
 @Entity
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
-public class Tutor implements UserDetails { // <--- OBRIGATÓRIO: implements UserDetails
+@AllArgsConstructor
+public class Tutor implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_tutor;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_pessoa", nullable = false)
-    private Pessoa pessoa;
-
-    
-    // --- NOVOS CAMPOS (Essenciais para o Login funcionar) ---
     @Column(unique = true)
     private String email;
     private String senha;
 
-    // --- Métodos de Segurança (UserDetails) ---
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
+    private Pessoa pessoa;
+
+    @OneToMany(mappedBy = "tutor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Animal> animais;
+
+    // --- MÉTODOS OBRIGATÓRIOS DO USERDETAILS ---
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
-    public String getPassword() { return this.senha; }
+    public String getPassword() {
+        return senha;
+    }
 
     @Override
-    public String getUsername() { return this.email; }
+    public String getUsername() {
+        return email;
+    }
 
     @Override
     public boolean isAccountNonExpired() { return true; }

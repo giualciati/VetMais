@@ -30,7 +30,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         if(token != null){
             var login = tokenService.validateToken(token);
             // Busca o Tutor pelo email contido no token
-            UserDetails user = tutorRepository.findByEmail(login).orElse(null);
+            UserDetails user = tutorRepository.findByEmail(login);
 
             if(user != null){
                 var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
