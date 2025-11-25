@@ -2,6 +2,7 @@ package br.com.vetmais.controller;
 
 import br.com.vetmais.dto.AgendamentoDetalhesDTO;
 import br.com.vetmais.dto.AgendamentoRequestDTO;
+import br.com.vetmais.dto.AgendamentoStatusUpdateDTO;
 import br.com.vetmais.service.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,11 +10,19 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/agendamentos")
-//@CrossOrigin(origins = "*")
 public class AgendamentoController {
 
     @Autowired
     private AgendamentoService agendamentoService;
+
+    @GetMapping
+    public ResponseEntity<?> listarTodos() {
+        try {
+            return ResponseEntity.ok(agendamentoService.listarTodosDetalhes());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
     @PostMapping("/novo")
     public ResponseEntity<?> criar(@RequestBody AgendamentoRequestDTO dados) {
@@ -28,6 +37,12 @@ public class AgendamentoController {
     @GetMapping("/{id}")
     public ResponseEntity<AgendamentoDetalhesDTO> getDetalhes(@PathVariable Long id) {
         return ResponseEntity.ok(agendamentoService.buscarDetalhes(id));
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Void> alterarStatus(@PathVariable Long id, @RequestBody AgendamentoStatusUpdateDTO dto) {
+        agendamentoService.alterarStatus(id, dto.getStatusAgendamento());
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}/cancelar")
