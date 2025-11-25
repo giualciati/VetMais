@@ -32,7 +32,7 @@ public class Tutor implements UserDetails { // <--- OBRIGATÓRIO: implements Use
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_tutor;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_pessoa", nullable = false)
     private Pessoa pessoa;
 
