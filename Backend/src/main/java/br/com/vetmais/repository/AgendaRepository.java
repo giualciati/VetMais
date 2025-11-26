@@ -13,7 +13,7 @@ public interface AgendaRepository extends JpaRepository<Agenda, Long> {
             " a.id, " +
             " v.pessoa.nm_pessoa, " +
             " s.nm_servico, " +
-            " a.data_hora, " +
+            " a.dataHora, " +
             " h.cidade_hospital) " + 
             "FROM Agenda a " +
             "JOIN a.veterinario v " +
@@ -21,9 +21,33 @@ public interface AgendaRepository extends JpaRepository<Agenda, Long> {
             "JOIN a.statusAgenda sa " +
             "JOIN a.hospital h " +
             "WHERE sa.nm_status = 'DISPONIVEL' " +
-            "AND a.data_hora >= CURRENT_TIMESTAMP " +
+            "AND a.dataHora >= CURRENT_TIMESTAMP " +
             "AND (:termo IS NULL OR s.nm_servico = :termo OR v.especialidade_vet = :termo)")
     List<AgendaDisponivelDTO> buscarAgendasDisponiveis(@Param("termo") String termo);
+
+    @Query("SELECT new br.com.vetmais.dto.AgendaDisponivelDTO(" +
+       "  a.id, " +
+       "  v.pessoa.nm_pessoa, " +
+       "  s.nm_servico, " +
+       "  a.dataHora, " +
+       "  h.cidade_hospital) " + 
+       "FROM Agenda a " +
+       "JOIN a.veterinario v " +
+       "JOIN a.servico s " +
+       "JOIN a.statusAgenda sa " +
+       "JOIN a.hospital h " +
+       // 1. Garante que só horários futuros e status disponível (ID 1) apareçam
+       "WHERE a.dataHora >= CURRENT_TIMESTAMP " +
+       "AND sa.id_status_agenda = 1 " + // <--- MAIS SEGURO: Usar o ID fixo (1 = Disponível)
+       
+       // 2. Filtro por SERVIÇO/ESPECIALIDADE
+       "AND (:especialidade IS NULL OR s.nm_servico LIKE %:especialidade%) " +
+       
+       // 3. Filtro por CIDADE
+       "AND (:cidade IS NULL OR h.cidade_hospital LIKE %:cidade%)")
+List<AgendaDisponivelDTO> buscarAgendasDisponiveis(
+    @Param("especialidade") String especialidade,
+    @Param("cidade") String cidade); // <--- NOVO PARÂMETRO
 
     @Query("SELECT a FROM Agenda a JOIN a.agendamento ag WHERE ag.id_agendamento = :idAgendamento")
     Agenda buscarPorIdAgendamento(@Param("idAgendamento") Long idAgendamento);

@@ -1,5 +1,6 @@
 package br.com.vetmais.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Agenda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date data_hora;
+    private LocalDateTime dataHora;
 
     // Agenda -> Muitos para Um -> StatusAgenda
     @ManyToOne(fetch = FetchType.EAGER)
@@ -39,7 +40,7 @@ public class Agenda {
     @JoinColumn(name = "id_veterinario", nullable = false)
     private Veterinario veterinario;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_hospvet", nullable = false)
     private Hospital hospital;
 

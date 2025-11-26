@@ -88,16 +88,14 @@ public class AgendamentoService {
         agendamentoRepository.save(agendamento);
     }
 
-    // Método para buscar os detalhes completos
     public AgendamentoDetalhesDTO buscarDetalhes(Long id) {
         Agendamento agendamento = agendamentoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
 
         AgendamentoDetalhesDTO dto = new AgendamentoDetalhesDTO();
 
-        // Mapeando dados (Manual ou use ModelMapper)
         dto.setIdAgendamento(agendamento.getId_agendamento());
-        dto.setProtocolo(String.format("%04d", agendamento.getId_agendamento())); // Ex: 0001
+        dto.setProtocolo(String.format("%04d", agendamento.getId_agendamento()));
         dto.setStatusAgendamento(agendamento.getSituacao_agendamento().getNm_situacao());
 
         // Animal e Tutor
@@ -110,17 +108,13 @@ public class AgendamentoService {
         dto.setDescricaoAnimal(agendamento.getAnimal().getDesc_animal());
         dto.setNomeTutor(agendamento.getTutor().getPessoa().getNm_pessoa());
 
-        // Achar a Agenda vinculada (Precisamos buscar na tb_agenda onde o agendamento está na lista ou fazer query inversa)
-        // Supondo que você consiga recuperar a Agenda a partir do Agendamento 
-        // (Se não tiver mapeado bidirecional, precisará de uma query no Repository)
-        // Vou assumir aqui uma Query simples no Repository: findAgendaByAgendamentoId
         Agenda agenda = agendaRepository.buscarPorIdAgendamento(id);
 
         if (agenda != null) {
             dto.setNomeVeterinario(agenda.getVeterinario().getPessoa().getNm_pessoa());
             dto.setNomeHospital(agenda.getHospital().getNm_hospital());
             dto.setEspecialidade(agenda.getServico().getNm_servico());
-            dto.setDataHora(agenda.getData_hora());
+            dto.setDataHora(agenda.getDataHora());
         }
 
         return dto;
@@ -149,29 +143,27 @@ public class AgendamentoService {
             dto.setNomeVeterinario(agendamento.getAgenda().getVeterinario().getPessoa().getNm_pessoa());
             dto.setNomeHospital(agendamento.getAgenda().getHospital().getNm_hospital());
             dto.setEspecialidade(agendamento.getAgenda().getServico().getNm_servico());
-            dto.setDataHora(agendamento.getAgenda().getData_hora());
+            dto.setDataHora(agendamento.getAgenda().getDataHora());
         }
 
         return dto;
     }
 
-    // Método para Cancelar
     @Transactional
     public void cancelarAgendamento(Long idAgendamento) {
         Agendamento agendamento = agendamentoRepository.findById(idAgendamento)
                 .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
 
-        // 1. Muda situação do Agendamento para CANCELADO (ID 3)
         Situacao_agendamento cancelado = situacaoRepository.findById(3L)
                 .orElseThrow(() -> new RuntimeException("Status Cancelado não existe"));
         agendamento.setSituacao_agendamento(cancelado);
         agendamentoRepository.save(agendamento);
 
-        // 2. Libera a Agenda (Volta status para DISPONIVEL - ID 1)
+
         Agenda agenda = agendaRepository.buscarPorIdAgendamento(idAgendamento);
         if (agenda != null) {
             StatusAgenda disponivel = new StatusAgenda();
-            disponivel.setId_status_agenda(1L); // ID 1 = Disponível
+            disponivel.setId_status_agenda(1L);
             agenda.setStatusAgenda(disponivel);
             agendaRepository.save(agenda);
         }

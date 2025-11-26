@@ -1,6 +1,8 @@
 package br.com.vetmais.dto;
 
 import lombok.Data;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -26,5 +28,5 @@ public class AgendamentoDetalhesDTO {
     private String nomeVeterinario;
     private String nomeHospital;
     private String especialidade;
-    private Date dataHora;
+    private LocalDateTime dataHora;
 }

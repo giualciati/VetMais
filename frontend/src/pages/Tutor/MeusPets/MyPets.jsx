@@ -17,7 +17,7 @@ export default function MyPets() {
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
-    const idTutor = localStorage.getItem("idTutor") || 2;
+    const idTutor = localStorage.getItem("idTutor") || 1;
 
     listarPets(idTutor)
       .then((res) => {

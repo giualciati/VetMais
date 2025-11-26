@@ -43,7 +43,7 @@ export default function CadastrarPet() {
 
     setErro("");
 
-    const idTutor = localStorage.getItem("idTutor") || 2;
+    const idTutor = localStorage.getItem("idTutor") || 1;
 
     const dadosParaOBackend = {
         nm_animal: pet.nome,
