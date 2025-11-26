@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Prontuarios.css';
 import { NavLink, useNavigate } from 'react-router-dom';
+import logo from '../../../assets/images/Logo.png';
 
 function Prontuarios() {
   const navigate = useNavigate();
@@ -43,11 +44,11 @@ function Prontuarios() {
     <div className="prontuarios-pagina">
       
       <aside className="sidebar-prontuarios">
-        <img src="/images/logo.png" alt="Vet+ Logo" className="logo" />
+        <img src={logo} alt="Vet+ Logo" className="logo" />
         
         <nav className="sidebar-nav">
-          <NavLink to="/infoPessoal">Perfil</NavLink>
-          <NavLink to="/prontuarioAnimal">Prontuários</NavLink>
+          <NavLink to="/infoPessoaisTutor">Perfil</NavLink>
+          <NavLink to="/prontuario">Prontuários</NavLink>
           <NavLink to="/agenda">Agenda</NavLink>
           <NavLink to="/">Sair</NavLink>
         </nav>

@@ -51,7 +51,7 @@ function AppContent() {
         <Route path="/MyPets" element={<MyPets />} />
         <Route path="/MyPets/Cadastro" element={<CadastroPets />} />
         <Route path="/MyPets/Editar/:id" element={<EditPets />} />
-        <Route path="/prontuarioAnimal" element={<Prontuario />} />
+        <Route path="/prontuario" element={<Prontuario />} />
         <Route path="/agenda" element={<Agenda />} />
         <Route path="/novo-agendamento" element={<AgendarServico />} />
         <Route path="/horarios" element={<Horarios />} />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './agendarServico.css'; 
+import logo from '../../../assets/images/Logo.png';
 
 function AgendarServico() {
   const navigate = useNavigate();
@@ -154,7 +155,7 @@ function AgendarServico() {
       <div className="agendar-servico-container">
 
         <header className='agendar-header'>
-          <img src="/images/logo.png" alt="Vet+ Logo" className="logo" /> 
+          <img src={logo} alt="Vet+ Logo" className="logo" /> 
           <div className="titulo-container">
             <h1 className="titulo-agendar">Agendar Serviço</h1>
           </div>
