@@ -1,6 +1,7 @@
 package br.com.vetmais.repository;
 
 import br.com.vetmais.model.Agenda;
+import br.com.vetmais.dto.AgendaCompletaDTO;
 import br.com.vetmais.dto.AgendaDisponivelDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -43,8 +44,20 @@ public interface AgendaRepository extends JpaRepository<Agenda, Long> {
        "AND (:cidade IS NULL OR h.cidade_hospital LIKE %:cidade%)")
 List<AgendaDisponivelDTO> buscarAgendasDisponiveis(
     @Param("especialidade") String especialidade,
-    @Param("cidade") String cidade); // <--- NOVO PARÂMETRO
+    @Param("cidade") String cidade);
 
     @Query("SELECT a FROM Agenda a JOIN a.agendamento ag WHERE ag.id_agendamento = :idAgendamento")
     Agenda buscarPorIdAgendamento(@Param("idAgendamento") Long idAgendamento);
+
+    @Query("SELECT new br.com.vetmais.dto.AgendaCompletaDTO(" +
+           "a.id, " +
+           "v.crm_veterinario, " + 
+           "s.nm_servico, " + 
+           "a.dataHora, " + 
+           "sa.nm_status) " + 
+           "FROM Agenda a " +
+           "JOIN a.veterinario v " + 
+           "JOIN a.servico s " + 
+           "JOIN a.statusAgenda sa")
+    List<AgendaCompletaDTO> buscarTodosMapeadosParaDTO();
 }
