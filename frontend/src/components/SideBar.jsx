@@ -35,8 +35,8 @@ export default function Sidebar() {
         </Link>
 
         <Link
-          to="/prontuarios"
-          className={location.pathname === "/prontuarios" ? "active" : ""}
+          to="/prontuario"
+          className={location.pathname === "/prontuario" ? "active" : ""}
         >
           Prontuários
         </Link>

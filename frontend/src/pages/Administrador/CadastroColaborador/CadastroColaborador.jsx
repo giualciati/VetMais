@@ -66,7 +66,7 @@ export default function CadastroColaborador() {
 
         if (response.ok) {
             alert("✅ Veterinário cadastrado com sucesso!");
-            window.location.reload('/informacoesPessoais');
+            window.location.replace('/informacoesPessoais');
         } else {
             const erroMsg = await response.text();
             alert("❌ Erro no cadastro: " + erroMsg);
