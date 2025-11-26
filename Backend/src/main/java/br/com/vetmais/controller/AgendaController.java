@@ -1,5 +1,6 @@
 package br.com.vetmais.controller;
 
+import br.com.vetmais.dto.AgendaCompletaDTO;
 import br.com.vetmais.dto.AgendaDisponivelDTO;
 import br.com.vetmais.model.Agenda;
 import br.com.vetmais.model.Servico;
@@ -32,6 +33,11 @@ public class AgendaController {
 
     @Autowired
     private StatusAgendaRepository statusAgendaRepository;
+
+   @GetMapping("/todos") 
+    public List<AgendaCompletaDTO> listarTodosDTO() {
+        return agendaRepository.buscarTodosMapeadosParaDTO(); 
+    }
 
     @GetMapping("/disponiveis")
     public List<AgendaDisponivelDTO> listarDisponiveis(
