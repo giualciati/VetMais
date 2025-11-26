@@ -6,7 +6,7 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import "../styles/AboutUs.css";
+import "./AboutUs.css";
 
 function AboutUs() {
   return (

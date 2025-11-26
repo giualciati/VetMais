@@ -8,7 +8,7 @@ const Navbar = () => {
   const isHome = location.pathname === "/";
   const isAboutUs = location.pathname === "/AboutUs";
   const isSignIn = location.pathname === "/cadastro";
-
+  const isLogin = location.pathname === "/LoginEntrar";
   return (
     <nav
       className={`navbar-component navbar ${
@@ -34,7 +34,9 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">Meus serviços</Link>
+            <Link to="/LoginEntrar" className={isLogin ? "active" : ""}>
+              Meus serviços
+            </Link>
           </li>
         </ul>
       </div>

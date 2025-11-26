@@ -1,21 +1,21 @@
 import React from "react";
-import "../styles/Global.css";
-import "../styles/Home.css";
+
+import "../PaginaInicial/Home.css";
 import { Link } from "react-router-dom";
-import cachorro1 from "../assets/images/Cachorro1.png";
-import vet from "../assets/images/Veterinaria.jpg";
-import gato from "../assets/images/Gato.png";
-import passaro from "../assets/images/Passaro.png";
-import porco from "../assets/images/Porco.png";
-import cachorro2 from "../assets/images/Cachorro2.png";
+import cachorro1 from "../../assets/images/Cachorro1.png";
+import vet from "../../assets/images/Veterinaria.jpg";
+import gato from "../../assets/images/Gato.png";
+import passaro from "../../assets/images/Passaro.png";
+import porco from "../../assets/images/Porco.png";
+import cachorro2 from "../../assets/images/Cachorro2.png";
 import { FaHeart } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 import { FaHospital } from "react-icons/fa";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaHeartbeat } from "react-icons/fa";
-import CirculoAzulVazado from "../assets/images/CirculoAzulVazado.svg";
-import CirculoRosa from "../assets/images/CirculoRosa.svg";
-import LinhaAmarela from "../assets/images/LinhaAmarela.svg";
+import CirculoAzulVazado from "../../assets/images/CirculoAzulVazado.svg";
+import CirculoRosa from "../../assets/images/CirculoRosa.svg";
+import LinhaAmarela from "../../assets/images/LinhaAmarela.svg";
 
 const Home = () => {
   return (

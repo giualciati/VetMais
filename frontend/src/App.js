@@ -6,11 +6,12 @@ import {
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Home from "./pages/Home";
-import AboutUs from "./pages/AboutUs";
+import Home from "./pages/PaginaInicial/Home";
+import AboutUs from "./pages/SobreNos/AboutUs";
 import MyPets from "./pages/Tutor/MeusPets/MyPets";
 import CadastroPets from "./pages/Tutor/MeusPets/CadastroPets";
 import EditPets from "./pages/Tutor/MeusPets/EditPets";
+import LoginEntrar from "./pages/Tutor/LoginUsuario/LoginEntrar";
 import CadastroTutor from "./pages/Tutor/Cadastro/CadastroTutor";
 import Prontuario from "./pages/Tutor/Prontuario/Prontuarios";
 import Agenda from "./pages/Tutor/Agenda/agenda";
@@ -27,13 +28,18 @@ import AgendarServico from "./pages/Tutor/AgendarServico/agendarServico";
 import ProntuarioDetalhes from "./pages/Tutor/ProntuarioDetalhes/ProntuarioDetalhes";
 import InfoPessoais from "./pages/Tutor/InfoPessoais/InfoPessoais";
 import EdtInfoPessoais from "./pages/Tutor/EdtInfoPessoais/EdtInfoPessoais";
+import TrocarSenha from "./pages/Tutor/EsqueciSenha/TrocaSenha";
 
 function AppContent() {
   const location = useLocation();
 
-  const showNavAndFooter = ["/", "/AboutUs"].includes(
-    location.pathname
-  );
+  const showNavAndFooter = [
+    "/",
+    "/AboutUs",
+    "/cadastro",
+    "/LoginEntrar",
+    "/TrocarSenha",
+  ].includes(location.pathname);
 
   return (
     <>
@@ -47,8 +53,12 @@ function AppContent() {
 
         {/* Tutor */}
         <Route path="/infPessoaisTutor" element={<InfoPessoais />} />
-        <Route path="/editarInformacoesPessoaisTutor" element={<EdtInfoPessoais />} />
+        <Route
+          path="/editarInformacoesPessoaisTutor"
+          element={<EdtInfoPessoais />}
+        />
         <Route path="/MyPets" element={<MyPets />} />
+        <Route path="/LoginEntrar" element={<LoginEntrar />} />
         <Route path="/MyPets/Cadastro" element={<CadastroPets />} />
         <Route path="/MyPets/Editar/:id" element={<EditPets />} />
         <Route path="/prontuario" element={<Prontuario />} />
@@ -58,8 +68,12 @@ function AppContent() {
         <Route path="/controlDispo" element={<ControlDispo />} />
         <Route path="/fichaagendamento" element={<FichaAgendamento />} />
         <Route path="/fichaagendamento/:id" element={<FichaAgendamento />} />
-        <Route path="/prontuarioDetalhes/:id" element={<ProntuarioDetalhes />} />
-        
+        <Route
+          path="/prontuarioDetalhes/:id"
+          element={<ProntuarioDetalhes />}
+        />
+        <Route path="/TrocarSenha" element={<TrocarSenha />} />
+
         {/* Administrador */}
         <Route path="/informacoesPessoais" element={<InformacoesPessoais />} />
         <Route
