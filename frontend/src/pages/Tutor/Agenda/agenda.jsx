@@ -105,7 +105,7 @@ function Agenda() {
                                         </td>
                                         <td>
                                             <Link
-                                                to="/fichaagendamento"
+                                                to={`/fichaagendamento/${prontuario.id}`}
                                                 className="ver-mais-link"
                                             >
                                                 Ver mais

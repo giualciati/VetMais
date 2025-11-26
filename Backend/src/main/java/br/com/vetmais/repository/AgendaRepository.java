@@ -36,14 +36,10 @@ public interface AgendaRepository extends JpaRepository<Agenda, Long> {
        "JOIN a.servico s " +
        "JOIN a.statusAgenda sa " +
        "JOIN a.hospital h " +
-       // 1. Garante que só horários futuros e status disponível (ID 1) apareçam
        "WHERE a.dataHora >= CURRENT_TIMESTAMP " +
-       "AND sa.id_status_agenda = 1 " + // <--- MAIS SEGURO: Usar o ID fixo (1 = Disponível)
-       
-       // 2. Filtro por SERVIÇO/ESPECIALIDADE
+       "AND sa.id_status_agenda = 1 " +
+ 
        "AND (:especialidade IS NULL OR s.nm_servico LIKE %:especialidade%) " +
-       
-       // 3. Filtro por CIDADE
        "AND (:cidade IS NULL OR h.cidade_hospital LIKE %:cidade%)")
 List<AgendaDisponivelDTO> buscarAgendasDisponiveis(
     @Param("especialidade") String especialidade,

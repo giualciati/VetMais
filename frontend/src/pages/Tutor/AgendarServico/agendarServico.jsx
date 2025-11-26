@@ -11,6 +11,7 @@ function AgendarServico() {
   const [horarios, setHorarios] = useState([]); 
   const [cep, setCep] = useState('');
   const [cidadeFiltro, setCidadeFiltro] = useState('');
+  const [servicos, setServicos] = useState([]);
   
   const [procedimento, setProcedimento] = useState(''); 
   const [selectedPetId, setSelectedPetId] = useState(null);
@@ -22,8 +23,22 @@ function AgendarServico() {
   const idSalvo = localStorage.getItem("idTutor");
   const ID_TUTOR_LOGADO = idSalvo ? JSON.parse(idSalvo) : 1; 
 
-  // Vou mudar aqui ainda
-  const listaProcedimentos = ["Consulta Geral", "Vacinação", "Cirurgia", "Ortopedia", "Dermatologia", "Cardiologia", "Exames"];
+
+  //BUSCAR SERVIÇOS DO BACKEND 
+  useEffect(() => {
+    const buscarServicos = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/servicos'); 
+        if (response.ok) {
+            const data = await response.json();
+            setServicos(data); 
+        }
+      } catch (error) {
+        console.error("Erro ao buscar serviços:", error);
+      }
+    };
+    buscarServicos();
+  }, []);
 
   useEffect(() => {
     const buscarPetsDoTutor = async () => {
@@ -179,8 +194,13 @@ function AgendarServico() {
                 onChange={(e) => setProcedimento(e.target.value)}
               >
                 <option value="">Todos</option>
-                {listaProcedimentos.map(proc => (
-                  <option key={proc} value={proc}>{proc}</option>
+                  {servicos.map(servico => ( 
+                    <option 
+                      key={servico.id_servico}
+                      value={servico.nm_servico} 
+                    >
+                  {servico.nm_servico}
+                </option>
                 ))}
               </select>
             </div>

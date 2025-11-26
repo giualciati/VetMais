@@ -7,10 +7,9 @@ function FichaAgendamento() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // 1. Inicializamos com objeto vazio {} para a tela renderizar na hora
   const [dados, setDados] = useState({});
   const [statusSelecionado, setStatusSelecionado] = useState('');
-  const [loading, setLoading] = useState(true); // Controle de loading separado
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const carregarFicha = async () => {
@@ -19,15 +18,16 @@ function FichaAgendamento() {
         if (response.ok) {
           const data = await response.json();
           setDados(data);
-          setStatusSelecionado(data.statusAgendamento || 'Agendado');
+          setStatusSelecionado(data.statusAgendamento || 'Agendado'); 
         } else {
-          // Se der erro, não faz nada, apenas deixa os campos vazios
-          console.warn('Agendamento não encontrado ou erro na API');
+          const errorText = await response.text();
+          console.warn('Erro ao carregar agendamento:', errorText);
+          alert('Erro ao carregar detalhes. Verifique o console.');
         }
       } catch (error) {
-        console.error('Erro:', error);
+        console.error('Erro de conexão:', error);
       } finally {
-        setLoading(false); // Finaliza o loading independente do resultado
+        setLoading(false);
       }
     };
 
@@ -48,6 +48,7 @@ function FichaAgendamento() {
       return;
     }
 
+    // Lógica para Cancelamento
     if (statusSelecionado === 'Cancelado' && dados?.statusAgendamento !== 'Cancelado') {
       const confirmar = window.confirm(
         'Tem certeza que deseja cancelar este agendamento? O horário será liberado.'
@@ -64,25 +65,48 @@ function FichaAgendamento() {
             alert('Agendamento cancelado com sucesso!');
             navigate('/agenda');
           } else {
-            alert('Erro ao cancelar.');
+            const errorText = await response.text();
+            alert('Erro ao cancelar. Status: ' + errorText);
           }
         } catch (error) {
           console.error('Erro:', error);
         }
       }
-    } else {
-      navigate('/agenda');
+    } 
+    // Outras alterações de status (Atendido, Concluído)
+    else if (statusSelecionado !== dados?.statusAgendamento) {
+        try {
+            const response = await fetch(
+                `http://localhost:8080/agendamentos/${id}/status`,
+                { 
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ statusAgendamento: statusSelecionado })
+                }
+            );
+
+            if (response.ok || response.status === 204) { 
+                alert('Status alterado com sucesso!');
+                setDados(prev => ({...prev, statusAgendamento: statusSelecionado})); 
+                navigate('/agenda'); // <--- NAVEGA APENAS NO SUCESSO
+            } else {
+                const errorText = await response.text();
+                alert('Erro ao alterar status: ' + errorText); // <--- EXIBE O ERRO REAL
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro de conexão ao salvar.');
+        }
     }
   };
 
-  // 2. Tratamento seguro das datas (só formata se existir)
   const formatarData = (dataString) => {
-    if (!dataString) return '';
+    if (!dataString) return '---';
     return new Date(dataString).toLocaleDateString('pt-BR');
   };
 
   const formatarHora = (dataString) => {
-    if (!dataString) return '';
+    if (!dataString) return '---';
     return new Date(dataString).toLocaleTimeString('pt-BR', {
         hour: '2-digit',
         minute: '2-digit',
@@ -105,6 +129,7 @@ function FichaAgendamento() {
         </header>
 
         <div className="ficha-content">
+          {/* Dados do Animal */}
           <div className="row">
             <div className="campo">
               <label>Nome do Animal</label>
@@ -135,6 +160,7 @@ function FichaAgendamento() {
             </div>
           </div>
 
+          {/* Dados do Tutor e Descrição */}
           <div className="row">
             <div className="campo full-width">
               <label>Nome Tutor</label>
@@ -151,6 +177,7 @@ function FichaAgendamento() {
 
           <h2 className="titulo-secao">Dados da Consulta</h2>
 
+          {/* Dados da Consulta */}
           <div className="row">
             <div className="campo">
               <label>Veterinário(a)</label>
@@ -182,7 +209,7 @@ function FichaAgendamento() {
                 value={statusSelecionado}
                 onChange={(e) => setStatusSelecionado(e.target.value)}
                 className={`select-status ${statusSelecionado}`}
-                disabled={dados?.statusAgendamento === 'Concluído' || dados?.statusAgendamento === 'Cancelado' || !dados?.idAgenda}
+                disabled={dados?.statusAgendamento === 'Concluído' || dados?.statusAgendamento === 'Cancelado' || !dados?.idAgendamento}
               >
                 <option value="">Selecione</option>
                 <option value="Agendado">Agendado</option>
@@ -194,7 +221,7 @@ function FichaAgendamento() {
           </div>
 
           <div className="ficha-actions">
-            <button className="btn-salvar" onClick={handleSalvar} disabled={!dados?.idAgenda}>Salvar</button>
+            <button className="btn-salvar" onClick={handleSalvar} disabled={!dados?.idAgendamento}>Salvar</button>
             <button className="btn-voltar" onClick={handleVoltar}>Voltar</button>
           </div>
         </div>

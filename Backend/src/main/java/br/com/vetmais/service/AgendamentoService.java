@@ -23,50 +23,46 @@ public class AgendamentoService {
     @Autowired
     private TutorRepository tutorRepository;
     @Autowired
-    private SituacaoAgendamentoRepository situacaoRepository;
+    private SituacaoAgendamentoRepository situacaoAgendamentoRepository;
+    @Autowired
+    private StatusAgendaRepository statusAgendaRepository;
 
-    @Transactional // Garante que ou salva tudo ou não salva nada
-    public Agendamento criarAgendamento(AgendamentoRequestDTO dados) {
+    @Transactional 
+    public void criarAgendamento(AgendamentoRequestDTO dto) {
+        
+        Agenda agendaSlot = agendaRepository.findById(dto.getIdAgenda())
+                .orElseThrow(() -> new RuntimeException("Horário de agenda não encontrado."));
 
-        Agenda agenda = agendaRepository.findById(dados.getIdAgenda())
-                .orElseThrow(() -> new RuntimeException("Horário não encontrado!"));
-
-        Animal animal = animalRepository.findById(dados.getIdAnimal())
-                .orElseThrow(() -> new RuntimeException("Animal não encontrado!"));
-
-        Tutor tutor = tutorRepository.findById(dados.getIdTutor())
-                .orElseThrow(() -> new RuntimeException("Tutor não encontrado!"));
-
-        if (!"DISPONIVEL".equalsIgnoreCase(agenda.getStatusAgenda().getNm_status())) {
-            throw new RuntimeException("Este horário já foi reservado por outra pessoa!");
+        if (agendaSlot.getStatusAgenda().getId_status_agenda() != 1L) {
+            throw new RuntimeException("Este horário já foi reservado por outra pessoa!"); 
         }
 
-        // Definir a situação do agendagamento 
-        Long idSituacaoInicial = 1L;
+        Tutor tutor = tutorRepository.findById(dto.getIdTutor())
+                .orElseThrow(() -> new RuntimeException("Tutor não encontrado."));
 
-        Situacao_agendamento situacao = situacaoRepository.findById(idSituacaoInicial)
-                .orElseThrow(() -> new RuntimeException("Situação 'Agendado' não encontrada no banco (ID 1)"));
+        Animal pet = animalRepository.findById(dto.getIdAnimal())
+                .orElseThrow(() -> new RuntimeException("Pet não encontrado."));
 
+        StatusAgenda statusAgendado = statusAgendaRepository.findById(2L)
+                .orElseThrow(() -> new RuntimeException("Status Agendado (ID 2) não configurado no banco."));
+            
+        agendaSlot.setStatusAgenda(statusAgendado);
+        agendaRepository.save(agendaSlot); 
+        
         Agendamento novoAgendamento = new Agendamento();
-        novoAgendamento.setAnimal(animal);
+    
         novoAgendamento.setTutor(tutor);
-        novoAgendamento.setSituacao_agendamento(situacao);
-        novoAgendamento.setAgenda(agenda);
+        novoAgendamento.setAnimal(pet);
+        novoAgendamento.setAgenda(agendaSlot); // VÍNCULO ESSENCIAL
+        
 
+        Situacao_agendamento situacaoInicial = situacaoAgendamentoRepository.findById(1L).get();
+        novoAgendamento.setSituacao_agendamento(situacaoInicial);
+        
         agendamentoRepository.save(novoAgendamento);
-
-        //  Atualizando o status da agenda
-        StatusAgenda statusOcupado = new StatusAgenda();
-        statusOcupado.setId_status_agenda(2L);
-        agenda.setStatusAgenda(statusOcupado);
-
-        // Vincula o agendamento criado à agenda 
-        agendaRepository.save(agenda);
-
-        return novoAgendamento;
     }
 
-    // Novo método para listar todos os agendamentos com detalhes completos
+    
     public List<AgendamentoDetalhesDTO> listarTodosDetalhes() {
         return agendamentoRepository.findAll().stream()
                 .map(this::convertToDetalhesDTO)
@@ -75,52 +71,32 @@ public class AgendamentoService {
 
     // Método para alterar status
     @Transactional
-    public void alterarStatus(Long idAgendamento, String novoStatus) {
-        Agendamento agendamento = agendamentoRepository.findById(idAgendamento)
-                .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
+public void alterarStatus(Long idAgendamento, String novoStatus) {
+    Agendamento agendamento = agendamentoRepository.findById(idAgendamento)
+            .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
 
-        Situacao_agendamento situacao = situacaoRepository.findAll().stream()
-                .filter(s -> s.getNm_situacao().equalsIgnoreCase(novoStatus))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Situação '" + novoStatus + "' não encontrada"));
+    Long idSituacao = switch (novoStatus.toUpperCase()) {
+        case "AGENDADO" -> 2L; 
+        case "ATENDIDO" -> 4L; 
+        case "CONCLUÍDO" -> 3L; 
+        case "CANCELADO" -> 5L; 
+        default -> throw new RuntimeException("Status '" + novoStatus + "' inválido para alteração.");
+    };
 
-        agendamento.setSituacao_agendamento(situacao);
-        agendamentoRepository.save(agendamento);
-    }
+    Situacao_agendamento situacao = situacaoAgendamentoRepository.findById(idSituacao)
+        .orElseThrow(() -> new RuntimeException("Situação não configurada no banco (ID " + idSituacao + ")."));
+
+    agendamento.setSituacao_agendamento(situacao);
+    agendamentoRepository.save(agendamento);
+}
 
     public AgendamentoDetalhesDTO buscarDetalhes(Long id) {
         Agendamento agendamento = agendamentoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
 
-        AgendamentoDetalhesDTO dto = new AgendamentoDetalhesDTO();
-
-        dto.setIdAgendamento(agendamento.getId_agendamento());
-        dto.setProtocolo(String.format("%04d", agendamento.getId_agendamento()));
-        dto.setStatusAgendamento(agendamento.getSituacao_agendamento().getNm_situacao());
-
-        // Animal e Tutor
-        dto.setNomeAnimal(agendamento.getAnimal().getNm_animal());
-        dto.setEspecie(agendamento.getAnimal().getEspecie_animal());
-        dto.setRaca(agendamento.getAnimal().getRaca_animal());
-        dto.setSexo(agendamento.getAnimal().getSexo_animal());
-        dto.setDataNascimento(agendamento.getAnimal().getDt_nasc_animal());
-        dto.setRga(agendamento.getAnimal().getRGA_animal());
-        dto.setDescricaoAnimal(agendamento.getAnimal().getDesc_animal());
-        dto.setNomeTutor(agendamento.getTutor().getPessoa().getNm_pessoa());
-
-        Agenda agenda = agendaRepository.buscarPorIdAgendamento(id);
-
-        if (agenda != null) {
-            dto.setNomeVeterinario(agenda.getVeterinario().getPessoa().getNm_pessoa());
-            dto.setNomeHospital(agenda.getHospital().getNm_hospital());
-            dto.setEspecialidade(agenda.getServico().getNm_servico());
-            dto.setDataHora(agenda.getDataHora());
-        }
-
-        return dto;
+        return convertToDetalhesDTO(agendamento);
     }
 
-    // Método auxiliar para converter Agendamento para DTO
     private AgendamentoDetalhesDTO convertToDetalhesDTO(Agendamento agendamento) {
         AgendamentoDetalhesDTO dto = new AgendamentoDetalhesDTO();
 
@@ -138,12 +114,13 @@ public class AgendamentoService {
         dto.setDescricaoAnimal(agendamento.getAnimal().getDesc_animal());
         dto.setNomeTutor(agendamento.getTutor().getPessoa().getNm_pessoa());
 
-        // Agenda
-        if (agendamento.getAgenda() != null) {
-            dto.setNomeVeterinario(agendamento.getAgenda().getVeterinario().getPessoa().getNm_pessoa());
-            dto.setNomeHospital(agendamento.getAgenda().getHospital().getNm_hospital());
-            dto.setEspecialidade(agendamento.getAgenda().getServico().getNm_servico());
-            dto.setDataHora(agendamento.getAgenda().getDataHora());
+        // Agenda (Consulta)
+        Agenda agendaSlot = agendamento.getAgenda();
+        if (agendaSlot != null) {
+            dto.setNomeVeterinario(agendaSlot.getVeterinario().getPessoa().getNm_pessoa());
+            dto.setNomeHospital(agendaSlot.getHospital().getNm_hospital());
+            dto.setEspecialidade(agendaSlot.getServico().getNm_servico());
+            dto.setDataHora(agendaSlot.getDataHora());
         }
 
         return dto;
@@ -154,7 +131,7 @@ public class AgendamentoService {
         Agendamento agendamento = agendamentoRepository.findById(idAgendamento)
                 .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
 
-        Situacao_agendamento cancelado = situacaoRepository.findById(3L)
+        Situacao_agendamento cancelado = situacaoAgendamentoRepository.findById(3L)
                 .orElseThrow(() -> new RuntimeException("Status Cancelado não existe"));
         agendamento.setSituacao_agendamento(cancelado);
         agendamentoRepository.save(agendamento);
