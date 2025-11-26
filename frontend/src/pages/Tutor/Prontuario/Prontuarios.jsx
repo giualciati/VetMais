@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Prontuarios.css';
-import { NavLink, useNavigate } from 'react-router-dom';
-import logo from '../../../assets/images/Logo.png';
+import { useNavigate } from 'react-router-dom';
+import Sidebar from "../../../components/SideBar.jsx";
 
 function Prontuarios() {
   const navigate = useNavigate();
@@ -41,25 +41,16 @@ function Prontuarios() {
   const formatarProtocolo = (id) => String(id).padStart(2, '0');
 
   return (
-    <div className="prontuarios-pagina">
+    <div className="prontuariosTutor-pagina">
       
-      <aside className="sidebar-prontuarios">
-        <img src={logo} alt="Vet+ Logo" className="logo" />
-        
-        <nav className="sidebar-nav">
-          <NavLink to="/infoPessoaisTutor">Perfil</NavLink>
-          <NavLink to="/prontuario">Prontuários</NavLink>
-          <NavLink to="/agenda">Agenda</NavLink>
-          <NavLink to="/">Sair</NavLink>
-        </nav>
-      </aside>
+      <Sidebar />
 
-      <main className="main-content-prontuarios">
-        <h1 className="titulo-prontuarios">Prontuários</h1>
+      <main className="main-content-prontuariosTutor">
+        <h1 className="titulo-prontuariosTutor">Prontuários</h1>
         
-        <div className="prontuario-tabela">
+        <div className="prontuarioTutor-tabela">
           
-          <div className="prontuario-header">
+          <div className="prontuarioTutor-header">
             <span>Número de protocolo</span>
             <span>Nome</span>
             <span>Espécie</span>

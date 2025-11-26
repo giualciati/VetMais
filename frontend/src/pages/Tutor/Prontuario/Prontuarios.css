@@ -1,74 +1,33 @@
 /* Layout da Página Inteira */
 .prontuarios-pagina {
   display: flex;
+  width: 100%;
   min-height: 100vh;
   background-color: #F9FAFB;
 }
 
-/* --- Barra Lateral --- */
-.sidebar-prontuarios {
-  flex: 0 0 240px; 
-  background-color: #BBD6F8; 
-  padding: 30px 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-prontuarios .logo{
-  width: 140px;
-  height: auto;
-  margin-bottom: 40px;
-  margin-left: 55px;
-}
-
-.sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.sidebar-nav a {
-  text-decoration: none;
-  color: #555;
-  font-size: 18px;
-  padding: 10px 15px;
-  border-radius: 8px;
-  transition: background-color 0.2s;
-}
-
-.sidebar-nav a:hover {
-  background-color: #DDE8F3;
-}
-
-/* Estilo do link ativo */
-.sidebar-nav a.active {
-  font-weight: bold;
-  color: #333;
-
-}
-
-
 /* --- Conteúdo Principal --- */
-.main-content-prontuarios {
-  flex: 1; 
-  padding: 40px 60px;
+.main-content-prontuariosTutor {
+  margin-left: 240px;
+  flex: 1;
+  padding: 40px 70px;
 }
 
-.titulo-prontuarios {
+.titulo-prontuariosTutor {
   color: #F89B31;
   font-size: 32px;
   margin-bottom: 30px;
 }
 
 /* --- Tabela --- */
-.prontuario-tabela {
+.prontuarioTutor-tabela {
   width: 100%;
   border-collapse: collapse; 
 }
 
-.prontuario-header {
+.prontuarioTutor-header {
   display: grid;
-  grid-template-columns: 1.5fr 2fr 1fr 1fr 1fr;
+  grid-template-columns: 1.2fr 1fr 0.8fr 1.5fr !important;
   align-items: center;
   gap: 15px;
   background-color: #4A90E2;
