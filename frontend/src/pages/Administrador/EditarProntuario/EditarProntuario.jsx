@@ -27,10 +27,10 @@ export default function EditaProntuario() {
 
             <div className="inputs-bloco-1">
               <label className="label-prontuario" htmlFor="nomeAnimal">Nome do Animal:</label>
-              <input className="input-prontuario" type="text" id="nomeAnimal" required />
+              <select className="input-prontuario" type="text" id="nomeAnimal" required />
 
               <label className="label-prontuario" htmlFor="nomeTutor">Nome do Tutor:</label>
-              <input className="input-prontuario" type="text" id="nomeTutor" required />
+              <select className="input-prontuario" type="text" id="nomeTutor" required />
             </div>
           </div>
 
@@ -38,7 +38,7 @@ export default function EditaProntuario() {
             
             <div className="inputs-bloco-2">
               <label className="label-prontuario" htmlFor="nomeEspecie">Espécie:</label>
-              <input className="input-prontuario" type="text" id="nomeEspecie" required />
+              <select className="input-prontuario" type="text" id="nomeEspecie" required />
 
               <label className="label-prontuario" htmlFor="nascimento">Data de Nascimento:</label>
               <input className="input-prontuario" type="date" id="nascimento" required />
@@ -46,10 +46,10 @@ export default function EditaProntuario() {
 
             <div className="inputs-bloco-2">
               <label className="label-prontuario" htmlFor="raca">Raça:</label>
-              <input className="input-prontuario" type="text" id="raca" required />
+              <select className="input-prontuario" type="text" id="raca" required />
 
               <label className="label-prontuario" htmlFor="sexo">Sexo:</label>
-              <input className="input-prontuario" type="text" id="sexo" required />
+              <select className="input-prontuario" type="text" id="sexo" required />
             </div>
 
           </div>
