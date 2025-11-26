@@ -131,7 +131,7 @@ export default function CadastroTutor() {
                 Cadastrar
               </button>
 
-              <a className="cadastro-link" href="#">
+              <a className="cadastro-link" href="/cadastroColaborador">
                 Seja nosso colaborador
               </a>
             </div>

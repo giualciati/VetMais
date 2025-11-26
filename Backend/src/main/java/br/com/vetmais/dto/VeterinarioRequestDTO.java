@@ -1,13 +1,26 @@
+// src/main/java/br/com/vetmais/dto/VeterinarioRequestDTO.java
+
 package br.com.vetmais.dto;
 
-public record VeterinarioRequestDTO (
+import lombok.Data;
+import java.util.Date;
+
+@Data
+public class VeterinarioRequestDTO {
     
-    String crm_veterinario,
+    private Long id_pessoa; 
+    
+    private String nome;
+    private String telefone;
+    private Date dataNascimento; 
+    private String email;
+    private String rg;
+    private String senha;
+    private String cpf;
 
-    String especialidade_vet,
+    private String especialidade; 
+    private String crm; 
+    
+    private Long hospitalId; 
 
-    Long id_pessoa,
-
-    Long id_hospital
-
-){}
+}
