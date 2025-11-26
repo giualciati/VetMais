@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './InfoPessoais.css'; 
-import logoImg from '../../../assets/Logo.png'; // Ajuste o caminho do logo
+import logoImg from '../../../assets/images/Logo.png'; // Ajuste o caminho do logo
 
 const InfoPessoais = () => {
   const navigate = useNavigate();

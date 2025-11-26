@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { listarProntuarios } from "../services/prontuarioService";
 import "../styles/ListaProntuarios.css";
-import editar from "../assets/pencil 1.png";
+import editar from "../assets/images/pencil 1.png";
 
 export default function ListaProntuarios() {
   const [prontuarios, setProntuarios] = useState([]);

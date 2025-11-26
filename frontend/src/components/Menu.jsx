@@ -1,4 +1,4 @@
-import logo from "../assets/Logo.png";
+import logo from "../assets/images/Logo.png";
 import { Link } from "react-router-dom";
 
 export default function Menu() {

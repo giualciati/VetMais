@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './EdtInfoPessoais.css'; 
-import logoImg from '../../../assets/Logo.png';
+import logoImg from '../../../assets/images/Logo.png';
 
 const EdtInfoPessoais = () => {
   const navigate = useNavigate();

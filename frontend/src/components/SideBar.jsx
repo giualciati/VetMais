@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../styles/SideBar.css";
-import logo from "../assets/Logo.png";
+import logo from "../assets/images/Logo.png";
 
 export default function Sidebar() {
   const location = useLocation();

@@ -56,7 +56,7 @@ function AppContent() {
         <Route path="/novo-agendamento" element={<AgendarServico />} />
         <Route path="/horarios" element={<Horarios />} />
         <Route path="/controlDispo" element={<ControlDispo />} />
-        <Route path="/fichaagendamento/:id" element={<FichaAgendamento />} />
+        <Route path="/fichaagendamento" element={<FichaAgendamento />} />
         <Route path="/prontuarioDetalhes/:id" element={<ProntuarioDetalhes />} />
         
         {/* Administrador */}
