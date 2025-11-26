@@ -1,6 +1,9 @@
 package br.com.vetmais.dto;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
@@ -10,7 +13,8 @@ import lombok.Data;
 @Data
 public class ProntuarioRequestDTO {
 
-    private Date dtAtendimento;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime dtAtendimento;
     private String dsSintomas;
     private String dsDiagnostico;
     private String dsTratamento;

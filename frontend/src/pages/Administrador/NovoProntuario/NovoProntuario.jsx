@@ -51,14 +51,16 @@ export default function NovoProntuario() {
     }
 
     const payload = {
-      dt_atendimento: formData.dt_atendimento, // mantemos o valor sem conversão
-      ds_sintomas: formData.ds_sintomas,
-      ds_diagnostico: formData.ds_diagnostico,
-      ds_tratamento: formData.ds_tratamento,
-      ds_observacoes: formData.ds_observacoes,
-      veterinario: { id_veterinario: parseInt(formData.veterinarioId) },
-      hospital: { id_hospvet: parseInt(formData.hospitalId) },
-      animal: { id_animal: parseInt(formData.animalId) },
+      dtAtendimento: formData.dt_atendimento, 
+      dsSintomas: formData.ds_sintomas, 
+      dsDiagnostico: formData.ds_diagnostico,
+      dsTratamento: formData.ds_tratamento,
+      dsObservacoes: formData.ds_observacoes,
+
+    
+      veterinarioId: parseInt(formData.veterinarioId),
+      hospitalId: parseInt(formData.hospitalId),
+      animalId: parseInt(formData.animalId)
     };
 
     try {

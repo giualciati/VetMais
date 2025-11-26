@@ -1,6 +1,9 @@
 package br.com.vetmais.service;
 
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import br.com.vetmais.repository.AnimalRepository;
 import br.com.vetmais.repository.HospitalRepository;
 import br.com.vetmais.repository.ProntuarioRepository;
 import br.com.vetmais.repository.VeterinarioRepository;
+import jakarta.transaction.Transactional;
 
 
 
@@ -33,7 +37,10 @@ public class ProntuarioService {
     @Autowired
     private AnimalRepository animalRepository;
 
-    public Prontuario cadastrarProntuario(ProntuarioRequestDTO dto) {
+        @Transactional 
+        public Prontuario cadastrarProntuario(ProntuarioRequestDTO dto) {
+        
+        // 1. Busca das Entidades (FKs)
         Veterinario vet = veterinarioRepository.findById(dto.getVeterinarioId())
                 .orElseThrow(() -> new RuntimeException("Veterinário não encontrado"));
 
@@ -43,23 +50,35 @@ public class ProntuarioService {
         Animal animal = animalRepository.findById(dto.getAnimalId())
                 .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
 
+        
+        Instant instant = dto.getDtAtendimento()
+                             .atZone(ZoneId.systemDefault())
+                             .toInstant();
+        Date dtAtendimentoConvertida = Date.from(instant);
+
+
+        // 3. Mapeamento e Salvamento
         Prontuario prontuario = new Prontuario();
-        prontuario.setDt_atendimento(dto.getDtAtendimento());
+        prontuario.setDt_atendimento(dtAtendimentoConvertida);
+        
         prontuario.setDs_sintomas(dto.getDsSintomas());
         prontuario.setDs_diagnostico(dto.getDsDiagnostico());
         prontuario.setDs_tratamento(dto.getDsTratamento());
         prontuario.setDs_observacoes(dto.getDsObservacoes());
+        
+        // Vínculos FKs
         prontuario.setVeterinario(vet);
         prontuario.setHospital(hosp);
         prontuario.setAnimal(animal);
 
         return prontuarioRepository.save(prontuario);
     }
+
     public List<Prontuario> getAllProntuarios() {
     return prontuarioRepository.findAll();
-}
+        }
 
-public Prontuario updateProntuario(Long id, Prontuario p) {
+        public Prontuario updateProntuario(Long id, Prontuario p) {
 
         Prontuario original = prontuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Prontuário não encontrado"));
