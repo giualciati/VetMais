@@ -110,7 +110,7 @@ public void alterarStatus(Long idAgendamento, String novoStatus) {
         dto.setRaca(agendamento.getAnimal().getRaca_animal());
         dto.setSexo(agendamento.getAnimal().getSexo_animal());
         dto.setDataNascimento(agendamento.getAnimal().getDt_nasc_animal());
-        dto.setRga(agendamento.getAnimal().getRGA_animal());
+        dto.setRga(agendamento.getAnimal().getRga_animal());
         dto.setDescricaoAnimal(agendamento.getAnimal().getDesc_animal());
         dto.setNomeTutor(agendamento.getTutor().getPessoa().getNm_pessoa());
 

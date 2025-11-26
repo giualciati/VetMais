@@ -36,7 +36,7 @@ export default function EditarPet() {
           setPet({
             nome: dados.nm_animal,          
             dataNascimento: dataFormatada,   
-            rga: dados.RGA_animal || "",      
+            rga: dados.rga_animal || "",      
             raca: dados.raca_animal,          
             especie: dados.especie_animal,    
             genero: dados.sexo_animal          
@@ -63,7 +63,7 @@ export default function EditarPet() {
     const petParaSalvar = {
       nm_animal: pet.nome,
       dt_nasc_animal: pet.dataNascimento,
-      RGA_animal: pet.rga,
+      rga_animal: pet.rga,
       raca_animal: pet.raca,
       especie_animal: pet.especie,
       sexo_animal: pet.genero

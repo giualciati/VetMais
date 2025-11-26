@@ -21,7 +21,7 @@ export default function Sidebar() {
         </Link>
 
         <Link
-          to="/meus-pets"
+          to="/MyPets"
           className={location.pathname.includes("/MyPets") ? "active" : ""}
         >
           Meus Pets

@@ -70,7 +70,7 @@ public class ProntuariosController {
                     dto.setDataNascimento(prontuario.getAnimal().getDt_nasc_animal());
                     dto.setEspecie(prontuario.getAnimal().getEspecie_animal());
                     dto.setRaca(prontuario.getAnimal().getRaca_animal());
-                    dto.setRga(prontuario.getAnimal().getRGA_animal());
+                    dto.setRga(prontuario.getAnimal().getRga_animal());
                     dto.setDescricaoAnimal(prontuario.getAnimal().getDesc_animal());
                     
                     

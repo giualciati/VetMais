@@ -40,7 +40,7 @@ public class Animal {
     private Date dt_nasc_animal;
 
     @Column(length = 20)
-    private String RGA_animal;
+    private String rga_animal;
 
     @Column(length = 100)
     private String sexo_animal;

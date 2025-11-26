@@ -61,15 +61,16 @@ function Prontuarios() {
           {loading && <p style={{padding: '20px', textAlign: 'center'}}>Carregando...</p>}
 
           {!loading && listaProntuarios.map(item => (
-            <div className="prontuario-linha" key={item.id_prontuario}>
-              <span><strong>{formatarProtocolo(item.id_prontuario)}</strong></span>
-              <span>{item.nm_animal}</span>
-              <span>{item.especie_animal}</span>
-              <span>{item.sexo_animal}</span>
+            <div className="prontuario-linhaTutor" key={item.idProntuario}>
+              <span><strong>{formatarProtocolo(item.idProntuario)}</strong></span>
+      
+                <span>{item.nomeAnimal || '---'}</span>
+                <span>{item.especie || '---'}</span>
+                <span>{item.sexo || '---'}</span>
               
               <span 
                 className="ver-mais-btn"
-                onClick={() => navigate(`/prontuarios/detalhes/${item.id_prontuario}`)} 
+                onClick={() => navigate(`/prontuarioDetalhes/${item.idProntuario}`)} 
                 style={{ cursor: 'pointer' }} 
               >
                 Ver mais

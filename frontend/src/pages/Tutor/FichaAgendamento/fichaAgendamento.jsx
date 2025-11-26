@@ -88,10 +88,10 @@ function FichaAgendamento() {
             if (response.ok || response.status === 204) { 
                 alert('Status alterado com sucesso!');
                 setDados(prev => ({...prev, statusAgendamento: statusSelecionado})); 
-                navigate('/agenda'); // <--- NAVEGA APENAS NO SUCESSO
+                navigate('/agenda'); 
             } else {
                 const errorText = await response.text();
-                alert('Erro ao alterar status: ' + errorText); // <--- EXIBE O ERRO REAL
+                alert('Erro ao alterar status: ' + errorText);
             }
         } catch (error) {
             console.error('Erro:', error);
