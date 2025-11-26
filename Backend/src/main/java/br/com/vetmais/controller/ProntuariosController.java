@@ -10,6 +10,7 @@ import br.com.vetmais.model.Prontuario;
 import br.com.vetmais.service.ProntuarioService;
 import br.com.vetmais.repository.ProntuarioRepository; // <--- Faltava este import
 import br.com.vetmais.dto.ProntuarioDetalhesDTO; // <--- Faltava este import
+import br.com.vetmais.dto.ProntuarioRequestDTO;
 import br.com.vetmais.dto.ProntuarioResumoDTO;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -23,15 +24,25 @@ public class ProntuariosController {
     @Autowired
     private ProntuarioRepository prontuarioRepository; // <--- Faltava injetar isso
 
+
+
+
+    @PostMapping("/cadastro")
+    public ResponseEntity<?> cadastrar(@RequestBody ProntuarioRequestDTO dto) {
+        try {
+            Prontuario p = prontuarioService.cadastrarProntuario(dto);
+            return ResponseEntity.ok(p);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping
     public List<Prontuario> findAll(){
         return prontuarioService.getAllProntuarios();
     }
 
-    @PostMapping
-    public Prontuario createProntuario(@RequestBody Prontuario prontuario){
-        return prontuarioService.createProntuario(prontuario);
-    }
+   
 
     @PutMapping("/{id}")
     public Prontuario update(@PathVariable Long id, @RequestBody Prontuario prontuario) {

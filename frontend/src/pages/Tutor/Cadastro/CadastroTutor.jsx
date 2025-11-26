@@ -1,4 +1,5 @@
 import "./cadastroTutor.scss";
+import cao from '../../../assets/images/cao-cadastro.jpg'
 import { useState } from "react";
 import axios from "axios";
 
@@ -50,7 +51,7 @@ export default function CadastroTutor() {
         <div className="cadastro-img-container">
           <img
             className="cadastro-img-cao"
-            src="/images/cao-cadastro.jpg"
+            src={cao}
             alt="cao"
           />
         </div>

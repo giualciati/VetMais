@@ -46,6 +46,11 @@ public class AnimalController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping
+    public List<AnimalDTO> listarTodosAnimais() {
+        return animalService.listarTodosAnimais(); // já mapeia para AnimalDTO
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Animal> atualizar(@PathVariable Long id, @RequestBody Animal animalAtualizado) {
         return animalRepository.findById(id)

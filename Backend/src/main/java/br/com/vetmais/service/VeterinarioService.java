@@ -30,31 +30,37 @@ public class VeterinarioService {
     }
 
     @Transactional
-    public void cadastrarVeterinario(VeterinarioRequestDTO dto) {
+    public Veterinario cadastrarVeterinario(VeterinarioRequestDTO dto) {
 
-        Pessoa novaPessoa = new Pessoa();
-        
-        novaPessoa.setNm_pessoa(dto.getNome());
-        novaPessoa.setTel_pessoa(dto.getTelefone());
-        novaPessoa.setDt_nasc_pessoa(dto.getDataNascimento());
-        novaPessoa.setEmail_pessoa(dto.getEmail());
-        novaPessoa.setRg_pessoa(dto.getRg());
-        novaPessoa.setSenha_pessoa(dto.getSenha());
-        novaPessoa.setCpf_pessoa(dto.getCpf());
-        
-        Pessoa pessoaSalva = pessoaRepository.save(novaPessoa); 
-        Hospital hospital = hospitalRepository.findById(dto.getHospitalId())
-                .orElseThrow(() -> new RuntimeException("Hospital não encontrado com ID: " + dto.getHospitalId()));
-
-        Veterinario novoVeterinario = new Veterinario();
-        novoVeterinario.setCrm_veterinario(dto.getCrm());
-        novoVeterinario.setEspecialidade_vet(dto.getEspecialidade());
-       
-        novoVeterinario.setPessoa(pessoaSalva); 
-        novoVeterinario.setHospital(hospital); 
-        
-        veterinarioRepository.save(novoVeterinario);
+    if (dto.getHospitalId() == null) {
+        throw new RuntimeException("O ID do hospital é obrigatório.");
     }
+
+    Hospital hospital = hospitalRepository.findById(dto.getHospitalId())
+            .orElseThrow(() -> new RuntimeException("Hospital não encontrado"));
+
+    // Monta a Pessoa
+    Pessoa pessoa = new Pessoa();
+pessoa.setNm_pessoa(dto.getNome());
+pessoa.setTel_pessoa(dto.getTelefone());
+pessoa.setDt_nasc_pessoa(dto.getDataNascimento());
+pessoa.setEmail_pessoa(dto.getEmail());
+pessoa.setRg_pessoa(dto.getRg());
+pessoa.setCpf_pessoa(dto.getCpf());
+pessoa.setSenha_pessoa(dto.getSenha());
+
+pessoaRepository.save(pessoa);
+
+
+    Veterinario veterinario = new Veterinario();
+veterinario.setEspecialidade_vet(dto.getEspecialidade());
+veterinario.setCrm_veterinario(dto.getCrm());
+veterinario.setPessoa(pessoa);
+veterinario.setHospital(hospital);
+
+return veterinarioRepository.save(veterinario);
+
+}
 
     public Veterinario updateVeterinario(Long id, Veterinario novo){
     return veterinarioRepository.findById(id)

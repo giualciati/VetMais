@@ -69,7 +69,7 @@ function AppContent() {
         <Route path="/cadastroColaborador" element={<CadastroColaborador />} />
         <Route path="/prontuarios/vet" element={<Prontuarios />} />
         <Route path="/novoProntuario" element={<NovoProntuario />} />
-        <Route path="/editarProntuario" element={<EditarProntuario />} />
+        <Route path="/editarProntuario/:id" element={<EditarProntuario />} />
       </Routes>
 
       {showNavAndFooter && <Footer />}

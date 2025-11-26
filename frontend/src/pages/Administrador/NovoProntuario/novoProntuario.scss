@@ -182,10 +182,15 @@
 
 .botoes-container {
     display: flex;
-    gap: 1em;
+    align-items: center;
+    text-align: center;
 }
 
 .btn-salvar {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
     background-color: #63A1F0;
     color: #fff;
     border: none;

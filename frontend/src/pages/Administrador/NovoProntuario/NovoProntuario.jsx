@@ -1,59 +1,82 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./novoProntuario.scss";
+import axios from "axios";
 import garfield from "../../../assets/images/Garfield.png";
 import tutor from "../../../assets/images/tutor_Garfield.png";
-import axios from "axios";
 
 export default function NovoProntuario() {
-
   const [formData, setFormData] = useState({
-    nomeAnimal: "",
-    nomeTutor: "",
-    nomeEspecie: "",
-    nascimento: "",
-    raca: "",
-    sexo: "",
-    descricaoAnimal: "",
-    sintomasAnimal: "",
-    diagnostico: "",
-    tratamento: "",
-    observacoes: "",
-    dataAtendimento: "",
-    horaAtendimento: "",
+    animalId: "",
+    veterinarioId: "",
+    hospitalId: "",
+    dt_atendimento: "",
+    ds_sintomas: "",
+    ds_diagnostico: "",
+    ds_tratamento: "",
+    ds_observacoes: "",
   });
 
+  const [animais, setAnimais] = useState([]);
+  const [veterinarios, setVeterinarios] = useState([]);
+  const [hospitais, setHospitais] = useState([]);
+
+  useEffect(() => {
+    // Buscar todos os animais
+    axios.get("http://localhost:8080/animais")
+      .then(res => setAnimais(res.data))
+      .catch(err => console.error("Erro ao buscar animais:", err));
+
+    // Buscar todos os veterinários
+    axios.get("http://localhost:8080/veterinarios")
+      .then(res => setVeterinarios(res.data))
+      .catch(err => console.error("Erro ao buscar veterinários:", err));
+
+    // Buscar todos os hospitais
+    axios.get("http://localhost:8080/hospital/findAll")
+      .then(res => setHospitais(res.data))
+      .catch(err => console.error("Erro ao buscar hospitais:", err));
+  }, []);
+
   function handleChange(e) {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    // 🚨 Se faltar data ou hora, não envia
-    if (!formData.dataAtendimento || !formData.horaAtendimento) {
-      alert("Informe a data e horário do atendimento");
+    // Validação simples
+    if (!formData.dt_atendimento || !formData.animalId || !formData.veterinarioId || !formData.hospitalId) {
+      alert("Preencha todos os campos obrigatórios.");
       return;
     }
 
-    const dataCompleta = `${formData.dataAtendimento}T${formData.horaAtendimento}:00`;
-
     const payload = {
-      dt_atendimento: dataCompleta,
-      ds_sintomas: formData.sintomasAnimal,
-      ds_diagnostico: formData.diagnostico,
-      ds_tratamento: formData.tratamento,
-      ds_observacoes: formData.observacoes,
-
-      veterinario: { id_veterinario: 1 },
-      hospital: { id_hospvet: 1 },
-      animal: { id_animal: 3 }
+      dt_atendimento: formData.dt_atendimento, // mantemos o valor sem conversão
+      ds_sintomas: formData.ds_sintomas,
+      ds_diagnostico: formData.ds_diagnostico,
+      ds_tratamento: formData.ds_tratamento,
+      ds_observacoes: formData.ds_observacoes,
+      veterinario: { id_veterinario: parseInt(formData.veterinarioId) },
+      hospital: { id_hospvet: parseInt(formData.hospitalId) },
+      animal: { id_animal: parseInt(formData.animalId) },
     };
 
     try {
-      await axios.post("http://localhost:8080/prontuarios", payload);
+      await axios.post("http://localhost:8080/prontuarios/cadastro", payload);
       alert("Prontuário criado com sucesso!");
+      // Limpar formulário
+      setFormData({
+        animalId: "",
+        veterinarioId: "",
+        hospitalId: "",
+        dt_atendimento: "",
+        ds_sintomas: "",
+        ds_diagnostico: "",
+        ds_tratamento: "",
+        ds_observacoes: "",
+      });
     } catch (error) {
-      console.error(error);
+      console.error("Erro ao salvar prontuário:", error);
       alert("Erro ao salvar prontuário.");
     }
   }
@@ -65,94 +88,75 @@ export default function NovoProntuario() {
       </div>
 
       <form className="prontuario-forms-container" onSubmit={handleSubmit}>
-
-        {/* Coluna ESQUERDA */}
+        {/* FORM ESQUERDO */}
         <div className="form-esquerdo">
-
           <div className="input-garfield-container">
             <div className="imagem-garfield-container">
               <img className="garfield-imagem" src={garfield} alt="Garfield" />
             </div>
 
             <div className="inputs-bloco-1">
-              <label htmlFor="nomeAnimal" className="label-prontuario">Nome do Animal:</label>
-              <input id="nomeAnimal" className="input-prontuario" type="text" required onChange={handleChange} />
+              <label className="label-prontuario">Animal:</label>
+              <select name="animalId" value={formData.animalId} onChange={handleChange} required>
+                <option value="">Selecione um animal</option>
+                {animais.map(animal => (
+                  <option key={animal.id} value={animal.id}>
+                    {animal.nome}
+                  </option>
+                ))}
+              </select>
 
-              <label htmlFor="nomeTutor" className="label-prontuario">Nome do Tutor:</label>
-              <input id="nomeTutor" className="input-prontuario" type="text" required onChange={handleChange} />
-            </div>
-          </div>
+              <label className="label-prontuario">Veterinário:</label>
+              <select name="veterinarioId" value={formData.veterinarioId} onChange={handleChange} required>
+                <option value="">Selecione um veterinário</option>
+                {veterinarios.map(v => (
+                  <option key={v.id_veterinario} value={v.id_veterinario}>
+                    {v.pessoa.nm_pessoa} - {v.especialidade_vet}
+                  </option>
+                ))}
+              </select>
 
-          <div className="card-inputs-container">
-            <div className="inputs-bloco-2">
-              <label htmlFor="nomeEspecie" className="label-prontuario">Espécie:</label>
-              <input id="nomeEspecie" className="input-prontuario" type="text" required onChange={handleChange} />
-
-              <label htmlFor="nascimento" className="label-prontuario">Data de Nascimento:</label>
-              <input id="nascimento" className="input-prontuario" type="date" required onChange={handleChange} />
-            </div>
-
-            <div className="inputs-bloco-2">
-              <label htmlFor="raca" className="label-prontuario">Raça:</label>
-              <input id="raca" className="input-prontuario" type="text" required onChange={handleChange} />
-
-              <label htmlFor="sexo" className="label-prontuario">Sexo:</label>
-              <input id="sexo" className="input-prontuario" type="text" required onChange={handleChange} />
+              <label className="label-prontuario">Hospital:</label>
+              <select name="hospitalId" value={formData.hospitalId} onChange={handleChange} required>
+                <option value="">Selecione um hospital</option>
+                {hospitais.map(h => (
+                  <option key={h.id_hospvet} value={h.id_hospvet}>
+                    {h.nm_hospital} - {h.cidade_hospital}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 
           <div className="textarea-container">
-            <label htmlFor="descricaoAnimal" className="label-prontuario">Descrição do Animal:</label>
-            <textarea id="descricaoAnimal" className="textarea-prontuario" required onChange={handleChange} />
+            <label className="label-prontuario">Sintomas:</label>
+            <textarea name="ds_sintomas" value={formData.ds_sintomas} onChange={handleChange} required />
 
-            <label htmlFor="sintomasAnimal" className="label-prontuario">Sintomas:</label>
-            <textarea id="sintomasAnimal" className="textarea-prontuario" required onChange={handleChange} />
-          </div>
+            <label className="label-prontuario">Diagnóstico:</label>
+            <textarea name="ds_diagnostico" value={formData.ds_diagnostico} onChange={handleChange} required />
 
-        </div>
+            <label className="label-prontuario">Tratamento:</label>
+            <textarea name="ds_tratamento" value={formData.ds_tratamento} onChange={handleChange} required />
 
-        {/* Coluna DIREITA */}
-        <div className="form-direito">
-
-          <div className="input-garfield-container">
-            <div className="imagem-garfield-container">
-              <img className="tutor-garfield-imagem" src={tutor} alt="Tutor Garfield" />
-            </div>
-
-            <div className="textarea-bloco-1">
-              <label htmlFor="diagnostico" className="label-prontuario">Diagnóstico:</label>
-              <textarea id="diagnostico" className="textarea-prontuario" required onChange={handleChange} />
-            </div>
-          </div>
-
-          <div className="textarea-container-2">
-            <div className="textarea-bloco-2">
-              <label htmlFor="tratamento" className="label-prontuario">Tratamento:</label>
-              <textarea id="tratamento" className="textarea-prontuario" required onChange={handleChange} />
-
-              <label htmlFor="observacoes" className="label-prontuario">Observações médicas:</label>
-              <textarea id="observacoes" className="textarea-prontuario" required onChange={handleChange} />
-            </div>
+            <label className="label-prontuario">Observações:</label>
+            <textarea name="ds_observacoes" value={formData.ds_observacoes} onChange={handleChange} />
           </div>
 
           <div className="inputs-final-container">
-            <div className="formato-bloco">
-              <label htmlFor="dataAtendimento" className="label-prontuario">Data do Atendimento:</label>
-              <input id="dataAtendimento" className="input-prontuario" type="date" required onChange={handleChange} />
-            </div>
-
-            <div className="formato-bloco">
-              <label htmlFor="horaAtendimento" className="label-prontuario">Horário:</label>
-              <input id="horaAtendimento" className="input-prontuario" type="time" required onChange={handleChange} />
-            </div>
-
-            <div className="botoes-container">
-              <button type="submit" className="btn-salvar">Salvar</button>
-            </div>
+            <label className="label-prontuario">Data e Hora do Atendimento:</label>
+            <input
+              type="datetime-local"
+              name="dt_atendimento"
+              value={formData.dt_atendimento}
+              onChange={handleChange}
+              required
+            />
           </div>
 
+          <div className="botoes-container">
+            <button type="submit" className="btn-salvar">Salvar</button>
+          </div>
         </div>
-
       </form>
     </section>
   );

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { listarProntuarios } from "../services/prontuarioService";
 import "../styles/ListaProntuarios.css";
 import editar from "../assets/images/pencil 1.png";
+import { Link } from "react-router-dom";
 
 export default function ListaProntuarios() {
   const [prontuarios, setProntuarios] = useState([]);
@@ -38,8 +39,9 @@ export default function ListaProntuarios() {
           <p className="coluna-prontuario">{formatarSomenteData(p.dt_atendimento)}</p>
 
           <div className="area-acoes">
-            <img className="icone-editar" src={editar} alt="Editar" />
-            <p className="texto-ver-mais">Ver mais</p>
+            <Link to="/editarProntuario/:id" >
+                <img className="icone-editar" src={editar} alt="Editar" />
+            </Link>
           </div>
         </div>
       ))}
