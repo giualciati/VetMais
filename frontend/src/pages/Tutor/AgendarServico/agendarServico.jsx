@@ -88,9 +88,14 @@ function AgendarServico() {
     }
   };
 
-  const horariosFiltrados = cidadeFiltro
+  // Tenta filtrar por cidade, mas se não achar, mostra tudo
+  const horariosNaCidade = cidadeFiltro
     ? horarios.filter(h => h.cidade && h.cidade.toLowerCase().includes(cidadeFiltro.toLowerCase()))
     : horarios;
+
+
+  const usarListaCompleta = cidadeFiltro && horariosNaCidade.length === 0;
+  const listaParaExibir = usarListaCompleta ? horarios : horariosNaCidade;
 
   const formatarData = (dataString) => {
     const dataObj = new Date(dataString);
@@ -100,7 +105,6 @@ function AgendarServico() {
     };
   };
 
-  // --- FUNÇÃO DE SALVAR (ATUALIZADA) ---
   const handleAgendar = async (e) => {
     e.preventDefault();
 
@@ -183,7 +187,6 @@ function AgendarServico() {
                 onChange={(e) => setCep(e.target.value)}
                 onBlur={(e) => buscarCep(e.target.value)}
                 placeholder="Ex: 01310-100"
-                disabled={semHorarios}
               />
             </div>
           </div>
@@ -195,33 +198,46 @@ function AgendarServico() {
           )}
 
           <h2 className="secao-titulo">Selecione o PET:</h2>
-          <div className={`pet-list ${semHorarios ? 'container-desativado' : ''}`}>
+          <div className="pet-list">
             {pets.length > 0 ? (
-                pets.map(pet => (
-                <div 
-                    key={pet.id}
-                    className={`pet-card ${pet.id === selectedPetId ? 'selected' : ''}`}
-                    onClick={() => !semHorarios && setSelectedPetId(pet.id)}
-                >
-                    <h3>🐶 {pet.nome}</h3>
-                    <p>{pet.especie} - {pet.raca}</p>
-                </div>
-                ))
+                pets.map(pet => {
+                  const idRealPet = pet.id || pet.id_animal;
+                  const nomeRealPet = pet.nome || pet.nm_animal;
+                  const especieReal = pet.especie || pet.especie_animal;
+                  const racaReal = pet.raca || pet.raca_animal;
+
+                  return (
+                    <div 
+                        key={idRealPet}
+                        className={`pet-card ${idRealPet === selectedPetId ? 'selected' : ''}`}
+                        onClick={() => setSelectedPetId(idRealPet)}
+                    >
+                        <h3>🐶 {nomeRealPet}</h3>
+                        <p>{especieReal} - {racaReal}</p>
+                    </div>
+                  );
+                })
             ) : (
                 <p>Nenhum pet encontrado para este tutor.</p>
             )}
           </div>
 
           <h2 className="secao-titulo">
-            {cidadeFiltro 
+            {cidadeFiltro && !usarListaCompleta
               ? `Horários disponíveis em ${cidadeFiltro}:` 
               : 'Horários disponíveis:'}
           </h2>
 
+          {usarListaCompleta && !semHorarios && (
+            <p className="aviso-cidade-nao-encontrada" style={{color: '#d97706', marginBottom: '10px'}}>
+               ⚠️ Não encontramos horários exatos em <strong>{cidadeFiltro}</strong>. Exibindo todas as opções disponíveis:
+            </p>
+          )}
+
           <div className="horario-list-container">
             <div className="horario-list">
               
-              {horariosFiltrados.map(item => {
+              {listaParaExibir.map(item => {
                 const { data, hora } = formatarData(item.dataHora);
                 return (
                   <div 
@@ -238,8 +254,8 @@ function AgendarServico() {
                 );
               })}
 
-              {horariosFiltrados.length === 0 && !semHorarios && cidadeFiltro && (
-                 <p className="horario-nao-encontrado">Nenhum horário nesta cidade.</p>
+              {listaParaExibir.length === 0 && !semHorarios && (
+                 <p className="horario-nao-encontrado">Nenhum horário disponível no momento.</p>
               )}
 
             </div>
@@ -250,7 +266,7 @@ function AgendarServico() {
             <button type="button" className="btn btn-cancelar-ag" onClick={handleCancelar} >
               Cancelar
             </button>
-            <button type="submit" className="btn btn-agendar-ag" disabled={semHorarios}>
+            <button type="submit" className="btn btn-agendar-ag" disabled={!selectedPetId || !selectedHorarioId}>
               Agendar
             </button>
           </footer>
