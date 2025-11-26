@@ -1,4 +1,5 @@
 package br.com.vetmais.model;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -34,5 +35,8 @@ public class Agendamento {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_situacao", nullable = false)
     private Situacao_agendamento situacao_agendamento;
-}
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_agenda", nullable = true)
+    private Agenda agenda;
+}
