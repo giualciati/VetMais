@@ -1,4 +1,6 @@
-import '../NovoProntuario/novoProntuario.scss';
+import './EditarProntuario.css';
+import garfield from "../../../assets/images/Garfield.png"
+import tutor from "../../../assets/images/tutor_Garfield.png"
 
 
 
@@ -20,7 +22,7 @@ export default function EditaProntuario() {
             <div className="imagem-garfield-container">
               <img
                 className="garfield-imagem"
-                src="/images/Garfield.png"
+                src={garfield}
                 alt="Garfield"
               />
             </div>
@@ -72,7 +74,7 @@ export default function EditaProntuario() {
             <div className="imagem-garfield-container">
               <img
                 className="tutor-garfield-imagem"
-                src="/images/tutor_Garfield.png"
+                src={tutor}
                 alt="Tutor Garfield"
               />
             </div>

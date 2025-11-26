@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./novoProntuario.scss";
+import garfield from "../../../assets/images/Garfield.png";
+import tutor from "../../../assets/images/tutor_Garfield.png";
 import axios from "axios";
 
 export default function NovoProntuario() {
@@ -69,7 +71,7 @@ export default function NovoProntuario() {
 
           <div className="input-garfield-container">
             <div className="imagem-garfield-container">
-              <img className="garfield-imagem" src="/images/Garfield.png" alt="Garfield" />
+              <img className="garfield-imagem" src={garfield} alt="Garfield" />
             </div>
 
             <div className="inputs-bloco-1">
@@ -114,7 +116,7 @@ export default function NovoProntuario() {
 
           <div className="input-garfield-container">
             <div className="imagem-garfield-container">
-              <img className="tutor-garfield-imagem" src="/images/tutor_Garfield.png" alt="Tutor Garfield" />
+              <img className="tutor-garfield-imagem" src={tutor} alt="Tutor Garfield" />
             </div>
 
             <div className="textarea-bloco-1">

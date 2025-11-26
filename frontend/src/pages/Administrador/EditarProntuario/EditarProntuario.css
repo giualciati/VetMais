@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ---------------------- TÍTULO ---------------------- */
+.novo-prontuario-page{
+  display: flex;
+  flex-direction: column;
+ 
+  background-color: #F6963E; /* Laranja */
+  min-height: 100vh;         /* Ocupa a tela inteira */
+  padding-bottom: 2rem;
+  padding-top: 1rem;
+
+}
+.titulo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo-prontuario {
+    background-color: #63A1F0;
+    width: 80%;
+    margin-top: 1em;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    padding: 0.4em 0;
+}
+
+/* ---------------------- CONTÊINER GERAL ---------------------- */
+
+.prontuario-forms-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3em;
+    margin: 2em 0;
+}
+
+/* ---------------------- FORMULÁRIOS ---------------------- */
+
+.form-esquerdo,
+.form-direito {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vh;
+    height: 120vh;
+    background-color: #FFEED9;
+    border-radius: 20px;
+    padding: 1em;
+}
+
+/* ---------------------- GARFIELD E INPUTS ---------------------- */
+
+.input-garfield-container {
+    display: flex;
+    flex-direction: row;
+    margin: 1em;
+}
+
+.imagem-garfield-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.garfield-imagem {
+    width: 130px;
+    height: 128px;
+}
+
+.tutor-garfield-imagem {
+    width: 80px;
+    height: 130px;
+}
+
+/* ---------------------- INPUT BLOCO 1 ---------------------- */
+
+.inputs-bloco-1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.label-prontuario {
+    font-size: 12px;
+    margin: 0.6em 1em 0.2em;
+}
+
+.input-prontuario {
+    margin: 0.5em;
+    height: 25px;
+    width: 260px;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    background: white;
+}
+
+/* ---------------------- CARD INPUT BLOCO 2 ---------------------- */
+
+.card-inputs-container {
+    display: flex;
+    margin-top: 1em;
+}
+
+.inputs-bloco-2 {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.inputs-bloco-2 .label-prontuario {
+    margin: 1em 0.8em 0.5em;
+}
+
+.inputs-bloco-2 .input-prontuario {
+    width: 200px;
+}
+
+/* ---------------------- TEXTAREAS GERAIS ---------------------- */
+
+.textarea-container,
+.textarea-container-2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.textarea-prontuario {
+    margin: 0.5em;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    width: 420px;
+    height: 150px;
+    resize: none;
+}
+
+/* ---------------------- TEXTAREA BLOCO 1 ---------------------- */
+
+.textarea-bloco-1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.textarea-bloco-1 .textarea-prontuario {
+    width: 350px;
+}
+
+/* ---------------------- BLOCO INPUTS FINAIS ---------------------- */
+
+.inputs-final-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin-top: 1em;
+}
+
+.formato-bloco {
+    display: flex;
+    flex-direction: column;
+}
+
+.formato-bloco .label-prontuario {
+    margin: 0.8em 0.5em;
+}
+
+.formato-bloco .input-prontuario {
+    width: 150px;
+    margin-left: 0.5em;
+}
+
+/* ---------------------- BOTÕES ---------------------- */
+
+.botoes-container {
+    display: flex;
+    gap: 1em;
+}
+
+.btn-salvar {
+    background-color: #63A1F0;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    width: 100px;
+    padding: 8px 35px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-top: 1em;
+}
