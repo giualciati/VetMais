@@ -1,17 +1,20 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/pets";
+// Mudamos a rota para bater no SEU AnimalController
+const API_URL = "http://localhost:8080/animais";
 
-export function listarPets() {
-  return axios.get(API_URL);
+// Busca animais vinculados ao tutor logado
+export function listarPets(idTutor) {
+  return axios.get(`${API_URL}/tutor/${idTutor}`);
 }
 
 export function buscarPet(id) {
   return axios.get(`${API_URL}/${id}`);
 }
 
-export function salvarPet(pet) {
-  return axios.post(API_URL, pet);
+// Salva o pet vinculando ao tutor (recebe o ID como parâmetro extra)
+export function salvarPet(pet, idTutor) {
+  return axios.post(`${API_URL}/tutor/${idTutor}`, pet);
 }
 
 export function atualizarPet(id, pet) {

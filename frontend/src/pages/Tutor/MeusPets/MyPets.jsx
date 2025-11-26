@@ -17,14 +17,30 @@ export default function MyPets() {
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
-    listarPets().then((res) => setPets(res.data));
+    const idTutor = localStorage.getItem("idTutor") || 2;
+
+    listarPets(idTutor)
+      .then((res) => {
+        console.log("Dados recebidos:", res.data);
+        setPets(res.data);
+      })
+      .catch((err) => console.error("Erro ao buscar pets:", err));
   }, []);
 
   function handleDelete(id) {
-    deletarPet(id).then(() => {
-      setPets((prev) => prev.filter((p) => p.id !== id));
-    });
+    if (window.confirm("Tem certeza que deseja excluir?")) {
+      deletarPet(id).then(() => {
+        setPets((prev) => prev.filter((p) => (p.id || p.id_animal) !== id));
+      });
+    }
   }
+
+  function formatarData(dataString) {
+    if (!dataString) return "---";
+    const data = new Date(dataString);
+    return data.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+  }
+
 
   return (
     <div className="layout mypets-layout">
@@ -42,32 +58,38 @@ export default function MyPets() {
 
         <div className="pets-grid">
           {pets.map((pet) => (
-            <div className="pet-card" key={pet.id}>
-              <p className="pet-name">{pet.nome}</p>
+            <div className="pet-card" key={pet.id || pet.id_animal}>
+              
+              <p className="pet-name">
+                 {pet.nome || pet.nm_animal}
+              </p>
 
               <div className="pet-info">
                 <p>
-                  <FaPaw /> {pet.especie}
+                  <FaPaw /> {pet.especie || pet.especie_animal}
                 </p>
+
                 <p>
-                  <FaVenus /> {pet.genero}
+                  <FaVenus /> {pet.sexo || pet.sexo_animal || pet.genero}
                 </p>
+
                 <p>
-                  <FaBook /> {pet.raca}
+                  <FaBook /> {pet.raca || pet.raca_animal}
                 </p>
+
                 <p>
-                  <FaRegCalendarAlt /> {pet.dataNascimento}
+                  <FaRegCalendarAlt /> {formatarData(pet.dt_nasc_animal || pet.dataNascimento)}
                 </p>
               </div>
 
               <div className="pet-actions">
-                <Link to={`/MyPets/Editar/${pet.id}`} className="edit-icon">
+                <Link to={`/MyPets/Editar/${pet.id || pet.id_animal}`} className="edit-icon">
                   <FaEdit />
                 </Link>
 
                 <button
                   className="delete-icon"
-                  onClick={() => handleDelete(pet.id)}
+                  onClick={() => handleDelete(pet.id || pet.id_animal)}
                 >
                   <FaTrashAlt />
                 </button>

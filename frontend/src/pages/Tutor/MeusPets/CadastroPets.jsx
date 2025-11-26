@@ -42,9 +42,29 @@ export default function CadastrarPet() {
     }
 
     setErro("");
-    salvarPet(pet).then(() => navigate("/MyPets"));
-  }
 
+    const idTutor = localStorage.getItem("idTutor") || 2;
+
+    const dadosParaOBackend = {
+        nm_animal: pet.nome,
+        especie_animal: pet.especie,
+        raca_animal: pet.raca,
+        dt_nasc_animal: pet.dataNascimento,
+        sexo_animal: pet.genero
+
+    };
+
+    salvarPet(dadosParaOBackend, idTutor)
+      .then(() => {
+          alert("Pet cadastrado com sucesso!");
+          navigate("/MyPets");
+      })
+      .catch((err) => {
+          console.error(err);
+          setErro("Erro ao salvar no servidor.");
+      });
+  }
+  
   return (
     <div className="cad-layout">
       <Sidebar />

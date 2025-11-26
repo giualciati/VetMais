@@ -20,7 +20,26 @@ export default function EditarPet() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    buscarPet(id).then((res) => setPet(res.data));
+    if (id) {
+      buscarPet(id)
+        .then((res) => {
+          const dados = res.data; 
+          
+          let dataFormatada = "";
+          if (dados.dt_nasc_animal) {
+            dataFormatada = dados.dt_nasc_animal.split('T')[0];
+          }
+
+          setPet({
+            nome: dados.nm_animal,
+            dataNascimento: dataFormatada,
+            raca: dados.raca_animal,
+            especie: dados.especie_animal,
+            genero: dados.sexo_animal, 
+          });
+        })
+        .catch((err) => console.error("Erro ao buscar pet:", err));
+    }
   }, [id]);
 
   function handleChange(e) {
@@ -30,20 +49,27 @@ export default function EditarPet() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // Validação simples
-    if (
-      !pet.nome ||
-      !pet.dataNascimento ||
-      !pet.rga ||
-      !pet.raca ||
-      !pet.especie ||
-      !pet.genero
-    ) {
+    // Validação
+    if (!pet.nome || !pet.dataNascimento || !pet.raca) {
       setError("Preencha todos os campos!");
       return;
     }
 
-    atualizarPet(id, pet).then(() => navigate("/MyPets"));
+  
+    const petParaSalvar = {
+      nm_animal: pet.nome,
+      dt_nasc_animal: pet.dataNascimento,
+      raca_animal: pet.raca,
+      especie_animal: pet.especie,
+      sexo_animal: pet.genero
+    };
+
+    atualizarPet(id, petParaSalvar)
+      .then(() => navigate("/MyPets"))
+      .catch((err) => {
+        console.error("Erro ao atualizar:", err);
+        setError("Erro ao salvar alterações.");
+      });
   }
 
   return (

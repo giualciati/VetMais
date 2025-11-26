@@ -18,7 +18,7 @@ function AgendarServico() {
   const [carregando, setCarregando] = useState(false);
 
   const idSalvo = localStorage.getItem("idTutor");
-  const ID_TUTOR_LOGADO = idSalvo ? JSON.parse(idSalvo) : 1; 
+  const ID_TUTOR_LOGADO = idSalvo ? JSON.parse(idSalvo) : 2; 
 
   const listaProcedimentos = ["Vacinação", "Clinica geral", "Ortopedia", "Castração", "Fisioterapia", "Odontologia", "Dermatologia", "Exames Laboratoriais", "Cardiologista", "Nutricionista", "Oftalmologista", "Cirurgia"];
 

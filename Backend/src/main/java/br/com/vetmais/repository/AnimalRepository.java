@@ -9,13 +9,6 @@ import java.util.List;
 
 public interface AnimalRepository extends JpaRepository<Animal, Long> {
 
-    @Query("SELECT new br.com.vetmais.dto.AnimalDTO(" +
-           " a.id_animal, " +
-           " a.nm_animal, " +
-           " a.especie_animal, " +
-           " a.raca_animal, " +
-           " a.sexo_animal) " +
-           "FROM Animal a " +
-           "WHERE a.tutor.id_tutor = :idTutor")
+    @Query("SELECT new br.com.vetmais.dto.AnimalDTO(a.id_animal, a.nm_animal, a.especie_animal, a.raca_animal, a.sexo_animal, a.dt_nasc_animal) FROM Animal a WHERE a.tutor.id_tutor = :idTutor")
     List<AnimalDTO> buscarPorTutor(@Param("idTutor") Long idTutor);
 }
