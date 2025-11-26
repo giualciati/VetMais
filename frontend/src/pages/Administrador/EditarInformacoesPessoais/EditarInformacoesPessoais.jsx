@@ -1,70 +1,104 @@
-
+import Menu from "../../../components/Menu";
+import './editarInformacoesPessoais.css'
 
 export default function EditarInformacoesPessoais() {
   return (
-    <section>
-      <div className="container">
+    <section className="eip-section">
+      <div className="eip-container">
 
-        <aside className="sidebar">
-          <div className="logo">
-            <img 
-              src="img/Imagem do WhatsApp de 2025-11-11 à(s) 21.39.16_3b656ce9.png" 
-              alt="Logo da Vet" 
-            />
-          </div>
+        
+          <Menu></Menu>
+      
+        <main className="eip-content">
+          <h1 className="eip-title">Editar Informações Pessoais</h1>
 
-          <nav className="menu">
-            <a href="index.html">Perfil</a>
-            <a href="#">Prontuários</a>
-            <a href="#">Agenda</a>
-            <a href="#">Meus Horários</a>
-            <a href="#">Sair</a>
-          </nav>
-        </aside>
+          <section className="eip-info-card">
+            <form className="eip-edit-form">
+              <div className="eip-info-grid">
 
-        <main className="content">
-          <h1>Editar Informações Pessoais</h1>
+                <div className="eip-coluna eip-coluna-1">
+                  <label className="eip-label">Nome</label>
+                  <input 
+                    className="eip-input"
+                    type="text"
+                    defaultValue="Camile Vitória Rosa Santos"
+                  />
 
-          <section className="info-card">
-            <form className="edit-form">
-              <div className="info-grid">
+                  <label className="eip-label">E-mail</label>
+                  <input 
+                    className="eip-input"
+                    type="email"
+                    defaultValue="camilevitoria@gmail.com"
+                  />
 
-                <div>
-                  <label>Nome</label>
-                  <input type="text" defaultValue="Camile Vitória Rosa Santos" />
+                  <label className="eip-label">CPF</label>
+                  <input 
+                    className="eip-input"
+                    type="text"
+                    defaultValue="000.000.000-00"
+                  />
 
-                  <label>E-mail</label>
-                  <input type="email" defaultValue="camilevitoria@gmail.com" />
+                  <label className="eip-label">RG</label>
+                  <input 
+                    className="eip-input"
+                    type="text"
+                    defaultValue="00.000.000-0"
+                  />
 
-                  <label>CPF</label>
-                  <input type="text" defaultValue="000.000.000-00" />
-
-                  <label>RG</label>
-                  <input type="text" defaultValue="00.000.000-0" />
-
-                  <label>CRM</label>
-                  <input type="text" defaultValue="000000/SP" />
+                  <label className="eip-label">CRM</label>
+                  <input 
+                    className="eip-input"
+                    type="text"
+                    defaultValue="000000/SP"
+                  />
                 </div>
 
-                <div>
-                  <label>Data de Nascimento</label>
-                  <input type="date" defaultValue="2005-05-01" />
+                <div className="eip-coluna eip-coluna-2">
+                  <label className="eip-label">Data de Nascimento</label>
+                  <input 
+                    className="eip-input"
+                    type="date"
+                    defaultValue="2005-05-01"
+                  />
 
-                  <label>Telefone</label>
-                  <input type="text" defaultValue="(11) 9 0987-2344" />
+                  <label className="eip-label">Telefone</label>
+                  <input 
+                    className="eip-input"
+                    type="text"
+                    defaultValue="(11) 9 0987-2344"
+                  />
 
-                  <label>Especialidade</label>
-                  <input type="text" defaultValue="Radiologia" />
+                  <label className="eip-label">Especialidade</label>
+                  <input 
+                    className="eip-input"
+                    type="text"
+                    defaultValue="Radiologia"
+                  />
 
-                  <label>Hospital</label>
-                  <input type="text" defaultValue="Hospital Jurubatuba" />
+                  <label className="eip-label">Hospital</label>
+                  <input 
+                    className="eip-input"
+                    type="text"
+                    defaultValue="Hospital Jurubatuba"
+                  />
                 </div>
 
               </div>
 
-              <div className="btn-group">
-                <button type="submit" className="btn-edit">Salvar</button>
-                <a href="index.html" className="btn-cancel">Cancelar</a>
+              <div className="eip-btn-group">
+                <button 
+                  type="submit" 
+                  className="eip-btn eip-btn-edit"
+                >
+                  Salvar
+                </button>
+
+                <a 
+                  href="index.html" 
+                  className="eip-btn eip-btn-cancel"
+                >
+                  Cancelar
+                </a>
               </div>
 
             </form>

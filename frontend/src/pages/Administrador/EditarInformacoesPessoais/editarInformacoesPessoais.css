@@ -1,0 +1,141 @@
+/* Atualize de .container para .eip-container */
+.eip-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Atualize de .sidebar para .eip-sidebar */
+.eip-sidebar {
+  background-color: #F6963E;
+  width: 350px;
+  padding: 50px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Atualize de .content para .eip-content */
+.eip-content {
+  flex: 1;
+  padding: 50px 60px;
+  text-align: center;
+}
+
+.eip-title {
+  color: #F6963E;
+  margin-bottom: 30px;
+}
+
+/* Atualize de .info-card para .eip-info-card */
+.eip-info-card {
+    display: flex;
+    justify-content: center;
+  position: relative;
+  
+  border-radius: 12px;
+  padding: 40px 50px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.eip-info-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 2px;
+  background: linear-gradient(135deg, #F6963E, #63A1F0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Atualize de .form-grid para .eip-info-grid */
+.eip-info-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px; /* ajuste fino */
+  text-align: left;
+}
+
+
+/* Colunas */
+.eip-coluna {
+  width: 100%;
+  max-width: 400px;
+}
+
+
+.eip-label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #3a3a3a;
+}
+
+.eip-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  outline: none;
+  margin-top: 5px;
+}
+
+/* Botões */
+.eip-btn-group {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.eip-btn {
+  background-color: #1b1b1b;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 25px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.eip-edit-form{
+   
+    width: 100%;
+}
+
+.eip-btn:hover {
+  background-color: #333;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .eip-container {
+    flex-direction: column;
+  }
+
+  .eip-sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .eip-content {
+    padding: 20px;
+  }
+
+  .eip-info-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
