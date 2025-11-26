@@ -1,44 +1,64 @@
+import React from "react";
+import "./cadastroColaborador.css";
 import Navbar from "../../../components/Navbar";
 
 
+// --- Página Cadastro ---
 export default function CadastroColaborador() {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Formulário enviado com sucesso!");
+  };
+
   return (
-    <div className="cadastro-colaborador-page">
+    <div className="cc-pagina">
       <Navbar />
-      <div>
-        <h1>Seja nosso colaborador</h1>
 
-        <form className="formulario">
-          <div className="linha">
-            <input type="text" placeholder="Nome" required />
-            <input type="tel" placeholder="Telefone" required />
-          </div>
+      <main className="cc-main">
+        <h1 className="cc-titulo">Seja nosso colaborador</h1>
 
-          <div className="linha">
-            <input type="date" required />
-            <input type="email" placeholder="E-mail" required />
-          </div>
+        <div className="cc-gradiente-wrapper">
+          <form onSubmit={handleSubmit} className="cc-formulario">
 
-          <div className="linha">
-            <input type="text" placeholder="RG" required />
-            <input type="password" placeholder="Senha" required />
-          </div>
+            <div className="cc-linha">
+              <input className="cc-input" type="text" placeholder="Nome" required />
+              <input className="cc-input" type="tel" placeholder="Telefone" required />
+            </div>
 
-          <div className="linha">
-            <input type="text" placeholder="CPF" required />
-            <input type="text" placeholder="Especialidade" required />
-          </div>
+            <div className="cc-linha">
+              <input
+                className="cc-input"
+                type="text"
+                placeholder="Data de Nascimento"
+                onFocus={(e) => e.currentTarget.type = 'date'}
+                onBlur={(e) => { if (!e.currentTarget.value) e.currentTarget.type = 'text' }}
+              />
+              <input className="cc-input" type="email" placeholder="E-mail" required />
+            </div>
 
-          <div className="linha">
-            <input type="text" placeholder="CRM" required />
-            <input type="text" placeholder="Hospital" required />
-          </div>
+            <div className="cc-linha">
+              <input className="cc-input" type="text" placeholder="RG" required />
+              <input className="cc-input" type="password" placeholder="Senha" required />
+            </div>
 
-          <button type="submit" className="botao">
-            Cadastrar
-          </button>
-        </form>
-      </div>
+            <div className="cc-linha">
+              <input className="cc-input" type="text" placeholder="CPF" required />
+              <input className="cc-input" type="text" placeholder="Especialidade" required />
+            </div>
+
+            <div className="cc-linha">
+              <input className="cc-input" type="text" placeholder="CRM" required />
+              <input className="cc-input" type="text" placeholder="Hospital" required />
+            </div>
+
+            <button type="submit" className="cc-botao">
+              Cadastrar
+            </button>
+
+          </form>
+        </div>
+      </main>
     </div>
   );
 }
