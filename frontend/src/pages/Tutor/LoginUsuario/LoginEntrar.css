@@ -110,6 +110,36 @@ body {
   border-color: var(--primary-orange);
 }
 
+.login-page__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* MENSAGEM DE ERRO */
+.login-page__error {
+  padding: 12px;
+  margin-bottom: 20px;
+  background-color: #ffebee;
+  border: 1px solid #ef5350;
+  border-radius: 8px;
+  color: #c62828;
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ESQUECEU A SENHA */
 .login-page__forgot-link {
   display: block;
@@ -136,8 +166,13 @@ body {
   transition: 0.3s ease;
 }
 
-.login-page__submit-btn:hover {
+.login-page__submit-btn:hover:not(:disabled) {
   opacity: 0.9;
+}
+
+.login-page__submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* LINK DE CADASTRO */

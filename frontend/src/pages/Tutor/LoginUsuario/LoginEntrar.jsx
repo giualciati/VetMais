@@ -2,16 +2,41 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginEntrar.css";
 import loginImg from "../../../assets/images/Cachorro3.png";
+import { login } from "../../../services/authService";
 
 const LoginEntrar = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Tentando logar com:", email, senha);
+    setError(""); // Limpa erros anteriores
+    setLoading(true);
+
+    // Valida campos vazios
+    if (!email || !senha) {
+      setError("Por favor, preencha todos os campos!");
+      setLoading(false);
+      return;
+    }
+
+    // Faz login usando o serviço
+    const result = await login(email, senha);
+
+    if (result.success) {
+      // Login bem-sucedido - redireciona para home
+      console.log("Login realizado com sucesso!");
+      navigate("/home");
+    } else {
+      // Erro no login - exibe mensagem
+      setError(result.error || "Erro ao fazer login!");
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -31,6 +56,13 @@ const LoginEntrar = () => {
           <form onSubmit={handleLogin}>
             <h2 className="login-page__title">Entrar</h2>
 
+            {/* Exibe mensagem de erro */}
+            {error && (
+              <div className="login-page__error">
+                {error}
+              </div>
+            )}
+
             <label htmlFor="usuario" className="login-page__label">
               Usuário (E-mail)
             </label>
@@ -40,6 +72,7 @@ const LoginEntrar = () => {
               className="login-page__input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={loading}
             />
 
             <label htmlFor="senha" className="login-page__label">
@@ -51,14 +84,19 @@ const LoginEntrar = () => {
               className="login-page__input"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
+              disabled={loading}
             />
 
             <a href="/TrocarSenha" className="login-page__forgot-link">
               Esqueceu a senha?
             </a>
 
-            <button type="submit" className="login-page__submit-btn">
-              Entrar
+            <button
+              type="submit"
+              className="login-page__submit-btn"
+              disabled={loading}
+            >
+              {loading ? "Carregando..." : "Entrar"}
             </button>
 
             <p className="login-page__signup">
