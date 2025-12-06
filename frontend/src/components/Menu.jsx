@@ -1,5 +1,6 @@
 import logo from "../assets/images/Logo.png";
 import { Link } from "react-router-dom";
+import "../styles/Menu.css";
 
 export default function Menu() {
   return (

@@ -37,7 +37,7 @@ export default function InformacoesPessoais() {
             </div>
 
             <div className="btn-container">
-              <a href="#" className="edit-btn-informacoes">Editar</a>
+              <a href="/editarInformacoesPessoais" className="edit-btn-informacoes" >Editar</a>
             </div>
 
           </section>

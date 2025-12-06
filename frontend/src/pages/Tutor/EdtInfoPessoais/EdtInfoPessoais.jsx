@@ -16,8 +16,6 @@ const EdtInfoPessoais = () => {
   });
 
   useEffect(() => {
-    // AQUI VAMOS BUSCAR OS DADOS ATUAIS DO JAVA PARA PREENCHER
-    // Simulando dados iniciais:
     setFormData({
       nome: "Camile Vitória Rosa Santos",
       cpf: "000.000.000-00",
@@ -28,7 +26,6 @@ const EdtInfoPessoais = () => {
     });
   }, []);
 
-  // atualiza os dados enquanto você digita
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData(prevState => ({
@@ -40,9 +37,8 @@ const EdtInfoPessoais = () => {
   const handleSalvar = (e) => {
     e.preventDefault();
     console.log("Dados para salvar:", formData);
-    // AQUI ENTRA O PUT PARA O JAVA
     alert("Dados salvos com sucesso! (Simulação)");
-    navigate('/infoPessoais');
+    navigate('/infPessoaisTutor');
   };
 
   return (
@@ -50,7 +46,7 @@ const EdtInfoPessoais = () => {
       <aside className="sidebar">
         <img src={logoImg} alt="VET+ Logo" className="logo" />
         <nav>
-          <NavLink to="/infoPessoais" className="active">Perfil</NavLink>
+          <NavLink to="/infPessoaisTutor" className="active">Perfil</NavLink>
           <NavLink to="/MyPets">Meus Pets</NavLink>
           <NavLink to="/agenda">Agenda</NavLink>
           <NavLink to="/prontuarioAnimal">Prontuários</NavLink>
@@ -95,7 +91,7 @@ const EdtInfoPessoais = () => {
             
             <div className="form-actions">
               <button type="submit" className="btn-edit">Salvar</button>
-              <button type="button" className="btn-cancel" onClick={() => navigate('/infoPessoais')}>Cancelar</button>
+              <button type="button" className="btn-cancel" onClick={() => navigate('/infPessoaisTutor')}>Cancelar</button>
             </div>
           </form>
         </div>

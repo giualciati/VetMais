@@ -86,15 +86,15 @@ export default function EditarInformacoesPessoais() {
               </div>
 
               <div className="eip-btn-group">
-                <button 
-                  type="submit" 
+                <a 
+                  href="/informacoesPessoais" 
                   className="eip-btn eip-btn-edit"
                 >
                   Salvar
-                </button>
+                </a>
 
                 <a 
-                  href="index.html" 
+                  href="/informacoesPessoais" 
                   className="eip-btn eip-btn-cancel"
                 >
                   Cancelar

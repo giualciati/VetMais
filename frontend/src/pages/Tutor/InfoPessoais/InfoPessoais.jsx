@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './InfoPessoais.css'; 
-import logoImg from '../../../assets/images/Logo.png'; // Ajuste o caminho do logo
+import logoImg from '../../../assets/images/Logo.png'; 
 
 const InfoPessoais = () => {
   const navigate = useNavigate();
   
-  // Estado para guardar os dados do usuário
   const [usuario, setUsuario] = useState({
     nome: "Carregando...",
     cpf: "...",
@@ -16,10 +15,8 @@ const InfoPessoais = () => {
     email: "..."
   });
 
-  // useEffect roda assim que a tela abre
   useEffect(() => {
-    // AQUI VAMOS BUSCAR OS DADOS NO JAVA
-    // simular que buscou:
+
     setUsuario({
       nome: "Camile Vitória Rosa Santos",
       cpf: "000.000.000-00",
@@ -79,7 +76,7 @@ const InfoPessoais = () => {
             </div>
             
             <div className="form-actions">
-              <button className="btn-edit" onClick={() => navigate('/editarInfoPessoais')}>
+              <button className="btn-edit" onClick={() => navigate('/editarInformacoesPessoaisTutor')}>
                 Editar
               </button>
             </div>
